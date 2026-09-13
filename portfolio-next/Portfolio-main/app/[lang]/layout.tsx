@@ -1,0 +1,76 @@
+import type { Metadata } from "next";
+import { Inter, Syne } from "next/font/google";
+import "../globals.css";
+import SmoothScroll from "@/providers/smooth-scroll-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
+import { LanguageProvider } from "@/providers/language-provider";
+import { SoundProvider } from "@/providers/sound-provider";
+import { Preloader } from "@/components/layout/preloader";
+import { CustomCursor } from "@/components/layout/custom-cursor";
+import Navbar from "@/components/layout/navbar";
+import { isValidLocale } from "@/lib/i18n";
+import { notFound } from "next/navigation";
+import { getDictionary, getContents, getSharedData } from "@/lib/loaders";
+
+const syne = Syne({ subsets: ["latin"], variable: "--font-syne" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://snehop9.github.io/portfolio-website"),
+  title: "Sneh Raunak | Portfolio",
+  description: "Machine learning systems and full-stack products by Sneh Raunak.",
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
+};
+
+export function generateStaticParams() {
+  return [{ lang: 'en' }, { lang: 'es' }, { lang: 'fr' }, { lang: 'hi' }];
+}
+
+export default async function LangLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+
+  if (!isValidLocale(lang)) {
+    notFound();
+  }
+
+  const [dictionary, contents, shared] = await Promise.all([
+    getDictionary(lang),
+    getContents(lang),
+    getSharedData(),
+  ]);
+
+  return (
+    <html lang={lang} suppressHydrationWarning>
+      <head>
+        <meta httpEquiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; connect-src 'self'; font-src 'self' data:; form-action 'self'; frame-ancestors 'none'; frame-src 'self'; img-src 'self' data: blob:; media-src 'self'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; worker-src 'self' blob:; upgrade-insecure-requests" />
+        <meta httpEquiv="Permissions-Policy" content="camera=(), geolocation=(), microphone=(), payment=(), usb=()" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+      </head>
+      <body className={`${inter.variable} ${syne.variable} font-sans bg-background text-foreground antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+        >
+          <SoundProvider>
+            <LanguageProvider lang={lang} dictionary={dictionary} contents={contents} shared={shared}>
+              <CustomCursor />
+              <Preloader />
+              <SmoothScroll>
+                <Navbar />
+                {children}
+              </SmoothScroll>
+            </LanguageProvider>
+          </SoundProvider>
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}

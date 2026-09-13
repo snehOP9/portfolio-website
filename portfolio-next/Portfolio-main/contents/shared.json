@@ -1,0 +1,22 @@
+{
+  "contact": { "location": "India", "email": "sneh.raunakk@gmail.com" },
+  "social": [
+    { "label": "GitHub", "href": "https://github.com/snehOP9" },
+    { "label": "Linkedin", "href": "https://www.linkedin.com/in/sneh-raunak/" },
+    { "label": "LeetCode", "href": "https://leetcode.com/u/Snehhhh/" }
+  ],
+  "stack": {
+    "frontend": [
+      { "name": "React", "icon": "/portfolio-website/stack/react.svg", "featured": true }, { "name": "Next.js", "icon": "/portfolio-website/stack/nextjs.svg", "featured": true }, { "name": "Tailwind CSS", "icon": "/portfolio-website/stack/tailwindcss.svg", "featured": true }, { "name": "TypeScript", "icon": "/portfolio-website/stack/typescript.svg" }, { "name": "JavaScript", "icon": "/portfolio-website/stack/javascript.svg" }, { "name": "HTML5", "icon": "/portfolio-website/stack/html5.svg" }, { "name": "CSS3", "icon": "/portfolio-website/stack/css3.svg" }
+    ],
+    "backend": [
+      { "name": "Python", "icon": "/portfolio-website/stack/python.svg" }, { "name": "Node.js", "icon": "/portfolio-website/stack/nodejs.svg" }, { "name": "Next.js", "icon": "/portfolio-website/stack/nextjs.svg" }
+    ],
+    "database": [
+      { "name": "PostgreSQL", "icon": "/portfolio-website/stack/postgresql.svg", "featured": true }, { "name": "MySQL", "icon": "/portfolio-website/stack/mysql.svg" }, { "name": "MongoDB", "icon": "/portfolio-website/stack/mongodb.svg" }
+    ],
+    "tools": [
+      { "name": "Git", "icon": "/portfolio-website/stack/git.svg" }, { "name": "Vercel", "icon": "/portfolio-website/stack/vercel.svg" }, { "name": "Framer Motion", "icon": "/portfolio-website/stack/framermotion.svg" }
+    ]
+  }
+}
