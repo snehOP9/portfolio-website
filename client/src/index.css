@@ -111,3 +111,14 @@
     background-position: 0% 50%;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .blob,
+  .text-gradient {
+    animation: none !important;
+  }
+}
