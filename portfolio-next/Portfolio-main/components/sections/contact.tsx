@@ -158,7 +158,7 @@ function FloatingInput({
     isTextArea?: boolean;
 }) {
     const baseClasses =
-        "peer w-full bg-transparent border border-border/40 rounded-xl px-4 pt-6 pb-2 text-sm text-foreground placeholder-transparent outline-none transition-all duration-300 focus:border-foreground/30 focus:ring-1 focus:ring-foreground/20 focus:scale-[1.01] hover:border-border/60";
+        "peer w-full rounded-xl border border-border/70 bg-secondary/20 px-5 pt-7 pb-3 text-sm text-foreground placeholder-transparent outline-none transition-all duration-300 hover:border-foreground/50 focus:border-foreground/60 focus:bg-background/70 focus:ring-2 focus:ring-foreground/20";
     const errorClasses = error ? "border-red-500/50 focus:border-red-500/50 focus:ring-red-500/20" : "";
 
     return (
@@ -192,7 +192,7 @@ function FloatingInput({
             )}
             <label
                 htmlFor={id}
-                className={`absolute left-4 top-2 text-xs font-mono tracking-widest uppercase transition-all duration-300 pointer-events-none ${error ? "text-red-500" : "text-muted-foreground peer-focus:text-foreground"
+                className={`pointer-events-none absolute left-5 top-3 text-xs font-mono tracking-widest uppercase transition-all duration-300 ${error ? "text-red-500" : "text-muted-foreground peer-focus:text-foreground"
                     }`}
             >
                 {label}
@@ -344,17 +344,17 @@ export default function Contact() {
                                             playClick();
                                             handleCopyEmail();
                                         }}
-                                        className="group flex items-center gap-4 text-left transition-all duration-500 hover:translate-x-1"
+                                        className="group flex w-fit items-center gap-3 rounded-xl border border-border/60 bg-secondary/15 px-3 py-2 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-foreground/40 hover:bg-secondary/30"
                                         aria-label={`Copy email: ${content.contact.email}`}
                                     >
                                         <div className="w-10 h-10 rounded-full border border-border/50 flex items-center justify-center bg-background shrink-0 transition-all duration-500 group-hover:bg-foreground group-hover:border-foreground/30">
                                             <Mail className="w-4 h-4 text-foreground transition-colors duration-500 group-hover:text-background" />
                                         </div>
                                         <div className="flex flex-col">
-                                            <span className="text-xs font-mono tracking-widest uppercase text-muted-foreground mb-0.5">
+                                            <span className="mb-0.5 text-xs font-mono tracking-widest uppercase text-muted-foreground">
                                                 {dict.sendEmail}
                                             </span>
-                                            <span className="text-sm font-medium text-foreground flex items-center gap-2">
+                                            <span className="flex items-center gap-2 text-sm font-medium text-foreground">
                                                 {content.contact.email}
                                                 <AnimatePresence mode="wait">
                                                     {copied ? (
@@ -374,7 +374,7 @@ export default function Contact() {
                                                             animate={{ opacity: 1 }}
                                                             exit={{ opacity: 0 }}
                                                         >
-                                                            <Copy className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                                            <span className="flex items-center gap-1 text-xs font-medium text-muted-foreground"><Copy className="h-3.5 w-3.5" />Copy</span>
                                                         </motion.span>
                                                     )}
                                                 </AnimatePresence>
@@ -404,7 +404,7 @@ export default function Contact() {
 
                         {/* ─── Social Icons ─── */}
                         <BlurReveal delay={0.3}>
-                            <div className="hidden lg:flex items-center gap-3 pt-2">
+                            <div className="flex flex-wrap items-center gap-3 pt-2">
                                 {content.social.map((link: { label: string; href: string }) => {
                                     const IconComponent = getSocialIcon(link.label);
                                     return (
@@ -432,7 +432,7 @@ export default function Contact() {
                         </BlurReveal>
 
                         {/* ─── Mobile Scroll Indicator ─── */}
-                        <div className="lg:hidden flex flex-col items-center justify-center gap-4 -mt-16 pb-4 text-muted-foreground w-full">
+                        <div className="flex w-full flex-col items-center justify-center gap-4 pb-4 pt-10 text-muted-foreground lg:hidden">
                             <div className="w-px h-12 bg-border relative overflow-hidden">
                                 <motion.div
                                     className="absolute top-0 left-0 w-full h-1/2 bg-foreground"
@@ -528,41 +528,13 @@ export default function Contact() {
                 </div>
 
                 {/* ─── Footer ─── */}
-                <div className="w-full flex flex-col md:flex-row items-center justify-between pb-12 xl:py-12 xl:border-t border-border/50 gap-8">
-                    <div className="text-sm font-mono tracking-widest text-muted-foreground uppercase flex items-center gap-4 max-xl:hidden">
+                <footer className="flex w-full items-center justify-center border-t border-border/50 py-8">
+                    <p className="flex items-center gap-3 font-mono text-xs tracking-widest text-muted-foreground uppercase">
                         <span>2026</span>
                         <span className="w-1.5 h-1.5 rounded-full bg-primary/50" />
                         <span>SNEH RAUNAK.</span>
-                    </div>
-
-                    <div className="flex flex-wrap items-center justify-center gap-3">
-                        {content.social.map((link: { label: string; href: string }) => {
-                            const IconComponent = getSocialIcon(link.label);
-                            return (
-                                <BlurReveal key={link.label}>
-                                    <Magnetic intensity={0.2}>
-                                        <div onClick={playClick}>
-                                            <a
-                                                href={link.href}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                aria-label={link.label}
-                                                className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-border/50 bg-background text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-foreground/40 hover:bg-foreground hover:text-background focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
-                                            >
-                                                <span className="sr-only">{link.label}</span>
-                                                {IconComponent ? (
-                                                    <IconComponent className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
-                                                ) : (
-                                                    <span className="text-sm font-bold">{link.label[0]}</span>
-                                                )}
-                                            </a>
-                                        </div>
-                                    </Magnetic>
-                                </BlurReveal>
-                            );
-                        })}
-                    </div>
-                </div>
+                    </p>
+                </footer>
             </div>
 
             {/* ─── Sending / Success / Error Overlay ─── */}

@@ -208,6 +208,11 @@
   background: radial-gradient(circle at 50% 50%, rgba(151, 255, 54, .12), rgba(7, 12, 10, .68) 44%, rgba(4, 6, 6, .98) 100%);
 }
 
+.group:hover .project-detail-cta {
+  background-color: var(--signal);
+  color: #07100a;
+}
+
 .project-signal-scene::before {
   content: "";
   position: absolute;

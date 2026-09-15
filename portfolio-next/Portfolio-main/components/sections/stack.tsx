@@ -55,7 +55,7 @@ export default function Stack() {
                     {categories.map((category, catIndex) => (
                         <BlurReveal key={category.title}>
                             <div>
-                                <div className="flex items-center gap-3 mb-6">
+                                <div className="mb-6 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
                                     <span className="text-xs font-mono tracking-widest text-muted-foreground/60">
                                         0{catIndex + 1}
                                     </span>
@@ -65,17 +65,24 @@ export default function Stack() {
                                     <span className="text-xs font-mono tracking-[.06em] text-signal-muted">{category.evidence}</span>
                                 </div>
 
-                                <div className="flex items-center gap-6 flex-wrap mb-6">
+                                <div className="mb-6 grid grid-cols-[repeat(auto-fit,minmax(10.5rem,1fr))] gap-x-6 gap-y-3">
                                     {category.items.map((item: StackItem) => (
                                         <HoverCard key={item.name} openDelay={50} closeDelay={50}>
                                             <HoverCardTrigger asChild>
-                                                <div className="w-fit h-fit">
+                                                <div className="h-full w-full">
                                                     <Magnetic intensity={0.15}>
-                                                        <div className="group flex items-center gap-3 py-2.5 px-1 shrink-0 cursor-default">
-                                                            <div className="transition-all duration-500 ease-out opacity-90 group-hover:opacity-100 group-hover:scale-110">
-                                                                <Image src={item.icon} alt={item.name} width={20} height={20} unoptimized={item.icon.endsWith('.svg')} />
+                                                        <div className="group flex min-h-12 items-center gap-3 rounded-xl border border-border/40 bg-secondary/10 px-3 py-2 transition-colors duration-300 hover:border-foreground/30 hover:bg-secondary/30">
+                                                            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-background/70 p-1 transition-transform duration-300 group-hover:scale-105">
+                                                                <Image
+                                                                    src={item.icon}
+                                                                    alt={item.name}
+                                                                    width={36}
+                                                                    height={36}
+                                                                    className={`h-10 w-10 object-contain ${item.name === "Next.js" || item.name === "Vercel" ? "dark:invert dark:brightness-200" : ""}`}
+                                                                    unoptimized={item.icon.endsWith('.svg')}
+                                                                />
                                                             </div>
-                                                            <span className="text-sm tracking-wide text-muted-foreground transition-colors duration-500 ease-out group-hover:text-foreground">
+                                                            <span className="text-sm leading-none tracking-wide text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
                                                                 {item.name}
                                                             </span>
                                                         </div>

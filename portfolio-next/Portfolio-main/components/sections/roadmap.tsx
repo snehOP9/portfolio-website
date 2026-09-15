@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { BlurReveal } from "@/components/effects/blur-reveal";
 import { useLanguage } from "@/providers/language-provider";
@@ -23,21 +23,10 @@ export default function Roadmap() {
         restDelta: 0.001
     });
 
-    const yBackground = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-
     return (
         <section ref={containerRef} className="relative overflow-hidden border-t border-border/50 py-20 md:py-28 xl:py-32">
             <div className="absolute top-1/4 left-0 w-full max-w-lg h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none -translate-x-1/2" />
             <div className="absolute bottom-1/4 right-0 w-full max-w-lg h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none translate-x-1/2" />
-
-            <motion.div
-                style={{ y: yBackground }}
-                className="absolute top-0 left-0 right-0 bottom-0 pointer-events-none flex items-center justify-center opacity-[0.02] z-0 overflow-hidden"
-            >
-                <div className="text-[20vw] font-black tracking-tighter uppercase whitespace-nowrap">
-                    {dict.title.roadmap}
-                </div>
-            </motion.div>
 
             <div className="container mx-auto px-container max-w-6xl relative z-10">
 
@@ -69,7 +58,7 @@ export default function Roadmap() {
                         className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-linear-to-b from-primary via-primary to-transparent shadow-[0_0_10px_rgba(var(--primary),0.5)] -translate-x-1/2 z-10"
                     />
 
-                    <div className="relative z-20 flex w-full flex-col gap-8 md:gap-14">
+                    <div className="relative z-20 flex w-full flex-col gap-8 md:gap-12">
                         {roadmapItems.map((item: RoadmapItem, index: number) => (
                             <TimelineNode
                                 key={item.id}
@@ -96,19 +85,19 @@ const TimelineNode = React.memo(function TimelineNode({ item, isEven }: { item: 
 
             <div
                 className={cn(
-                    "w-full md:w-[calc(50%-3rem)] pl-16 md:pl-0 relative group",
+                    "relative w-full pl-16 md:min-h-[18rem] md:w-[calc(50%-3rem)] md:pl-0 group",
                 )}
             >
                 <BlurReveal>
                     <div className={cn(
                         "relative overflow-hidden border border-border/50 bg-secondary/5 p-6 backdrop-blur-md transition-all duration-700 ease-out md:p-8",
                         "hover:bg-secondary/20 hover:border-border hover:shadow-2xl",
-                        isEven ? "md:text-right" : "md:text-left"
+                        isEven ? "md:text-left" : "md:text-right"
                     )}>
 
                         <span className={cn(
                             "max-sm:hidden text-xs font-mono tracking-widest text-muted-foreground uppercase flex mb-4",
-                            isEven ? "md:justify-end" : "md:justify-start"
+                            isEven ? "md:justify-start" : "md:justify-end"
                         )}>
                             {item.id}
                         </span>
@@ -119,11 +108,11 @@ const TimelineNode = React.memo(function TimelineNode({ item, isEven }: { item: 
                             </h3>
 
                             <p className="text-muted-foreground text-sm md:text-base leading-relaxed mt-2 max-w-sm ml-0 md:max-w-md"
-                                style={{ marginLeft: isEven ? 'auto' : '0' }}>
+                                style={{ marginLeft: isEven ? '0' : 'auto' }}>
                                 {item.description}
                             </p>
 
-                            <div className={cn("flex flex-wrap gap-2 mt-6", isEven ? "md:justify-end" : "justify-start")}>
+                            <div className={cn("mt-6 flex flex-wrap gap-2", isEven ? "md:justify-start" : "justify-end")}>
                                 {item.stack.map((tag: string) => (
                                     <span
                                         key={tag}

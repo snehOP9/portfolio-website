@@ -43,7 +43,7 @@ export default function About() {
                         </div>
                     </div>
 
-                    <div className="xl:w-3/4 flex flex-col gap-24">
+                    <div className="flex flex-col gap-24 xl:w-3/4 xl:pt-32">
 
                         <div className="space-y-12">
 
