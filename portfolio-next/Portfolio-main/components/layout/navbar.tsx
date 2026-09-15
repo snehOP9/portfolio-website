@@ -134,13 +134,23 @@ export default function Navbar() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const handlePopState = () => {
+    const handleHashNavigation = () => {
       const hash = window.location.hash.replace("#", "") || "home";
       scrollTarget(hash);
     };
 
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
+    // Native hash navigation runs before React hydrates and lands on the outer
+    // section wrapper. Re-run it after the intro is gone so deep links use the
+    // visible content anchors too.
+    const initialNavigation = window.setTimeout(handleHashNavigation, 1250);
+    window.addEventListener("popstate", handleHashNavigation);
+    window.addEventListener("hashchange", handleHashNavigation);
+
+    return () => {
+      window.clearTimeout(initialNavigation);
+      window.removeEventListener("popstate", handleHashNavigation);
+      window.removeEventListener("hashchange", handleHashNavigation);
+    };
   }, [scrollTarget]);
 
   useEffect(() => {
