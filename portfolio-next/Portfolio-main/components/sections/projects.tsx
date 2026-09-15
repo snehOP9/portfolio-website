@@ -82,15 +82,10 @@ export default function Projects() {
             className="relative py-16 md:py-24 lg:py-32 xl:py-0"
             style={{ height: measurements.dynamicHeight }}
         >
-            <div
-                className={`
-                    w-full 
-                    ${isDesktop
-                        ? "sticky top-0 h-screen flex items-center overflow-hidden"
-                        : "relative flex flex-col"
-                    }
-                `}
-            >
+            <div className={isDesktop
+                ? "sticky top-0 flex h-screen w-full items-center overflow-hidden"
+                : "relative flex w-full flex-col"
+            }>
 
                 {!isDesktop ? (
                     <>
