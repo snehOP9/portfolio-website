@@ -222,17 +222,6 @@
   background-size: 44px 44px;
 }
 
-.project-signal-kicker {
-  position: absolute;
-  z-index: 2;
-  top: 1.25rem;
-  left: 1.5rem;
-  color: rgba(232, 255, 202, .72);
-  font-family: var(--font-inter), monospace;
-  font-size: .75rem;
-  letter-spacing: .12em;
-}
-
 .project-signal-glow {
   position: absolute;
   inset: 20%;

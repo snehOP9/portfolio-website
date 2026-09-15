@@ -18,7 +18,7 @@ export default function SoundToggle() {
         <button
             onClick={handleClick}
             onMouseEnter={playHover}
-            className="relative flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-border/50 bg-secondary/10 hover:bg-foreground/5 hover:border-foreground/20 text-muted-foreground hover:text-foreground transition-all duration-300 overflow-hidden"
+            className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-border/50 bg-secondary/10 text-muted-foreground transition-all duration-300 hover:border-foreground/20 hover:bg-foreground/5 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
             aria-label={isMuted ? "Unmute sounds" : "Mute sounds"}
         >
             <motion.div

@@ -61,7 +61,7 @@ const ProjectCard = React.memo(function ProjectCard({ project, onClick }: { proj
                         onClick?.();
                     }}
                     onMouseEnter={playHover}
-                    className="group relative aspect-[4/5] w-full cursor-pointer text-left perspective-1000 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal sm:aspect-[16/10] xl:aspect-[4/5]"
+                    className="group relative aspect-[4/5] w-full cursor-pointer text-left perspective-1000 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal lg:aspect-[16/10] xl:aspect-[4/5]"
                 >
                     <div className="absolute inset-0 overflow-hidden rounded-2xl border border-border/50 bg-muted shadow-2xl transition-all duration-700 ease-out group-hover:-translate-y-2 group-hover:border-foreground/35">
                         <div className="absolute inset-0 z-0">

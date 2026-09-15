@@ -33,7 +33,6 @@ export function ProjectSignalScene({ kind }: { kind: SceneKind }) {
   return (
     <div ref={ref} className="project-signal-scene" data-active={play} data-scene={kind} aria-label={sceneCopy[kind].label} role="img">
       <div className="project-signal-glow" />
-      <span className="project-signal-kicker">{sceneCopy[kind].system}</span>
       <svg viewBox="0 0 720 480" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <defs>
           <linearGradient id={`line-${kind}`} x1="0" x2="1"><stop stopColor="rgba(205,255,125,0)" /><stop offset=".5" stopColor="rgba(205,255,125,.9)" /><stop offset="1" stopColor="rgba(205,255,125,0)" /></linearGradient>

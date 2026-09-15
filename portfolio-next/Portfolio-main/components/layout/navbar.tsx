@@ -227,7 +227,7 @@ export default function Navbar() {
             scrollToSection(e, "#home");
           }}
           onMouseEnter={playHover}
-          className="relative z-110 flex items-center gap-2 group"
+          className="relative z-110 flex h-11 w-11 items-center justify-center gap-2 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal group"
         >
           <svg viewBox="0 0 100 100" className="h-8 w-8 text-foreground transition-all duration-300 group-hover:scale-110 group-hover:opacity-70" aria-label="Sneh Raunak">
             <path d="M72 24C65 17 52 14 40 17C27 20 21 29 23 39C25 49 35 52 47 54C58 56 64 59 63 66C62 73 53 77 43 76C33 75 25 70 21 64" fill="none" stroke="currentColor" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" />
@@ -247,7 +247,7 @@ export default function Navbar() {
                     }}
                     onMouseEnter={playHover}
                     aria-current={activeSection === link.href.slice(1) ? "page" : undefined}
-                    className={`group relative flex items-center py-2 text-xs font-medium uppercase tracking-[0.2em] transition-colors ${activeSection === link.href.slice(1) ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                    className={`group relative flex min-h-11 items-center py-2 text-xs font-medium uppercase tracking-[0.2em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal ${activeSection === link.href.slice(1) ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
                   >
                     {link.name}
                     <span className={`absolute bottom-0 left-0 h-px bg-foreground transition-all duration-300 ${activeSection === link.href.slice(1) ? "w-full" : "w-0 group-hover:w-full"}`} />
@@ -266,7 +266,7 @@ export default function Navbar() {
         <div className="flex xl:hidden items-center gap-4">
           <button
             onClick={() => setIsMobileMenuOpen(prev => !prev)}
-            className="relative z-110 p-2 text-foreground focus:outline-none"
+            className="relative z-110 flex h-11 w-11 items-center justify-center text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
             aria-label="Toggle Menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -306,7 +306,7 @@ export default function Navbar() {
                         scrollToSection(e, link.href);
                       }}
                       aria-current={activeSection === link.href.slice(1) ? "page" : undefined}
-                      className="group flex items-baseline"
+                      className="group flex min-h-11 items-baseline rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
                     >
                       <span className={`text-4xl font-black tracking-tighter uppercase transition-all duration-300 group-hover:pl-4 group-hover:text-primary ${activeSection === link.href.slice(1) ? "text-primary" : "text-foreground"}`}>
                         {link.name}

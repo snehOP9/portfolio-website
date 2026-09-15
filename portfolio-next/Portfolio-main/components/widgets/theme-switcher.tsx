@@ -13,7 +13,7 @@ export default function ThemeSwitcher() {
   return (
     <button
       onClick={toggleTheme}
-      className="group relative flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-border/50 bg-background/50 backdrop-blur-md text-foreground transition-all duration-500 hover:bg-foreground hover:text-background hover:border-foreground/30 shadow-sm focus:outline-none"
+      className="group relative flex h-11 w-11 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-border/50 bg-background/50 text-foreground shadow-sm transition-all duration-500 hover:border-foreground/30 hover:bg-foreground hover:text-background focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
     >
       <div className="absolute inset-0 flex h-full w-full justify-center -translate-x-full -skew-x-13 group-hover:duration-1000 group-hover:translate-x-full">
         <div className="relative h-full w-4 bg-background/20 dark:bg-background/20" />

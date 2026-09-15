@@ -98,11 +98,11 @@ export function CustomCursor() {
             <motion.div
                 className={cn(
                     "rounded-full flex items-center justify-center transition-colors duration-300",
-                    isHovering ? "bg-white" : "bg-transparent border border-white/50"
+                    isHovering ? "border border-white/75 bg-transparent" : "bg-transparent border border-white/50"
                 )}
                 animate={{
-                    width: isHovering ? 64 : 32,
-                    height: isHovering ? 64 : 32,
+                    width: isHovering ? 40 : 24,
+                    height: isHovering ? 40 : 24,
                 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
             >
