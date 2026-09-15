@@ -17,6 +17,7 @@ export default function Navbar() {
   const lenis = useLenis();
   const { playHover, playClick } = useSound();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useModalHistory(isMobileMenuOpen, setIsMobileMenuOpen, "mobile-menu");
 
@@ -135,9 +136,32 @@ export default function Navbar() {
     return () => window.removeEventListener("popstate", handlePopState);
   }, [scrollTarget]);
 
+  useEffect(() => {
+    const sectionIds = navLinks.map(({ href }) => href.slice(1));
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => section !== null);
+
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveSection(visible.target.id);
+      },
+      { rootMargin: "-35% 0px -55% 0px", threshold: [0.01, 0.2, 0.5] },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [navLinks]);
+
   const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const targetId = href.replace("#", "");
+    setActiveSection(targetId);
 
     if (typeof window !== "undefined") {
       const newHash = targetId === "home" ? "" : `#${targetId}`;
@@ -204,10 +228,11 @@ export default function Navbar() {
                       scrollToSection(e, link.href);
                     }}
                     onMouseEnter={playHover}
-                    className="relative flex items-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground group py-2"
+                    aria-current={activeSection === link.href.slice(1) ? "page" : undefined}
+                    className={`group relative flex items-center py-2 text-xs font-medium uppercase tracking-[0.2em] transition-colors ${activeSection === link.href.slice(1) ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
                   >
                     {link.name}
-                    <span className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full" />
+                    <span className={`absolute bottom-0 left-0 h-px bg-foreground transition-all duration-300 ${activeSection === link.href.slice(1) ? "w-full" : "w-0 group-hover:w-full"}`} />
                   </Link>
                 </Magnetic>
               </li>
@@ -262,9 +287,10 @@ export default function Navbar() {
                         playClick();
                         scrollToSection(e, link.href);
                       }}
+                      aria-current={activeSection === link.href.slice(1) ? "page" : undefined}
                       className="group flex items-baseline"
                     >
-                      <span className="text-4xl font-black tracking-tighter uppercase text-foreground transition-all duration-300 group-hover:pl-4 group-hover:text-primary">
+                      <span className={`text-4xl font-black tracking-tighter uppercase transition-all duration-300 group-hover:pl-4 group-hover:text-primary ${activeSection === link.href.slice(1) ? "text-primary" : "text-foreground"}`}>
                         {link.name}
                       </span>
                     </Link>

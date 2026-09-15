@@ -24,7 +24,7 @@ export default function ManifestoFlow({ reverse = false }: { reverse?: boolean }
           {manifestoItems.map((item: string, index: number) => (
             <div key={`t1-${index}`} className="flex items-center gap-8 xl:gap-16">
               <span
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase text-foreground/25 whitespace-nowrap"
+                className="text-4xl font-bold tracking-tight text-foreground/30 sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl whitespace-nowrap"
               >
                 {item}
               </span>
@@ -37,7 +37,7 @@ export default function ManifestoFlow({ reverse = false }: { reverse?: boolean }
           {manifestoItems.map((item: string, index: number) => (
             <div key={`t2-${index}`} className="flex items-center gap-8 xl:gap-16">
               <span
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase text-foreground/25 whitespace-nowrap"
+                className="text-4xl font-bold tracking-tight text-foreground/30 sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl whitespace-nowrap"
               >
                 {item}
               </span>

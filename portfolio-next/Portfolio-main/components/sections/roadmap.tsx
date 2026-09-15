@@ -26,7 +26,7 @@ export default function Roadmap() {
     const yBackground = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
     return (
-        <section ref={containerRef} className="relative container-void overflow-hidden py-32 xl:py-48 border-t border-border/50">
+        <section ref={containerRef} className="relative overflow-hidden border-t border-border/50 py-20 md:py-28 xl:py-32">
             <div className="absolute top-1/4 left-0 w-full max-w-lg h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none -translate-x-1/2" />
             <div className="absolute bottom-1/4 right-0 w-full max-w-lg h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none translate-x-1/2" />
 
@@ -41,7 +41,7 @@ export default function Roadmap() {
 
             <div className="container mx-auto px-container max-w-6xl relative z-10">
 
-                <div className="flex flex-col md:items-center mb-24 md:mb-40 gap-4 text-center">
+                <div className="mb-14 flex flex-col gap-4 text-center md:mb-20 md:items-center">
                     <BlurReveal>
                         <span className="title-counter">
                             [005]
@@ -69,7 +69,7 @@ export default function Roadmap() {
                         className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-linear-to-b from-primary via-primary to-transparent shadow-[0_0_10px_rgba(var(--primary),0.5)] -translate-x-1/2 z-10"
                     />
 
-                    <div className="flex flex-col w-full gap-8 md:gap-24 relative z-20">
+                    <div className="relative z-20 flex w-full flex-col gap-8 md:gap-14">
                         {roadmapItems.map((item: RoadmapItem, index: number) => (
                             <TimelineNode
                                 key={item.id}
@@ -101,7 +101,7 @@ const TimelineNode = React.memo(function TimelineNode({ item, isEven }: { item: 
             >
                 <BlurReveal>
                     <div className={cn(
-                        "relative p-8 md:p-10 border border-border/50 bg-secondary/5 backdrop-blur-md overflow-hidden transition-all duration-700 ease-out",
+                        "relative overflow-hidden border border-border/50 bg-secondary/5 p-6 backdrop-blur-md transition-all duration-700 ease-out md:p-8",
                         "hover:bg-secondary/20 hover:border-border hover:shadow-2xl",
                         isEven ? "md:text-right" : "md:text-left"
                     )}>

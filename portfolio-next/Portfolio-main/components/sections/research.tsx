@@ -19,10 +19,10 @@ export default function Research() {
                 <div className="grid gap-16 xl:grid-cols-[0.9fr_1.1fr] xl:items-center xl:gap-24">
                     <div>
                         <BlurReveal>
-                            <p className="font-mono text-[11px] tracking-[0.24em] text-muted-foreground uppercase">[004] {research.eyebrow}</p>
+                            <p className="font-mono text-xs tracking-[0.14em] text-muted-foreground">[004] {research.eyebrow}</p>
                         </BlurReveal>
                         <BlurReveal>
-                            <h2 className="mt-7 max-w-3xl text-5xl font-black leading-[0.86] tracking-tighter uppercase sm:text-6xl lg:text-7xl xl:text-8xl">
+                            <h2 className="mt-7 max-w-3xl text-5xl font-black leading-[0.86] tracking-tighter sm:text-6xl lg:text-7xl xl:text-8xl">
                                 Explain the<br />black box.
                             </h2>
                         </BlurReveal>
@@ -32,7 +32,7 @@ export default function Research() {
                             </p>
                         </BlurReveal>
                         <BlurReveal>
-                            <p className="mt-8 inline-flex items-center gap-2 rounded-full border border-border/70 bg-secondary/25 px-4 py-2 font-mono text-[10px] tracking-[0.2em] text-foreground/80 uppercase">
+                            <p className="mt-8 inline-flex items-center gap-2 rounded-full border border-border/70 bg-secondary/25 px-4 py-2 font-mono text-xs tracking-[0.12em] text-foreground/80">
                                 {research.status}<ArrowUpRight className="h-3.5 w-3.5" />
                             </p>
                         </BlurReveal>
@@ -60,14 +60,14 @@ export default function Research() {
                                         transition={{ delay: index * 0.07, duration: 0.55 }}
                                         className="group relative overflow-hidden rounded-2xl border border-border/70 bg-background/65 p-5 backdrop-blur-md transition-colors duration-500 hover:border-foreground/35"
                                     >
-                                        <span className="font-mono text-[10px] tracking-[0.22em] text-muted-foreground">0{index + 1}</span>
+                                        <span className="font-mono text-xs tracking-[0.14em] text-muted-foreground">0{index + 1}</span>
                                         <p className="mt-9 text-xl font-semibold tracking-tight text-foreground">{theme}</p>
                                         <div className="absolute bottom-0 left-0 h-px w-0 bg-foreground transition-all duration-500 group-hover:w-full" />
                                     </motion.div>
                                 ))}
                             </div>
                             <div className="relative mt-3 rounded-2xl border border-border/70 bg-background/65 p-6 backdrop-blur-md sm:p-8">
-                                <p className="font-mono text-[10px] tracking-[0.22em] text-muted-foreground uppercase">Research focus</p>
+                                <p className="font-mono text-xs tracking-[0.14em] text-muted-foreground">Research focus</p>
                                 <h3 className="mt-4 max-w-2xl text-2xl font-medium leading-tight tracking-tight sm:text-3xl">{research.title}</h3>
                             </div>
                         </div>

@@ -4,7 +4,7 @@
     "description": "I work across the complete path: **data → models → APIs → software → users**. The goal is not just a model; it is a system people can understand and use.",
     "full": "Hi, I'm **Sneh Raunak**, a B.Tech Computer Science and Engineering student at Chandigarh University (2023–2027), with a CGPA of **8.68**.\n\nMy focus is AI / ML × Software Engineering: building complete systems that connect data, models, APIs, and interfaces. I care particularly about explainable AI, where a system can make its reasoning more legible rather than asking people to trust a black box.\n\nMy selected work includes *SentinelFlow*, a synthetic-data fraud-risk reference system, a Student Performance Predictor Pro, and Anony Talk. I work with *Python*, *FastAPI*, *React*, *Next.js*, *TypeScript*, and *PostgreSQL* to take ideas from technical foundation to usable product.\n\nEvery project is an opportunity to make complexity clearer, build with purpose, and improve the engineering behind the experience."
   },
-  "manifesto": ["BUILD WITH PURPOSE", "MODEL THE WHY", "ENGINEER THE WHOLE SYSTEM", "MAKE COMPLEXITY LEGIBLE", "PERFORMANCE WITH INTENT", "KEEP LEARNING"],
+  "manifesto": ["Build with purpose", "Model the why", "Engineer the whole system", "Make complexity legible", "Performance with intent", "Keep learning"],
   "projects": [
     {
       "id": "1", "title": "SentinelFlow", "category": "ML systems / decision intelligence", "year": "2026",

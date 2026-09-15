@@ -62,15 +62,15 @@ export default function About() {
                             <BlurReveal>
                                 <div className="grid max-w-3xl gap-px overflow-hidden rounded-2xl border border-border/70 bg-border/70 sm:grid-cols-3">
                                     <div className="bg-background p-5">
-                                        <p className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground uppercase">Education</p>
+                                        <p className="font-mono text-xs tracking-[0.12em] text-muted-foreground">Education</p>
                                         <p className="mt-3 font-medium leading-tight">{content.education.institution}</p>
                                     </div>
                                     <div className="bg-background p-5">
-                                        <p className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground uppercase">Program</p>
+                                        <p className="font-mono text-xs tracking-[0.12em] text-muted-foreground">Program</p>
                                         <p className="mt-3 font-medium leading-tight">{content.education.degree}</p>
                                     </div>
                                     <div className="bg-background p-5">
-                                        <p className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground uppercase">Current record</p>
+                                        <p className="font-mono text-xs tracking-[0.12em] text-muted-foreground">Current record</p>
                                         <p className="mt-3 font-medium leading-tight">{content.education.period}<br />{content.education.cgpa}</p>
                                     </div>
                                 </div>
@@ -84,9 +84,9 @@ export default function About() {
                                             playClick();
                                             setIsOpen(true);
                                         }}
-                                        className="group relative inline-flex cursor-pointer items-center gap-2 text-xl md:text-2xl font-medium py-2 w-fit"
+                                        className="group relative inline-flex min-h-12 cursor-pointer items-center gap-2 rounded-full border border-foreground/45 bg-foreground/5 px-5 py-2 text-xl font-medium text-foreground transition-colors hover:border-foreground hover:bg-foreground hover:text-background md:text-2xl"
                                     >
-                                        <span className="relative z-10 border-b-2 border-foreground/30 pb-1 group-hover:border-foreground transition-all duration-300">
+                                        <span className="relative z-10">
                                             {dict.readFullVersion}
                                         </span>
                                         <ArrowRight className="w-6 h-6" />

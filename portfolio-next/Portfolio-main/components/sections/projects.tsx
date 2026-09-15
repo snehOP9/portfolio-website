@@ -113,7 +113,7 @@ export default function Projects() {
                                 </p>
                             </BlurReveal>
                         </div>
-                        <div className="flex flex-col w-full max-w-full px-container gap-container">
+                        <div className="flex w-full max-w-full flex-col gap-8 px-container sm:gap-10">
                             {content.projects.map((project: ProjectItem) => (
                                 <ProjectCard
                                     key={project.id}
@@ -127,7 +127,7 @@ export default function Projects() {
                     <motion.div
                         ref={horizontalContainerRef}
                         style={{ x: smoothX }}
-                        className="flex w-max items-center px-container pr-[14vw]"
+                        className="flex w-max items-center gap-8 px-container pr-[14vw]"
                     >
                         <div className="w-[42vw] shrink-0 flex flex-col justify-center pr-10">
 
@@ -197,13 +197,16 @@ const ProjectCard = React.memo(function ProjectCard({ project, onClick }: { proj
     return (
         <BlurReveal>
             <Magnetic intensity={0.05}>
-                <div
+                <button
                     onClick={() => {
                         playClick();
                         onClick?.();
                     }}
                     onMouseEnter={playHover}
-                    className="group relative w-full aspect-[4/5] shrink-0 md:aspect-[16/10] xl:mx-5 xl:w-[min(56vw,820px)] perspective-1000 cursor-pointer"
+                    type="button"
+                    aria-haspopup="dialog"
+                    aria-label={`Open ${project.title} project details`}
+                    className="group relative w-full aspect-[4/5] shrink-0 cursor-pointer text-left perspective-1000 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal sm:aspect-[16/10] xl:w-[min(56vw,820px)]"
                 >
                     <div className="absolute inset-0 overflow-hidden rounded-3xl bg-muted border border-border/50 shadow-2xl transition-all duration-700 ease-out group-hover:-translate-y-2 group-hover:border-foreground/35">
                         <div className="absolute inset-0 z-0">
@@ -215,27 +218,27 @@ const ProjectCard = React.memo(function ProjectCard({ project, onClick }: { proj
                         <div className="absolute inset-0 z-10 flex flex-col justify-between p-6 xl:p-10">
                             <div className="flex justify-between items-start">
                                 <div className="rounded-full border border-foreground/15 bg-background/40 px-3 py-2 backdrop-blur-md">
-                                    <span className="block text-[10px] xl:text-xs font-mono tracking-[0.18em] text-foreground/85 uppercase">
+                                <span className="block text-xs font-mono tracking-[0.12em] text-foreground/85">
                                         {project.category}
                                     </span>
                                 </div>
                                 <div className="rounded-full border border-foreground/15 bg-background/40 px-3 py-2 backdrop-blur-md">
-                                    <span className="block text-[10px] xl:text-xs font-mono tracking-[0.18em] text-foreground/85">
+                                <span className="block text-xs font-mono tracking-[0.12em] text-foreground/85">
                                         {project.year}
                                     </span>
                                 </div>
                             </div>
 
                             <div className="max-w-[86%]">
-                                <span className="mb-3 block font-mono text-[10px] tracking-[0.24em] text-[#d7ff8f]/80 uppercase">Open system →</span>
-                                <h3 className="text-4xl font-black tracking-tighter uppercase text-foreground sm:text-5xl xl:text-6xl">
+                                <span className="mb-3 block font-mono text-xs tracking-[0.14em] text-signal-muted">Open system →</span>
+                                <h3 className="text-4xl font-black tracking-tighter text-foreground sm:text-5xl xl:text-6xl">
                                     {project.title}
                                 </h3>
                             </div>
                         </div>
 
                     </div>
-                </div>
+                </button>
             </Magnetic>
         </BlurReveal>
     );

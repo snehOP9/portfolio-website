@@ -56,13 +56,13 @@ export default function Stack() {
                         <BlurReveal key={category.title}>
                             <div>
                                 <div className="flex items-center gap-3 mb-6">
-                                    <span className="text-[10px] font-mono tracking-widest text-muted-foreground/40">
+                                    <span className="text-xs font-mono tracking-widest text-muted-foreground/60">
                                         0{catIndex + 1}
                                     </span>
-                                    <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-muted-foreground">
+                                    <h3 className="text-sm font-bold tracking-[0.08em] text-muted-foreground">
                                         {category.title}
                                     </h3>
-                                    <span className="text-[10px] font-mono tracking-[.12em] text-[#c6ff72]/70 uppercase">{category.evidence}</span>
+                                    <span className="text-xs font-mono tracking-[.06em] text-signal-muted">{category.evidence}</span>
                                 </div>
 
                                 <div className="flex items-center gap-6 flex-wrap mb-6">
@@ -97,7 +97,7 @@ export default function Stack() {
                                                     <span className="text-sm font-bold tracking-[0.15em] uppercase text-foreground">
                                                         {item.name}
                                                     </span>
-                                                    <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-mono">
+                                                    <span className="text-xs text-muted-foreground tracking-wide font-mono">
                                                         {category.title}
                                                     </span>
                                                 </div>

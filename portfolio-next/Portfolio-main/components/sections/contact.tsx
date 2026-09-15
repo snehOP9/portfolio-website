@@ -2,10 +2,9 @@
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, MapPin, ArrowUpRight, Copy, Send, Loader2, X, ArrowRight } from "lucide-react";
+import { Mail, MapPin, Copy, Send, Loader2, X, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/providers/language-provider";
 import { BlurReveal } from "@/components/effects/blur-reveal";
-import { ShineButton } from "@/components/ui/shine-button";
 import Magnetic from "@/components/effects/magnetic";
 import { useSound } from "@/providers/sound-provider";
 
@@ -193,7 +192,7 @@ function FloatingInput({
             )}
             <label
                 htmlFor={id}
-                className={`absolute left-4 top-2 text-[10px] font-mono tracking-widest uppercase transition-all duration-300 pointer-events-none ${error ? "text-red-500" : "text-muted-foreground peer-focus:text-foreground"
+                className={`absolute left-4 top-2 text-xs font-mono tracking-widest uppercase transition-all duration-300 pointer-events-none ${error ? "text-red-500" : "text-muted-foreground peer-focus:text-foreground"
                     }`}
             >
                 {label}
@@ -207,7 +206,7 @@ function FloatingInput({
                         initial={{ opacity: 0, y: -4, height: 0 }}
                         animate={{ opacity: 1, y: 0, height: "auto" }}
                         exit={{ opacity: 0, y: -4, height: 0 }}
-                        className="text-[11px] text-red-500 mt-1.5 pl-1 font-medium"
+                        className="text-xs text-red-500 mt-1.5 pl-1 font-medium"
                     >
                         {error}
                     </motion.p>
@@ -352,7 +351,7 @@ export default function Contact() {
                                             <Mail className="w-4 h-4 text-foreground transition-colors duration-500 group-hover:text-background" />
                                         </div>
                                         <div className="flex flex-col">
-                                            <span className="text-[10px] font-mono tracking-widest uppercase text-muted-foreground mb-0.5">
+                                            <span className="text-xs font-mono tracking-widest uppercase text-muted-foreground mb-0.5">
                                                 {dict.sendEmail}
                                             </span>
                                             <span className="text-sm font-medium text-foreground flex items-center gap-2">
@@ -364,7 +363,7 @@ export default function Contact() {
                                                             initial={{ opacity: 0, scale: 0.8 }}
                                                             animate={{ opacity: 1, scale: 1 }}
                                                             exit={{ opacity: 0, scale: 0.8 }}
-                                                            className="text-[10px] font-mono tracking-wider text-green-500 bg-green-500/10 px-2 py-0.5 rounded-full"
+                                                            className="text-xs font-mono tracking-wider text-green-500 bg-green-500/10 px-2 py-0.5 rounded-full"
                                                         >
                                                             {dict.copied}
                                                         </motion.span>
@@ -392,7 +391,7 @@ export default function Contact() {
                                         <MapPin className="w-4 h-4 text-foreground" />
                                     </div>
                                     <div className="flex flex-col">
-                                        <span className="text-[10px] font-mono tracking-widest uppercase text-muted-foreground mb-0.5">
+                                        <span className="text-xs font-mono tracking-widest uppercase text-muted-foreground mb-0.5">
                                             {dict.locationLabel}
                                         </span>
                                         <span className="text-sm font-medium text-foreground">
@@ -447,7 +446,7 @@ export default function Contact() {
                                     }}
                                 />
                             </div>
-                            <span className="text-[10px] font-mono tracking-[0.2em] uppercase opacity-70">
+                            <span className="text-xs font-mono tracking-[0.12em] uppercase opacity-70">
                                 {dict.scrollDown} to send message
                             </span>
                         </div>
@@ -536,24 +535,27 @@ export default function Contact() {
                         <span>SNEH RAUNAK.</span>
                     </div>
 
-                    <div className="flex flex-wrap items-center justify-center gap-4">
+                    <div className="flex flex-wrap items-center justify-center gap-3">
                         {content.social.map((link: { label: string; href: string }) => {
                             const IconComponent = getSocialIcon(link.label);
                             return (
                                 <BlurReveal key={link.label}>
                                     <Magnetic intensity={0.2}>
                                         <div onClick={playClick}>
-                                            <ShineButton
+                                            <a
                                                 href={link.href}
-                                                className="h-14 px-8"
-                                                shineClassName="w-6 bg-background/20 dark:bg-background/20"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                aria-label={link.label}
+                                                className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-border/50 bg-background text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-foreground/40 hover:bg-foreground hover:text-background focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
                                             >
-                                                <span className="relative z-10 flex items-center gap-3 text-sm font-medium tracking-widest uppercase">
-                                                    {IconComponent && <IconComponent className="w-4 h-4" />}
-                                                    {link.label}
-                                                    <ArrowUpRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
-                                                </span>
-                                            </ShineButton>
+                                                <span className="sr-only">{link.label}</span>
+                                                {IconComponent ? (
+                                                    <IconComponent className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
+                                                ) : (
+                                                    <span className="text-sm font-bold">{link.label[0]}</span>
+                                                )}
+                                            </a>
                                         </div>
                                     </Magnetic>
                                 </BlurReveal>

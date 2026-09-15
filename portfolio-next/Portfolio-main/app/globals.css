@@ -8,6 +8,18 @@
   --signal: #c6ff72;
 }
 
+@layer utilities {
+  .bg-signal { background-color: var(--signal); }
+  .text-signal { color: var(--signal); }
+  .text-signal-muted { color: rgba(198, 255, 114, .8); }
+  .border-signal { border-color: var(--signal); }
+  .outline-signal { outline-color: var(--signal); }
+  .signal-ghost:hover {
+    border-color: rgba(198, 255, 114, .6);
+    background-color: rgba(198, 255, 114, .08);
+  }
+}
+
 @media (min-width: 640px) {
   :root {
     --container-spacing: 1.5rem;
@@ -159,6 +171,7 @@
     @apply w-full max-w-[100vw];
     overflow-x: clip;
     overscroll-behavior-y: none;
+    scroll-padding-top: 6rem;
   }
 
   body {
@@ -211,8 +224,8 @@
   left: 1.5rem;
   color: rgba(232, 255, 202, .72);
   font-family: var(--font-inter), monospace;
-  font-size: 9px;
-  letter-spacing: .19em;
+  font-size: .75rem;
+  letter-spacing: .12em;
 }
 
 .project-signal-glow {
