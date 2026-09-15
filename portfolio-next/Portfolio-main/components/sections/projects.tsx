@@ -51,9 +51,8 @@ const ProjectCard = React.memo(function ProjectCard({ project, onClick }: { proj
     const kind = project.title === "SentinelFlow" ? "sentinel" : project.title.startsWith("Student") ? "student" : "anony";
 
     return (
-        <BlurReveal>
-            <Magnetic intensity={0.05}>
-                <button
+        <Magnetic disabled>
+            <button
                     type="button"
                     aria-haspopup="dialog"
                     aria-label={`Open ${project.title} project details`}
@@ -91,8 +90,7 @@ const ProjectCard = React.memo(function ProjectCard({ project, onClick }: { proj
                             </div>
                         </div>
                     </div>
-                </button>
-            </Magnetic>
-        </BlurReveal>
+            </button>
+        </Magnetic>
     );
 });
