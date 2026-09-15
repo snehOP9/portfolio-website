@@ -1,9 +1,11 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
 import { SectionHeading } from "../SectionHeading";
 import { profile } from "@/data/profile";
 
 export function Experience() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section id="experience" className="py-24 relative z-10 bg-black/20">
       <div className="max-w-4xl mx-auto px-6">
@@ -20,10 +22,12 @@ export function Experience() {
             {profile.experience.map((exp, idx) => (
               <motion.div
                 key={exp.role}
-                initial={{ opacity: 0, x: -30 }}
+                initial={shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                transition={
+                  shouldReduceMotion ? { duration: 0, delay: 0 } : { duration: 0.5, delay: idx * 0.1 }
+                }
                 className="relative pl-8 md:pl-24"
               >
                 <div className="absolute left-[-4px] md:left-[28px] top-1.5 w-2 h-2 md:w-3 md:h-3 rounded-full bg-primary shadow-[0_0_10px_rgba(var(--primary),0.8)]" />
