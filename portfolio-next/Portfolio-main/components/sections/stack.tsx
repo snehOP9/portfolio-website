@@ -51,15 +51,15 @@ export default function Stack() {
                     </BlurReveal>
                 </div>
 
-                <div className="flex flex-col gap-container mb-6">
+                <div className="mb-6 flex flex-col gap-10">
                     {categories.map((category, catIndex) => (
                         <BlurReveal key={category.title}>
                             <div>
-                                <div className="mb-6 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
+                                <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
                                     <span className="text-xs font-mono tracking-widest text-muted-foreground/60">
                                         0{catIndex + 1}
                                     </span>
-                                    <h3 className="text-sm font-bold tracking-[0.08em] text-muted-foreground">
+                                    <h3 className="text-base font-bold tracking-[0.06em] text-muted-foreground">
                                         {category.title}
                                     </h3>
                                     <span className="text-xs font-mono tracking-[.06em] text-signal-muted">{category.evidence}</span>

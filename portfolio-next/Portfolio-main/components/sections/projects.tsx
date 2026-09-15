@@ -63,7 +63,7 @@ const ProjectCard = React.memo(function ProjectCard({ project, onClick }: { proj
                     onMouseEnter={playHover}
                     className="group relative aspect-[4/5] w-full cursor-pointer text-left perspective-1000 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal sm:aspect-[16/10] xl:aspect-[4/5]"
                 >
-                    <div className="absolute inset-0 overflow-hidden rounded-3xl border border-border/50 bg-muted shadow-2xl transition-all duration-700 ease-out group-hover:-translate-y-2 group-hover:border-foreground/35">
+                    <div className="absolute inset-0 overflow-hidden rounded-2xl border border-border/50 bg-muted shadow-2xl transition-all duration-700 ease-out group-hover:-translate-y-2 group-hover:border-foreground/35">
                         <div className="absolute inset-0 z-0">
                             <ProjectSignalScene kind={kind} />
                             <div className="absolute inset-0 bg-linear-to-t from-background via-background/35 to-background/5" />
@@ -84,7 +84,7 @@ const ProjectCard = React.memo(function ProjectCard({ project, onClick }: { proj
                                 <h3 className="text-4xl font-black tracking-tighter text-foreground sm:text-5xl">
                                     {project.title}
                                 </h3>
-                                <span className="project-detail-cta mt-5 inline-flex items-center rounded-full border border-signal bg-background/35 px-4 py-2 text-sm font-semibold text-signal backdrop-blur-md transition-colors">
+                                <span className="project-detail-cta mt-5 inline-flex items-center rounded-full border border-signal bg-background/35 px-5 py-3 text-base font-bold text-signal backdrop-blur-md transition-colors">
                                     View project details →
                                 </span>
                             </div>

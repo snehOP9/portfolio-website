@@ -17,7 +17,7 @@ export default function About() {
     return (
         <section className="w-full container-void bg-background text-foreground overflow-hidden relative">
             <div className="container mx-auto px-container">
-                <div className="flex flex-col xl:flex-row gap-12 xl:gap-32">
+                <div className="flex flex-col gap-12 xl:flex-row xl:gap-20">
 
                     <div className="xl:w-1/4">
                         <div className="flex flex-col gap-4 sticky top-32">
@@ -43,9 +43,9 @@ export default function About() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-24 xl:w-3/4 xl:pt-32">
+                    <div className="flex flex-col gap-16 xl:w-3/4 xl:pt-20">
 
-                        <div className="space-y-12">
+                        <div className="space-y-8">
 
                             <BlurReveal>
                                 <h3 className="text-3xl md:text-5xl lg:text-6xl font-light leading-[1.1]">

@@ -39,7 +39,7 @@ export default function Research() {
                     </div>
 
                     <BlurReveal>
-                        <div className="relative min-h-[480px] overflow-hidden rounded-[2rem] border border-border/70 bg-card/40 p-5 shadow-2xl sm:p-8">
+                        <div className="relative min-h-[480px] overflow-hidden rounded-2xl border border-border/70 bg-card/40 p-5 shadow-2xl sm:p-8">
                             <motion.div
                                 animate={reduceMotion ? undefined : { rotate: 360 }}
                                 transition={{ duration: 42, ease: "linear", repeat: Infinity }}

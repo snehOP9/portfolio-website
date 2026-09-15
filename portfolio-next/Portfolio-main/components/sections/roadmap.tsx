@@ -24,13 +24,13 @@ export default function Roadmap() {
     });
 
     return (
-        <section ref={containerRef} className="relative overflow-hidden border-t border-border/50 py-20 md:py-28 xl:py-32">
+        <section ref={containerRef} className="relative overflow-hidden border-t border-border/50 py-16 md:py-20 xl:py-24">
             <div className="absolute top-1/4 left-0 w-full max-w-lg h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none -translate-x-1/2" />
             <div className="absolute bottom-1/4 right-0 w-full max-w-lg h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none translate-x-1/2" />
 
             <div className="container mx-auto px-container max-w-6xl relative z-10">
 
-                <div className="mb-14 flex flex-col gap-4 text-center md:mb-20 md:items-center">
+                <div className="mb-12 flex flex-col gap-4 text-center md:mb-14 md:items-center">
                     <BlurReveal>
                         <span className="title-counter">
                             [005]
@@ -58,7 +58,7 @@ export default function Roadmap() {
                         className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-linear-to-b from-primary via-primary to-transparent shadow-[0_0_10px_rgba(var(--primary),0.5)] -translate-x-1/2 z-10"
                     />
 
-                    <div className="relative z-20 flex w-full flex-col gap-8 md:gap-12">
+                    <div className="relative z-20 flex w-full flex-col gap-7 md:gap-8">
                         {roadmapItems.map((item: RoadmapItem, index: number) => (
                             <TimelineNode
                                 key={item.id}
@@ -85,12 +85,12 @@ const TimelineNode = React.memo(function TimelineNode({ item, isEven }: { item: 
 
             <div
                 className={cn(
-                    "relative w-full pl-16 md:min-h-[18rem] md:w-[calc(50%-3rem)] md:pl-0 group",
+                    "relative w-full pl-16 md:min-h-[14rem] md:w-[calc(50%-3rem)] md:pl-0 group",
                 )}
             >
                 <BlurReveal>
                     <div className={cn(
-                        "relative overflow-hidden border border-border/50 bg-secondary/5 p-6 backdrop-blur-md transition-all duration-700 ease-out md:p-8",
+                        "relative overflow-hidden border border-border/50 bg-secondary/5 p-5 backdrop-blur-md transition-all duration-700 ease-out md:p-6",
                         "hover:bg-secondary/20 hover:border-border hover:shadow-2xl",
                         isEven ? "md:text-left" : "md:text-right"
                     )}>
@@ -112,7 +112,7 @@ const TimelineNode = React.memo(function TimelineNode({ item, isEven }: { item: 
                                 {item.description}
                             </p>
 
-                            <div className={cn("mt-6 flex flex-wrap gap-2", isEven ? "md:justify-start" : "justify-end")}>
+                            <div className={cn("mt-4 flex flex-wrap gap-2", isEven ? "md:justify-start" : "justify-end")}>
                                 {item.stack.map((tag: string) => (
                                     <span
                                         key={tag}

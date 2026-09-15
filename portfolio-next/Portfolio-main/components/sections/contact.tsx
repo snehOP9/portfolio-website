@@ -501,7 +501,7 @@ export default function Contact() {
                                         type="submit"
                                         onClick={playClick}
                                         disabled={sendState === "sending"}
-                                        className="group relative w-full flex h-14 cursor-pointer items-center justify-center overflow-hidden rounded-xl border border-border/50 bg-foreground text-background transition-all duration-500 hover:shadow-lg hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 mt-2"
+                                        className="group relative mt-2 flex h-14 w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl border border-signal bg-signal text-[#07100a] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
                                     >
                                         {/* Shine sweep */}
                                         <div className="absolute inset-0 flex h-full w-full justify-center -translate-x-full -skew-x-12 group-hover:duration-1000 group-hover:translate-x-full">

@@ -19,9 +19,9 @@ function useSceneVisibility() {
 }
 
 const sceneCopy: Record<SceneKind, { label: string; system: string }> = {
-  sentinel: { label: "Live decision lattice", system: "SYNTHETIC SIGNALS / POLICY PATHS" },
-  student: { label: "Learning-signal pipeline", system: "FEATURES / MODEL / GUIDANCE" },
-  anony: { label: "Private connection field", system: "AVATARS / MESSAGES / RELATE" },
+  sentinel: { label: "Live decision lattice", system: "Synthetic signals / policy paths" },
+  student: { label: "Learning-signal pipeline", system: "Features / model / guidance" },
+  anony: { label: "Private connection field", system: "Avatars / messages / relate" },
 };
 
 export function ProjectSignalScene({ kind }: { kind: SceneKind }) {
