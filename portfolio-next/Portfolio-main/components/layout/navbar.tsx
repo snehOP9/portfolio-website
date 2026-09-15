@@ -108,22 +108,23 @@ export default function Navbar() {
         navbarHeight = Math.max(currentHeight - heightDifference, 0);
       }
 
-      // Target the first visible content block, then leave clear space for the fixed navigation.
-      const offset = targetId === "home" ? 0 : -navbarHeight - 12;
+      // Resolve a numeric destination. Passing an element to Lenis also applies
+      // its CSS scroll-margin/padding calculation, which left a large gap above
+      // every section on desktop browsers.
+      const destination = targetId === "home"
+        ? 0
+        : elem!.getBoundingClientRect().top + window.scrollY - navbarHeight - 12;
 
       if (lenis) {
-        lenis.scrollTo(targetId === "home" ? 0 : elem!, {
-          offset,
+        lenis.scrollTo(destination, {
           duration: 1.5,
         });
       } else {
         if (targetId === "home") {
           window.scrollTo({ top: 0, behavior: "smooth" });
         } else if (elem) {
-          const rect = elem.getBoundingClientRect();
-          const offsetPosition = rect.top + window.scrollY + offset;
           window.scrollTo({
-            top: offsetPosition,
+            top: destination,
             behavior: "smooth",
           });
         }

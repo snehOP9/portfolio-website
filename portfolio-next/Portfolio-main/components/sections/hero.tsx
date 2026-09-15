@@ -23,7 +23,14 @@ export default function Hero() {
 
   const scrollToProjects = useCallback(() => {
     window.history.replaceState({ section: "projects" }, "", "#projects");
-    document.getElementById("projects-content")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const target = document.getElementById("projects-content");
+    const headerHeight = document.querySelector("header")?.getBoundingClientRect().height ?? 80;
+    if (target) {
+      window.scrollTo({
+        top: target.getBoundingClientRect().top + window.scrollY - headerHeight - 12,
+        behavior: "smooth",
+      });
+    }
   }, []);
 
   return (
