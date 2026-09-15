@@ -16,7 +16,7 @@ export default function About() {
 
     return (
         <section className="w-full container-void bg-background text-foreground overflow-hidden relative">
-            <div className="container mx-auto px-container">
+            <div id="about-content" className="container mx-auto scroll-mt-28 px-container">
                 <div className="flex flex-col gap-12 xl:flex-row xl:gap-20">
 
                     <div className="xl:w-1/4">

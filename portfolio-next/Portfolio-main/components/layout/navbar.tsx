@@ -12,6 +12,15 @@ import Magnetic from "@/components/effects/magnetic";
 import { useSound } from "@/providers/sound-provider";
 import { useModalHistory } from "@/hooks/use-modal-history";
 
+const contentTargetIds: Record<string, string> = {
+  about: "about-content",
+  stack: "stack-content",
+  projects: "projects-content",
+  research: "research-content",
+  roadmap: "roadmap-content",
+  contact: "contact-content",
+};
+
 export default function Navbar() {
   const { dict } = useLanguage();
   const lenis = useLenis();
@@ -84,7 +93,8 @@ export default function Navbar() {
   }, [isMobileMenuOpen, lenis]);
 
   const scrollTarget = useCallback((targetId: string) => {
-    const elem = document.getElementById(targetId);
+    const contentTargetId = contentTargetIds[targetId] ?? targetId;
+    const elem = document.getElementById(contentTargetId);
 
     if (elem || targetId === "home") {
       let navbarHeight = 80;
@@ -98,15 +108,12 @@ export default function Navbar() {
         navbarHeight = Math.max(currentHeight - heightDifference, 0);
       }
 
-      const isDesktop = dimensions.screenWidth >= 1280;
-      const isAboutOnDesktop = targetId === "about" && isDesktop;
-
-      // For contact, we use a custom offset to make it sit slightly higher (scroll further down).
-      const offset = targetId === "home" ? 0 : targetId === "contact" ? 160 : -navbarHeight;
+      // Target the first visible content block, then leave clear space for the fixed navigation.
+      const offset = targetId === "home" ? 0 : -navbarHeight - 12;
 
       if (lenis) {
         lenis.scrollTo(targetId === "home" ? 0 : elem!, {
-          offset: isAboutOnDesktop ? 0 : offset,
+          offset,
           duration: 1.5,
         });
       } else {
@@ -114,7 +121,7 @@ export default function Navbar() {
           window.scrollTo({ top: 0, behavior: "smooth" });
         } else if (elem) {
           const rect = elem.getBoundingClientRect();
-          const offsetPosition = rect.top + window.scrollY + (isAboutOnDesktop ? 0 : offset);
+          const offsetPosition = rect.top + window.scrollY + offset;
           window.scrollTo({
             top: offsetPosition,
             behavior: "smooth",
@@ -122,7 +129,7 @@ export default function Navbar() {
         }
       }
     }
-  }, [lenis, dimensions.scrollHeight, dimensions.screenWidth]);
+  }, [lenis, dimensions.scrollHeight]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;

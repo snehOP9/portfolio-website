@@ -40,7 +40,7 @@ export default function Stack() {
     return (
         <section className="w-full bg-background text-foreground overflow-hidden relative py-16 md:py-24 lg:py-32 xl:py-40 2xl:py-36">
 
-            <div className="h-full flex flex-col px-container container mx-auto">
+            <div id="stack-content" className="h-full flex scroll-mt-28 flex-col px-container container mx-auto">
                 <div className="grid gap-6 mb-16 lg:grid-cols-[1fr_.8fr] lg:items-end">
                     <BlurReveal>
                         <div><span className="title-counter">[002]</span>

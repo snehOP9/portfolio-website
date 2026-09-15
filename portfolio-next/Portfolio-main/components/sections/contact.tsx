@@ -302,7 +302,7 @@ export default function Contact() {
                 />
             </div>
 
-            <div className="container mx-auto px-container relative z-10">
+            <div id="contact-content" className="container relative z-10 mx-auto scroll-mt-28 px-container">
 
                 {/* ─── Section Header ─── */}
                 <div className="flex flex-col items-center text-center max-w-5xl mx-auto mb-16 lg:mb-24">

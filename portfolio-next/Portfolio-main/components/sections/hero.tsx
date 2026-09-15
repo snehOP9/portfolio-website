@@ -23,7 +23,7 @@ export default function Hero() {
 
   const scrollToProjects = useCallback(() => {
     window.history.replaceState({ section: "projects" }, "", "#projects");
-    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("projects-content")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
   return (
@@ -32,7 +32,15 @@ export default function Hero() {
         <div className="flex flex-col justify-center space-y-7 xl:space-y-10">
           <div className="flex items-center gap-3 font-mono text-xs tracking-[0.16em] text-signal"><span className="h-px w-10 bg-signal opacity-70" /> Data → models → systems</div>
           <h1 className="max-w-4xl text-[clamp(3.5rem,8.5vw,9.5rem)] font-black leading-[.78] tracking-[-.075em] text-foreground">Sneh<br />Raunak<span className="text-signal">.</span></h1>
-          <p className="font-mono text-xs leading-relaxed tracking-[0.08em] text-foreground/70">AI / ML × Software Engineering · Chandigarh University · B.Tech CSE · 2023–2027</p>
+          <p className="flex max-w-2xl flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs leading-relaxed tracking-[0.06em] text-foreground/70 sm:gap-x-3">
+            <span className="whitespace-nowrap">AI / ML × Software Engineering</span>
+            <span aria-hidden="true">·</span>
+            <span className="whitespace-nowrap">Chandigarh University</span>
+            <span aria-hidden="true">·</span>
+            <span className="whitespace-nowrap">B.Tech CSE</span>
+            <span aria-hidden="true">·</span>
+            <span className="whitespace-nowrap">2023–2027</span>
+          </p>
           <p className="max-w-xl text-base font-light leading-relaxed text-muted-foreground sm:text-lg 2xl:text-xl">{content.about.description}</p>
           <div className="flex flex-col flex-wrap gap-3 sm:flex-row sm:items-center">
             <Magnetic><button onClick={() => { playClick(); setContactOpen(true); }} onMouseEnter={playHover} className="group relative flex h-14 w-fit items-center gap-3 overflow-hidden rounded-full bg-signal px-7 text-xs font-semibold tracking-[.16em] text-[#07100a] uppercase transition-transform hover:-translate-y-1">{dict.contactMe}<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></button></Magnetic>

@@ -15,7 +15,7 @@ export default function Research() {
             <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:72px_72px]" />
             <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-foreground/50 to-transparent" />
 
-            <div className="container relative mx-auto px-container">
+            <div id="research-content" className="container relative mx-auto scroll-mt-28 px-container">
                 <div className="grid gap-16 xl:grid-cols-[0.9fr_1.1fr] xl:items-center xl:gap-24">
                     <div>
                         <BlurReveal>

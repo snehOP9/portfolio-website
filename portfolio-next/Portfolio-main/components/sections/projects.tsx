@@ -21,7 +21,7 @@ export default function Projects() {
 
     return (
         <section data-slot="projects" className="relative py-16 md:py-24 lg:py-32">
-            <div className="container mx-auto px-container">
+            <div id="projects-content" className="container mx-auto scroll-mt-28 px-container">
                 <div className="mb-12 grid gap-6 lg:mb-16 lg:grid-cols-[.72fr_1.28fr] lg:items-end">
                     <div className="flex flex-col gap-4">
                         <BlurReveal><span className="title-counter">[003]</span></BlurReveal>

@@ -28,7 +28,7 @@ export default function Roadmap() {
             <div className="absolute top-1/4 left-0 w-full max-w-lg h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none -translate-x-1/2" />
             <div className="absolute bottom-1/4 right-0 w-full max-w-lg h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none translate-x-1/2" />
 
-            <div className="container mx-auto px-container max-w-6xl relative z-10">
+            <div id="roadmap-content" className="container relative z-10 mx-auto max-w-6xl scroll-mt-28 px-container">
 
                 <div className="mb-12 flex flex-col gap-4 text-center md:mb-14 md:items-center">
                     <BlurReveal>
