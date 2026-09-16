@@ -55,6 +55,12 @@ interface FormErrors {
 }
 
 type SendState = "idle" | "sending" | "success" | "error";
+type DeliveryError = "activation" | "network" | null;
+
+interface FormSubmitResponse {
+    success?: boolean | string;
+    message?: string;
+}
 
 /* ─── Animated Checkmark ─── */
 function AnimatedCheckmark() {
@@ -229,6 +235,7 @@ export default function Contact() {
     });
     const [errors, setErrors] = useState<FormErrors>({});
     const [sendState, setSendState] = useState<SendState>("idle");
+    const [deliveryError, setDeliveryError] = useState<DeliveryError>(null);
     const [copied, setCopied] = useState(false);
 
     const updateField = useCallback((field: keyof FormData, value: string) => {
@@ -252,6 +259,7 @@ export default function Contact() {
     const submitForm = useCallback(async () => {
         if (!validate()) return;
 
+        setDeliveryError(null);
         setSendState("sending");
 
         try {
@@ -276,11 +284,19 @@ export default function Contact() {
                 },
             );
 
-            if (!response.ok) throw new Error("Message delivery request failed");
+            const result = (await response.json()) as FormSubmitResponse;
+            const succeeded = result.success === true || result.success === "true";
+
+            if (!response.ok || !succeeded) {
+                setDeliveryError(/activat/i.test(result.message ?? "") ? "activation" : "network");
+                setSendState("error");
+                return;
+            }
 
             setFormData({ name: "", email: "", subject: "", message: "" });
             setSendState("success");
         } catch {
+            setDeliveryError("network");
             setSendState("error");
         }
     }, [content.contact.email, formData, validate]);
@@ -615,13 +631,13 @@ export default function Contact() {
                                     <AnimatedErrorIcon />
                                     <div className="flex flex-col gap-2">
                                         <h3 className="text-xl font-bold tracking-tight text-foreground">
-                                            {dict.errorTitle}
+                                            {deliveryError === "activation" ? dict.activationTitle : dict.errorTitle}
                                         </h3>
                                         <p className="text-sm text-muted-foreground leading-relaxed">
-                                            {dict.errorSubtitle}
+                                            {deliveryError === "activation" ? dict.activationSubtitle : dict.errorSubtitle}
                                         </p>
                                     </div>
-                                    <div className="flex items-center gap-3">
+                                    <div className="flex w-full flex-col items-stretch gap-3 sm:flex-row sm:justify-center">
                                         <button
                                             onClick={() => setSendState("idle")}
                                             className="flex h-11 cursor-pointer items-center justify-center rounded-xl border border-border/50 px-6 text-foreground transition-all duration-500 hover:bg-secondary/30"
@@ -631,18 +647,29 @@ export default function Contact() {
                                                 {dict.close}
                                             </span>
                                         </button>
-                                        <button
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                setSendState("idle");
-                                                setTimeout(() => void submitForm(), 100);
-                                            }}
-                                            className="group relative flex h-11 cursor-pointer items-center justify-center overflow-hidden rounded-xl border border-border/50 bg-foreground px-6 text-background transition-all duration-500 hover:bg-background hover:text-foreground hover:border-foreground/30"
+                                        {deliveryError !== "activation" && (
+                                            <button
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    setSendState("idle");
+                                                    setTimeout(() => void submitForm(), 100);
+                                                }}
+                                                className="group relative flex h-11 cursor-pointer items-center justify-center overflow-hidden rounded-xl border border-border/50 bg-foreground px-6 text-background transition-all duration-500 hover:bg-background hover:text-foreground hover:border-foreground/30"
+                                            >
+                                                <span className="relative z-10 text-xs font-semibold tracking-[0.15em] uppercase">
+                                                    {dict.retry}
+                                                </span>
+                                            </button>
+                                        )}
+                                        <a
+                                            href={`mailto:${content.contact.email}?subject=${encodeURIComponent(`[Portfolio] ${formData.subject}`)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`)}`}
+                                            className="group relative flex h-11 cursor-pointer items-center justify-center overflow-hidden rounded-xl border border-signal bg-signal px-6 text-[#07100a] transition-all duration-300 hover:brightness-110"
                                         >
-                                            <span className="relative z-10 text-xs font-semibold tracking-[0.15em] uppercase">
-                                                {dict.retry}
+                                            <span className="relative z-10 flex items-center gap-2 text-xs font-semibold tracking-[0.12em] uppercase">
+                                                <Mail className="h-3.5 w-3.5" />
+                                                {dict.emailDirectly}
                                             </span>
-                                        </button>
+                                        </a>
                                     </div>
                                 </>
                             )}
