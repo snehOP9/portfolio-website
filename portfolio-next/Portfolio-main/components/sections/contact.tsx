@@ -249,25 +249,48 @@ export default function Contact() {
         return Object.keys(newErrors).length === 0;
     }, [formData, dict]);
 
-    const handleSubmit = useCallback(
-        async (e: React.FormEvent) => {
-            e.preventDefault();
-            if (!validate()) return;
+    const submitForm = useCallback(async () => {
+        if (!validate()) return;
 
-            const subject = encodeURIComponent(`[Portfolio] ${formData.subject}`);
-            const body = encodeURIComponent(
-                `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`,
+        setSendState("sending");
+
+        try {
+            const response = await fetch(
+                `https://formsubmit.co/ajax/${encodeURIComponent(content.contact.email)}`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                    },
+                    body: JSON.stringify({
+                        name: formData.name.trim(),
+                        email: formData.email.trim(),
+                        subject: formData.subject.trim(),
+                        message: formData.message.trim(),
+                        _subject: `[Portfolio] ${formData.subject.trim()}`,
+                        _replyto: formData.email.trim(),
+                        _template: "table",
+                        _url: window.location.href,
+                    }),
+                },
             );
 
-            setSendState("success");
-            window.location.assign(`mailto:${content.contact.email}?subject=${subject}&body=${body}`);
-            setFormData({ name: "", email: "", subject: "", message: "" });
+            if (!response.ok) throw new Error("Message delivery request failed");
 
-            setTimeout(() => {
-                setSendState("idle");
-            }, 3500);
+            setFormData({ name: "", email: "", subject: "", message: "" });
+            setSendState("success");
+        } catch {
+            setSendState("error");
+        }
+    }, [content.contact.email, formData, validate]);
+
+    const handleSubmit = useCallback(
+        (e: React.FormEvent) => {
+            e.preventDefault();
+            void submitForm();
         },
-        [content.contact.email, formData, validate]
+        [submitForm],
     );
 
     const handleCopyEmail = useCallback(async () => {
@@ -610,8 +633,9 @@ export default function Contact() {
                                         </button>
                                         <button
                                             onClick={(e) => {
+                                                e.preventDefault();
                                                 setSendState("idle");
-                                                setTimeout(() => handleSubmit(e as unknown as React.FormEvent), 100);
+                                                setTimeout(() => void submitForm(), 100);
                                             }}
                                             className="group relative flex h-11 cursor-pointer items-center justify-center overflow-hidden rounded-xl border border-border/50 bg-foreground px-6 text-background transition-all duration-500 hover:bg-background hover:text-foreground hover:border-foreground/30"
                                         >
