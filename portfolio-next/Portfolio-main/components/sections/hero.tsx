@@ -55,6 +55,11 @@ export default function Hero() {
             <Magnetic><button onClick={() => { playClick(); scrollToProjects(); }} onMouseEnter={playHover} className="signal-ghost flex h-14 w-fit items-center gap-3 rounded-full border border-border/70 px-6 text-xs font-semibold tracking-[.14em] text-foreground uppercase transition-colors"><Mouse className="h-4 w-4" />{dict.exploreProjects}</button></Magnetic>
             <Magnetic><button onClick={() => { playClick(); setResumeOpen(true); }} onMouseEnter={playHover} className="signal-ghost flex h-14 w-fit items-center gap-3 rounded-full border border-border/70 px-6 text-xs font-semibold tracking-[.14em] text-foreground uppercase transition-colors"><FileText className="h-4 w-4" />{dict.resume}</button></Magnetic>
           </div>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-3 font-mono text-xs tracking-[.1em] text-muted-foreground">
+            <a href="https://github.com/snehOP9" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition-colors hover:text-foreground"><span aria-hidden="true">↗</span>GITHUB</a>
+            <a href="https://www.linkedin.com/in/sneh-raunak/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition-colors hover:text-foreground"><span aria-hidden="true">↗</span>LINKEDIN</a>
+            <a href="/resume/Sneh_Raunak_Resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition-colors hover:text-foreground"><FileText className="h-4 w-4" />OPEN RESUME</a>
+          </div>
         </div>
         <div className="relative mx-auto h-[min(54vh,600px)] w-full max-w-[620px] lg:h-[min(70vh,720px)]">
           <SSystem />

@@ -1,5 +1,4 @@
 import ScrollProgress from "@/components/layout/scroll-progress";
-import ManifestoFlow from "@/components/effects/manifesto-flow";
 import Hero from "@/components/sections/hero";
 import About from "@/components/sections/about";
 import Stack from "@/components/sections/stack";
@@ -10,5 +9,5 @@ import Contact from "@/components/sections/contact";
 import { InteractiveParticles } from "@/components/effects/interactive-particles";
 
 export default function PortfolioHome() {
-  return <><ScrollProgress /><InteractiveParticles /><main id="main-content" className="bg-background relative"><Hero /><div className="relative z-10 bg-background border-t border-border"><section id="work"><Projects /></section><ManifestoFlow /><section id="research"><Research /></section><ManifestoFlow reverse /><section id="about"><About /></section><ManifestoFlow /><section id="stack"><Stack /></section><ManifestoFlow reverse /><section id="roadmap"><Roadmap /></section><section id="contact"><Contact /></section></div></main></>;
+  return <><ScrollProgress /><InteractiveParticles /><main id="main-content" className="bg-background relative"><Hero /><div className="relative z-10 divide-y divide-border bg-background"><section id="work"><Projects /></section><section id="research"><Research /></section><section id="about"><About /></section><section id="stack"><Stack /></section><section id="roadmap"><Roadmap /></section><section id="contact"><Contact /></section></div></main></>;
 }
