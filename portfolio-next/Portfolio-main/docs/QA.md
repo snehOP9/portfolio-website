@@ -5,6 +5,8 @@
 - [x] Lint and production build pass after the redesign slice.
 - [x] Public GitHub Pages base path is configured.
 - [x] No EmailJS client integration or contact-service credential remains.
+- [x] CSP permits only the FormSubmit HTTPS endpoint required by the contact form.
+- [ ] Confirm FormSubmit owner activation and submit one live contact-form test after deployment.
 - [x] Every featured project has a source-grounded visual mapping.
 - [x] Project motion is visibility-gated and reduced-motion aware.
 

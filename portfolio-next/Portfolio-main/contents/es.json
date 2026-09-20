@@ -27,7 +27,8 @@
     "title": "Explainable Machine Learning for Predicting Problematic Short-Form Video Use Among University Students",
     "summary": "An explainable machine-learning research project focused on turning model comparison and feature analysis into reasoning that can be inspected, challenged, and understood.",
     "themes": ["Problem framing", "Model comparison", "SHAP", "LIME", "Robustness", "Fairness"],
-    "status": "Research exploration"
+    "status": "Research exploration",
+    "reference": { "label": "Abrir el cuaderno de investigación", "href": "https://colab.research.google.com/drive/1BikxJRmQ-TTbnvAcT5Lj09rKFtEYlsK9?usp=sharing" }
   },
   "education": {
     "institution": "Chandigarh University",

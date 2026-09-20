@@ -49,7 +49,7 @@ export default async function LangLayout({
   return (
     <html lang={lang} suppressHydrationWarning>
       <head>
-        <meta httpEquiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; connect-src 'self'; font-src 'self' data:; form-action 'self'; frame-ancestors 'none'; frame-src 'self'; img-src 'self' data: blob:; media-src 'self'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; worker-src 'self' blob:; upgrade-insecure-requests" />
+        <meta httpEquiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; connect-src 'self' https://formsubmit.co; font-src 'self' data:; form-action 'self'; frame-ancestors 'none'; frame-src 'self'; img-src 'self' data: blob:; media-src 'self'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; worker-src 'self' blob:; upgrade-insecure-requests" />
         <meta httpEquiv="Permissions-Policy" content="camera=(), geolocation=(), microphone=(), payment=(), usb=()" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
       </head>

@@ -2,15 +2,15 @@
 
 ## Scope
 
-This portfolio is intentionally a static export. It has no application server, authentication, database, user accounts, server actions, analytics endpoint, or contact-form API. The contact form opens a user-controlled `mailto:` draft instead of transmitting information through a third-party client service.
+This portfolio is intentionally a static export. It has no application server, authentication, database, user accounts, server actions, analytics endpoint, or repository-hosted contact-form API. The contact form submits directly from the visitor's browser to FormSubmit over HTTPS; it also offers a user-controlled `mailto:` draft as a fallback.
 
 ## Security controls in the site
 
-- Content Security Policy meta policy that limits scripts, connections, images, media, frames, workers, and embedded objects to the site itself.
+- Content Security Policy meta policy that limits scripts, connections, images, media, frames, workers, and embedded objects to the site itself, with a narrowly scoped `https://formsubmit.co` connection allowance for the contact form.
 - Permissions Policy that disables camera, microphone, geolocation, payment, and USB access.
 - Strict cross-origin referrer policy.
 - `noopener noreferrer` on external links opened in new tabs.
-- No committed environment files, API keys, tokens, private keys, or client-side contact-service credentials.
+- No committed environment files, API keys, tokens, private keys, or client-side contact-service credentials. FormSubmit is used without a client-side secret and requires a one-time owner activation email.
 - Static image output only; Next image optimization is disabled.
 - Updated, pinned production dependencies and npm overrides for known patched transitive versions.
 

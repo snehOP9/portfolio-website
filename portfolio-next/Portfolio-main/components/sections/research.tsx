@@ -36,6 +36,16 @@ export default function Research() {
                                 {research.status}<ArrowUpRight className="h-3.5 w-3.5" />
                             </p>
                         </BlurReveal>
+                        <BlurReveal>
+                            <a
+                                href={research.reference.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-foreground underline decoration-foreground/40 underline-offset-4 transition-colors hover:decoration-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
+                            >
+                                {research.reference.label}<ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                            </a>
+                        </BlurReveal>
                     </div>
 
                     <BlurReveal>
