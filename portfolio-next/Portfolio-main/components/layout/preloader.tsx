@@ -1,16 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 export function Preloader() {
     const [isLoading, setIsLoading] = useState(true);
+    const reduceMotion = useReducedMotion();
 
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsLoading(false);
             document.body.style.overflow = "";
-        }, 1200);
+        }, reduceMotion ? 0 : 620);
 
         document.body.style.overflow = "hidden";
 
@@ -18,7 +19,7 @@ export function Preloader() {
             clearTimeout(timer);
             document.body.style.overflow = "";
         };
-    }, []);
+    }, [reduceMotion]);
 
     return (
         <AnimatePresence>
@@ -28,7 +29,7 @@ export function Preloader() {
                     initial={{ y: 0 }}
                     exit={{
                         y: "-100%",
-                        transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] }
+                        transition: { duration: reduceMotion ? 0 : 0.42, ease: [0.76, 0, 0.24, 1] }
                     }}
                     className="fixed inset-0 z-99999 flex flex-col items-center justify-center bg-background pointer-events-auto"
                 >
@@ -42,7 +43,7 @@ export function Preloader() {
                         <div className="relative flex items-center justify-center w-36 h-36">
                             <motion.svg
                                 animate={{ rotate: 360 }}
-                                transition={{ duration: 12, ease: "linear", repeat: Infinity }}
+                                transition={{ duration: reduceMotion ? 0 : 12, ease: "linear", repeat: reduceMotion ? 0 : Infinity }}
                                 viewBox="0 0 100 100"
                                 className="absolute inset-0 w-full h-full opacity-40"
                             >
@@ -75,7 +76,7 @@ export function Preloader() {
                                     strokeDasharray="289"
                                     initial={{ strokeDashoffset: 289 }}
                                     animate={{ strokeDashoffset: 0 }}
-                                    transition={{ duration: 2, ease: [0.65, 0, 0.35, 1] }}
+                                    transition={{ duration: reduceMotion ? 0 : 0.58, ease: [0.65, 0, 0.35, 1] }}
                                     className="text-primary"
                                 />
                             </motion.svg>
@@ -87,7 +88,7 @@ export function Preloader() {
                                 className="relative z-10 h-20 w-20 text-foreground"
                                 initial={{ pathLength: 0, opacity: 0, rotate: -10 }}
                                 animate={{ pathLength: 1, opacity: 1, rotate: 0 }}
-                                transition={{ duration: 0.9, delay: 0.15, ease: [0.65, 0, 0.35, 1] }}
+                                transition={{ duration: reduceMotion ? 0 : 0.48, delay: reduceMotion ? 0 : 0.08, ease: [0.65, 0, 0.35, 1] }}
                                 aria-label="Sneh Raunak"
                             >
                                 <motion.path

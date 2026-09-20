@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import ThemeSwitcher from "@/components/widgets/theme-switcher";
@@ -24,10 +24,12 @@ const contentTargetIds: Record<string, string> = {
 
 export default function Navbar() {
   const router = useRouter();
+  const pathname = usePathname();
   const lenis = useLenis();
   const { playHover, playClick } = useSound();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const highlightedSection = pathname.startsWith("/research/") ? "research" : pathname.startsWith("/projects/") ? "work" : activeSection;
 
   useModalHistory(isMobileMenuOpen, setIsMobileMenuOpen, "mobile-menu");
 
@@ -154,25 +156,35 @@ export default function Navbar() {
   }, [scrollTarget]);
 
   useEffect(() => {
+    // IntersectionObserver reports only changed entries, which can leave a
+    // stale underline when adjacent long sections overlap its root margin.
+    // Resolve the active item from the reading position on every scroll frame.
     const sectionIds = navLinks.map(({ href }) => href.slice(1));
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((section): section is HTMLElement => section !== null);
+    let frameId = 0;
+    const updateActiveSection = () => {
+      frameId = 0;
+      const headerHeight = headerRef.current?.getBoundingClientRect().height ?? 80;
+      const readingLine = window.scrollY + headerHeight + window.innerHeight * 0.28;
+      let nextActive = "home";
 
-    if (!sections.length) return;
+      for (const id of sectionIds) {
+        const section = document.getElementById(id);
+        if (section && section.offsetTop <= readingLine) nextActive = id;
+      }
+      setActiveSection((current) => current === nextActive ? current : nextActive);
+    };
+    const scheduleUpdate = () => {
+      if (!frameId) frameId = window.requestAnimationFrame(updateActiveSection);
+    };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-35% 0px -55% 0px", threshold: [0.01, 0.2, 0.5] },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    updateActiveSection();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    return () => {
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (frameId) window.cancelAnimationFrame(frameId);
+    };
   }, [navLinks]);
 
   const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -249,11 +261,11 @@ export default function Navbar() {
                       scrollToSection(e, link.href);
                     }}
                     onMouseEnter={playHover}
-                    aria-current={activeSection === link.href.slice(1) ? "page" : undefined}
-                    className={`group relative flex min-h-11 items-center py-2 text-xs font-medium uppercase tracking-[0.2em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal ${activeSection === link.href.slice(1) ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                    aria-current={highlightedSection === link.href.slice(1) ? "page" : undefined}
+                    className={`group relative flex min-h-11 items-center py-2 text-xs font-medium uppercase tracking-[0.2em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal ${highlightedSection === link.href.slice(1) ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
                   >
                     {link.name}
-                    <span className={`absolute bottom-0 left-0 h-px bg-foreground transition-all duration-300 ${activeSection === link.href.slice(1) ? "w-full" : "w-0 group-hover:w-full"}`} />
+                    <span className={`absolute bottom-0 left-0 h-px bg-foreground transition-all duration-300 ${highlightedSection === link.href.slice(1) ? "w-full" : "w-0 group-hover:w-full"}`} />
                   </Link>
                 </Magnetic>
               </li>
@@ -308,10 +320,10 @@ export default function Navbar() {
                         playClick();
                         scrollToSection(e, link.href);
                       }}
-                      aria-current={activeSection === link.href.slice(1) ? "page" : undefined}
+                      aria-current={highlightedSection === link.href.slice(1) ? "page" : undefined}
                       className="group flex min-h-11 items-baseline rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
                     >
-                      <span className={`text-4xl font-black tracking-tighter uppercase transition-all duration-300 group-hover:pl-4 group-hover:text-primary ${activeSection === link.href.slice(1) ? "text-primary" : "text-foreground"}`}>
+                      <span className={`text-4xl font-black tracking-tighter uppercase transition-all duration-300 group-hover:pl-4 group-hover:text-primary ${highlightedSection === link.href.slice(1) ? "text-primary" : "text-foreground"}`}>
                         {link.name}
                       </span>
                     </Link>
