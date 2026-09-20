@@ -17,9 +17,12 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://snehraunak.in"),
   title: { default: "Sneh Raunak | ML systems and full-stack products", template: "%s | Sneh Raunak" },
   description: "Selected machine-learning systems, full-stack products, and explainable-AI research by Sneh Raunak.",
+  keywords: ["Sneh Raunak", "machine learning", "full-stack developer", "FastAPI", "Next.js", "explainable AI", "portfolio"],
+  authors: [{ name: "Sneh Raunak", url: "https://snehraunak.in" }],
+  creator: "Sneh Raunak",
   alternates: { canonical: "/" },
   openGraph: { type: "website", locale: "en_IN", url: "/", siteName: "Sneh Raunak", images: [{ url: "/og.png", width: 1200, height: 630, alt: "Sneh Raunak - ML systems and full-stack products" }] },
-  twitter: { card: "summary_large_image", images: ["/og.png"] }, robots: { index: true, follow: true },
+  twitter: { card: "summary_large_image", creator: "@Snehhhh_09", images: ["/og.png"] }, robots: { index: true, follow: true },
 };
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

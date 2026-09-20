@@ -48,7 +48,7 @@ const ProjectCard = React.memo(function ProjectCard({ project }: { project: Proj
                     aria-label={`Read ${project.title} case study`}
                     onClick={playClick}
                     onMouseEnter={playHover}
-                    className="group relative aspect-[16/11] w-full cursor-pointer text-left perspective-1000 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal lg:aspect-[16/10] xl:aspect-[16/11]"
+                    className="group relative min-h-[29rem] w-full cursor-pointer text-left perspective-1000 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
                 >
                     <div className="absolute inset-0 overflow-hidden rounded-2xl border border-[#d1ff82]/25 bg-[#07100a] text-white shadow-2xl transition-all duration-700 ease-out group-hover:-translate-y-2 group-hover:border-[#d1ff82]/65">
                         <div className="absolute inset-0 z-0">
@@ -67,10 +67,16 @@ const ProjectCard = React.memo(function ProjectCard({ project }: { project: Proj
                                 </span>
                             </div>
 
-                            <div className="max-w-[92%]">
+                            <div className="max-w-[94%]">
                                 <h3 className="text-4xl font-black tracking-tighter text-white sm:text-5xl">
                                     {project.title}
                                 </h3>
+                                <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/85 sm:text-base">{project.description}</p>
+                                <div className="mt-5 flex flex-wrap gap-2 font-mono text-[10px] tracking-[.12em] text-signal">
+                                    <span className="rounded-full border border-signal/45 bg-black/35 px-3 py-2">PUBLIC DEMO</span>
+                                    <span className="rounded-full border border-white/25 bg-black/35 px-3 py-2">SOURCE AVAILABLE</span>
+                                    <span className="rounded-full border border-white/25 bg-black/35 px-3 py-2">CASE STUDY</span>
+                                </div>
                                 <span className="project-detail-cta mt-5 inline-flex items-center rounded-full border border-signal bg-black/45 px-5 py-3 text-base font-bold text-signal backdrop-blur-md transition-colors">
                                     View project details →
                                 </span>

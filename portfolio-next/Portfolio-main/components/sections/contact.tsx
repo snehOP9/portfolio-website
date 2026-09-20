@@ -576,12 +576,14 @@ export default function Contact() {
                 </div>
 
                 {/* ─── Footer ─── */}
-                <footer className="flex w-full items-center justify-center border-t border-border/50 py-8">
-                    <p className="flex items-center gap-3 font-mono text-xs tracking-widest text-muted-foreground uppercase">
-                        <span>2026</span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary/50" />
-                        <span>SNEH RAUNAK.</span>
-                    </p>
+                <footer className="mt-10 flex w-full flex-col gap-6 border-t border-border/50 py-8 text-sm sm:flex-row sm:items-center sm:justify-between">
+                    <div><p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">2026 <span className="mx-2 text-signal">/</span> SNEH RAUNAK.</p><p className="mt-2 text-xs text-muted-foreground">ML systems and full-stack product work.</p></div>
+                    <div className="flex flex-wrap gap-x-5 gap-y-3 font-mono text-xs tracking-[.1em] text-muted-foreground">
+                        <a href="https://github.com/snehOP9" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">GITHUB</a>
+                        <a href="https://www.linkedin.com/in/sneh-raunak/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">LINKEDIN</a>
+                        <a href="/resume/Sneh_Raunak_Resume.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">RESUME</a>
+                        <a href={`mailto:${content.contact.email}`} className="hover:text-foreground">EMAIL</a>
+                    </div>
                 </footer>
             </div>
 
