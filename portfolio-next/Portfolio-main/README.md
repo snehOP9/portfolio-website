@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-The production build is configured as a static export for the `/portfolio-website` GitHub Pages path.
+The production build is configured as a static export for the `https://snehraunak.in` GitHub Pages custom domain.
 
 ## Contact
 

@@ -9,17 +9,17 @@
     {
       "id": "1", "title": "SentinelFlow", "category": "ML systems / decision intelligence", "year": "2026",
       "description": "SentinelFlow is a synthetic-data fraud-risk reference system that brings together risk workflows, explainability, and a polished operational interface. It is designed as a transparent engineering demonstration rather than a claim about live financial decisions.",
-      "image": "/portfolio-website/work/sentinelflow-signal.png", "demo": "https://sentinalflow.vercel.app", "repo": "https://github.com/snehOP9/Sentinal-Flow", "stack": ["FastAPI", "Next.js", "PostgreSQL", "Redis", "MLflow"]
+      "image": "/work/sentinelflow-signal.png", "demo": "https://sentinalflow.vercel.app", "repo": "https://github.com/snehOP9/Sentinal-Flow", "stack": ["FastAPI", "Next.js", "PostgreSQL", "Redis", "MLflow"]
     },
     {
       "id": "2", "title": "Student Performance Predictor Pro", "category": "Full-stack ML application", "year": "2026",
       "description": "A full-stack student performance application with authenticated workflows, prediction and uncertainty endpoints, and actionable recommendations. The experience pairs a FastAPI backend with a focused React and TypeScript interface.",
-      "image": "/portfolio-website/work/student-insight.png", "demo": "https://student-performance-predictor-pro-w.vercel.app/", "repo": "https://github.com/snehOP9/student-performance-api", "stack": ["Python", "FastAPI", "React", "TypeScript", "Vite"]
+      "image": "/work/student-insight.png", "demo": "https://student-performance-predictor-pro-w.vercel.app/", "repo": "https://github.com/snehOP9/student-performance-api", "stack": ["Python", "FastAPI", "React", "TypeScript", "Vite"]
     },
     {
       "id": "3", "title": "Anony Talk", "category": "Community web application", "year": "2026",
       "description": "An anonymous reflection and community web application built around safe, lightweight conversations. It is a product experience, not a substitute for professional healthcare or crisis support.",
-      "image": "/portfolio-website/work/anony-orbit.png", "demo": "https://anony-talk-safespace.vercel.app/", "repo": "https://github.com/snehOP9/anony-talk", "stack": ["React", "Vite", "Node.js", "Express", "SQLite"]
+      "image": "/work/anony-orbit.png", "demo": "https://anony-talk-safespace.vercel.app/", "repo": "https://github.com/snehOP9/anony-talk", "stack": ["React", "Vite", "Node.js", "Express", "SQLite"]
     }
   ],
   "research": {

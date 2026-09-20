@@ -6,7 +6,6 @@ const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: "/portfolio-website",
   images: { unoptimized: true },
   trailingSlash: true,
   poweredByHeader: false,

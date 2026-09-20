@@ -16,7 +16,7 @@ const syne = Syne({ subsets: ["latin"], variable: "--font-syne" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://snehop9.github.io/portfolio-website"),
+  metadataBase: new URL("https://snehraunak.in"),
   title: "Sneh Raunak | Portfolio",
   description: "Machine learning systems and full-stack products by Sneh Raunak.",
   alternates: { canonical: "/" },

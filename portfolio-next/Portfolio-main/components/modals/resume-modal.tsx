@@ -26,7 +26,7 @@ export function ResumeModal({ open, onOpenChange }: ResumeModalProps) {
 
                 <div className="relative w-full h-full flex-1 overflow-hidden pt-12 pb-4 px-4 sm:px-8">
                     <iframe
-                        src="/portfolio-website/resume/Sneh_Raunak_Resume.pdf#toolbar=0&view=FitH"
+                        src="/resume/Sneh_Raunak_Resume.pdf#toolbar=0&view=FitH"
                         className="w-full h-full border-0 rounded-lg shadow-lg bg-white/5"
                         title="Resume"
                     />
@@ -35,7 +35,7 @@ export function ResumeModal({ open, onOpenChange }: ResumeModalProps) {
                 {/* Floating Download Button */}
                 <div className="absolute bottom-8 right-8 z-50">
                     <a
-                        href="/portfolio-website/resume/Sneh_Raunak_Resume.pdf"
+                        href="/resume/Sneh_Raunak_Resume.pdf"
                         download="Sneh_Raunak_Resume.pdf"
                         className="group relative flex h-14 items-center justify-center gap-3 rounded-full overflow-hidden border border-border/50 bg-background px-6 text-foreground shadow-[0_0_20px_rgba(0,0,0,0.1)] transition-all duration-500 hover:bg-foreground hover:text-background hover:border-foreground/30 hover:shadow-[0_0_30px_rgba(0,0,0,0.2)] hover:-translate-y-1 active:scale-[0.98] active:translate-y-0"
                         aria-label="Download Resume"
