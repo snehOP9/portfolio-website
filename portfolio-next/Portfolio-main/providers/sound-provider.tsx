@@ -12,12 +12,12 @@ interface SoundContextType {
 const SoundContext = createContext<SoundContextType | undefined>(undefined);
 
 export function SoundProvider({ children }: { children: React.ReactNode }) {
-    const [isMuted, setIsMuted] = useState(false); // Default to unmuted
+    const [isMuted, setIsMuted] = useState(true);
     const audioCtxRef = useRef<AudioContext | null>(null);
 
     useEffect(() => {
         const savedMute = localStorage.getItem("sound-muted");
-        const frame = requestAnimationFrame(() => setIsMuted(savedMute === "true"));
+        const frame = requestAnimationFrame(() => setIsMuted(savedMute !== "false"));
         return () => cancelAnimationFrame(frame);
     }, []);
 
@@ -38,9 +38,7 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
             if (audioCtxRef.current.state === "suspended") {
                 audioCtxRef.current.resume();
             }
-        } catch (e) {
-            console.error("Audio resume failed:", e);
-        }
+        } catch { /* Audio is optional. */ }
     }, []);
 
     const initAudioContext = useCallback((): AudioContext | null => {
@@ -77,9 +75,7 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
             
             osc.start(ctx.currentTime);
             osc.stop(ctx.currentTime + 0.05);
-        } catch (e) {
-            console.error("Audio play failed:", e);
-        }
+        } catch { /* Audio is optional. */ }
     }, [isMuted, initAudioContext]);
 
     const playClick = useCallback(() => {
@@ -104,9 +100,7 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
             
             osc.start(ctx.currentTime);
             osc.stop(ctx.currentTime + 0.1);
-        } catch (e) {
-            console.error("Audio play failed:", e);
-        }
+        } catch { /* Audio is optional. */ }
     }, [isMuted, initAudioContext]);
 
     return (

@@ -54,8 +54,7 @@ export function SSystem() {
         <motion.g animate={reduceMotion ? undefined : { rotate: 360 }} transition={{ duration: 30, ease: "linear", repeat: Infinity }} style={{ transformOrigin: "380px 380px" }}>
           <ellipse cx="380" cy="382" rx="270" ry="139" fill="none" stroke="rgba(206,255,128,.24)" strokeWidth="1.5" />
           <ellipse cx="380" cy="382" rx="225" ry="280" fill="none" stroke="rgba(190,255,105,.13)" strokeWidth="1" transform="rotate(52 380 382)" />
-          <circle r="7" fill="#d7ff8f" filter="url(#s-bloom)"><animateMotion dur="8s" repeatCount="indefinite" rotate="auto"><mpath href="#orbit-a" /></animateMotion></circle>
-          <circle r="4" fill="#f1ffe0"><animateMotion dur="12s" repeatCount="indefinite" rotate="auto"><mpath href="#orbit-b" /></animateMotion></circle>
+          {!reduceMotion && <><circle r="7" fill="#d7ff8f" filter="url(#s-bloom)"><animateMotion dur="8s" repeatCount="indefinite" rotate="auto"><mpath href="#orbit-a" /></animateMotion></circle><circle r="4" fill="#f1ffe0"><animateMotion dur="12s" repeatCount="indefinite" rotate="auto"><mpath href="#orbit-b" /></animateMotion></circle></>}
         </motion.g>
 
         <g opacity=".7"><path d="M120 382C120 208 650 172 650 382" fill="none" stroke="rgba(231,255,193,.58)" strokeWidth="1.25" strokeDasharray="3 8" /></g>
@@ -65,7 +64,7 @@ export function SSystem() {
         </g>
         <motion.g animate={reduceMotion ? undefined : { rotate: -360 }} transition={{ duration: 38, ease: "linear", repeat: Infinity }} style={{ transformOrigin: "380px 380px" }}>
           <path d="M196 233C358 126 604 263 499 486" fill="none" stroke="rgba(196,255,109,.66)" strokeWidth="1.4" />
-          <circle r="6" fill="#c6ff72" filter="url(#s-bloom)"><animateMotion dur="10s" repeatCount="indefinite" rotate="auto"><mpath href="#orbit-b" /></animateMotion></circle>
+          {!reduceMotion && <circle r="6" fill="#c6ff72" filter="url(#s-bloom)"><animateMotion dur="10s" repeatCount="indefinite" rotate="auto"><mpath href="#orbit-b" /></animateMotion></circle>}
         </motion.g>
         <OrbitLabel x={156} y={326}>DATA</OrbitLabel>
         <OrbitLabel x={585} y={315}>MODELS</OrbitLabel>

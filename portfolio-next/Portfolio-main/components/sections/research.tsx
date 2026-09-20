@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { BlurReveal } from "@/components/effects/blur-reveal";
 import { useLanguage } from "@/providers/language-provider";
+import Link from "next/link";
 
 export default function Research() {
     const { content } = useLanguage();
@@ -35,6 +36,11 @@ export default function Research() {
                             <p className="mt-8 inline-flex items-center gap-2 rounded-full border border-border/70 bg-secondary/25 px-4 py-2 font-mono text-xs tracking-[0.12em] text-foreground/80">
                                 {research.status}<ArrowUpRight className="h-3.5 w-3.5" />
                             </p>
+                        </BlurReveal>
+                        <BlurReveal>
+                            <Link href="/research/short-form-video-xai/" className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-foreground underline decoration-foreground/40 underline-offset-4 transition-colors hover:decoration-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal">
+                                Read research overview <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                            </Link>
                         </BlurReveal>
                         <BlurReveal>
                             <a

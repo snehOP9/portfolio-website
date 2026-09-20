@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+import Link from "next/link";
 import { useLanguage } from "@/providers/language-provider";
 import { BlurReveal } from "@/components/effects/blur-reveal";
-import { ProjectModal } from "@/components/modals/project-modal";
 import type { ProjectItem } from "@/types/project";
 import Magnetic from "@/components/effects/magnetic";
 import { useSound } from "@/providers/sound-provider";
@@ -11,14 +11,6 @@ import { ProjectSignalScene } from "@/components/effects/project-signal-scene";
 
 export default function Projects() {
     const { content, dict } = useLanguage();
-    const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const handleOpenProject = (project: ProjectItem) => {
-        setSelectedProject(project);
-        setIsModalOpen(true);
-    };
-
     return (
         <section data-slot="projects" className="relative py-16 md:py-24 lg:py-32">
             <div id="projects-content" className="container mx-auto scroll-mt-28 px-container">
@@ -36,30 +28,25 @@ export default function Projects() {
 
                 <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3 xl:gap-8">
                     {content.projects.map((project: ProjectItem) => (
-                        <ProjectCard key={project.id} project={project} onClick={() => handleOpenProject(project)} />
+                        <ProjectCard key={project.id} project={project} />
                     ))}
                 </div>
             </div>
 
-            <ProjectModal open={isModalOpen} onOpenChange={setIsModalOpen} project={selectedProject} />
         </section>
     );
 }
 
-const ProjectCard = React.memo(function ProjectCard({ project, onClick }: { project: ProjectItem; onClick?: () => void }) {
+const ProjectCard = React.memo(function ProjectCard({ project }: { project: ProjectItem }) {
     const { playHover, playClick } = useSound();
     const kind = project.title === "SentinelFlow" ? "sentinel" : project.title.startsWith("Student") ? "student" : "anony";
 
     return (
         <Magnetic disabled>
-            <button
-                    type="button"
-                    aria-haspopup="dialog"
-                    aria-label={`Open ${project.title} project details`}
-                    onClick={() => {
-                        playClick();
-                        onClick?.();
-                    }}
+            <Link
+                    href={`/projects/${project.title === "SentinelFlow" ? "sentinelflow" : project.title.startsWith("Student") ? "student-performance-predictor" : "anony-talk"}/`}
+                    aria-label={`Read ${project.title} case study`}
+                    onClick={playClick}
                     onMouseEnter={playHover}
                     className="group relative aspect-[4/5] w-full cursor-pointer text-left perspective-1000 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal lg:aspect-[16/10] xl:aspect-[4/5]"
                 >
@@ -90,7 +77,7 @@ const ProjectCard = React.memo(function ProjectCard({ project, onClick }: { proj
                             </div>
                         </div>
                     </div>
-            </button>
+            </Link>
         </Magnetic>
     );
 });

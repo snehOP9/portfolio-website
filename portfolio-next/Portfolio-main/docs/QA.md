@@ -2,18 +2,19 @@
 
 ## Completed in this iteration
 
-- [x] Lint and production build pass after the redesign slice.
+- [x] Type-check, lint, and production build pass after the evidence-led portfolio update.
 - [x] Public GitHub Pages base path is configured.
 - [x] No EmailJS client integration or contact-service credential remains.
 - [x] CSP permits only the FormSubmit HTTPS endpoint required by the contact form.
 - [ ] Confirm FormSubmit owner activation and submit one live contact-form test after deployment.
-- [x] Every featured project has a source-grounded visual mapping.
-- [x] Project motion is visibility-gated and reduced-motion aware.
+- [x] Every featured project has a source-grounded static case-study route.
+- [x] Project and particle motion are visibility-gated or disabled for reduced-motion/coarse-pointer environments.
+- [x] Static routes include projects, research, robots, and sitemap.
 
 ## Required before sign-off
 
-- [x] Root and `/en/` routes return 200 locally; identity and project assets return 200.
-- [ ] Check `#projects`, `#research`, and `#contact` navigation.
+- [x] Root, `/en/`, case-study, research, robots, and sitemap routes build as static output.
+- [ ] Check `#work`, `#research`, `#about`, and `#contact` navigation in a browser surface.
 - [ ] Check 390×844, 768×1024, 1366×768, and 1920×1080 in a browser surface.
-- [ ] Check no horizontal body overflow, usable mobile navigation, and project modal links.
+- [ ] Check no horizontal body overflow, usable mobile navigation, direct case-study links, and contact social links.
 - [ ] Check console and network panel for errors and missing assets.

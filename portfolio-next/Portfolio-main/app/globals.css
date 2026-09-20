@@ -184,6 +184,20 @@
   }
 }
 
+.skip-link {
+  position: fixed;
+  top: .75rem;
+  left: .75rem;
+  z-index: 1000000;
+  transform: translateY(-200%);
+  border-radius: .5rem;
+  background: var(--signal);
+  color: #07100a;
+  padding: .75rem 1rem;
+  font-weight: 700;
+}
+.skip-link:focus { transform: translateY(0); outline: 2px solid currentColor; }
+
 .hero-shell::before {
   content: "";
   position: absolute;

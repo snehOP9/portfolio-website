@@ -18,7 +18,7 @@ export function CustomCursor() {
     const cursorYSpring = useSpring(cursorY, springConfig);
 
     useEffect(() => {
-        if (window.matchMedia("(pointer: coarse)").matches) return;
+        if (window.matchMedia("(pointer: coarse), (prefers-reduced-motion: reduce)").matches) return;
 
         const frameId = requestAnimationFrame(() => {
             setIsEnabled(true);

@@ -28,15 +28,20 @@ jobs:
         with:
           node-version: '22'
           cache: npm
+          cache-dependency-path: portfolio-next/Portfolio-main/package-lock.json
 
-      # The current lockfile predates the optional bufferutil declaration and
-      # fails `npm ci`. `npm install` still exercises the dependency graph while
-      # keeping CI useful until the lockfile is normalized by a maintenance PR.
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        working-directory: portfolio-next/Portfolio-main
+        run: npm ci --no-audit --no-fund
 
       - name: Type-check
-        run: npm run check
+        working-directory: portfolio-next/Portfolio-main
+        run: npm run typecheck
+
+      - name: Lint
+        working-directory: portfolio-next/Portfolio-main
+        run: npm run lint
 
       - name: Production build
+        working-directory: portfolio-next/Portfolio-main
         run: npm run build

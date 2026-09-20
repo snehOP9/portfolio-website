@@ -14,6 +14,8 @@ export default function SmoothScroll({
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
+    const shouldUseNativeScroll = window.matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse)").matches;
+    if (shouldUseNativeScroll) return;
     const lenisInstance = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

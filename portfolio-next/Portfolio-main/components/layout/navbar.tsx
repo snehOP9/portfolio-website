@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import ThemeSwitcher from "@/components/widgets/theme-switcher";
-import { useLanguage } from "@/providers/language-provider";
 import { useLenis } from "@/providers/smooth-scroll-provider";
 import SoundToggle from "@/components/widgets/sound-toggle";
 import Magnetic from "@/components/effects/magnetic";
@@ -13,6 +13,7 @@ import { useSound } from "@/providers/sound-provider";
 import { useModalHistory } from "@/hooks/use-modal-history";
 
 const contentTargetIds: Record<string, string> = {
+  work: "projects-content",
   about: "about-content",
   stack: "stack-content",
   projects: "projects-content",
@@ -22,7 +23,7 @@ const contentTargetIds: Record<string, string> = {
 };
 
 export default function Navbar() {
-  const { dict } = useLanguage();
+  const router = useRouter();
   const lenis = useLenis();
   const { playHover, playClick } = useSound();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -49,14 +50,12 @@ export default function Navbar() {
   const navMaxWidth = useTransform(scrollY, [0, dimensions.scrollHeight], [startWidth, dimensions.containerWidth]);
 
   const navLinks = useMemo(() => [
-    { name: dict.nav.home, href: "#home" },
-    { name: dict.nav.about, href: "#about" },
-    { name: dict.nav.stack, href: "#stack" },
-    { name: dict.nav.projects, href: "#projects" },
+    { name: "Home", href: "#home" },
+    { name: "Work", href: "#work" },
     { name: "Research", href: "#research" },
-    { name: dict.nav.roadmap, href: "#roadmap" },
-    { name: dict.nav.contact, href: "#contact" },
-  ], [dict.nav]);
+    { name: "About", href: "#about" },
+    { name: "Contact", href: "#contact" },
+  ], []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -143,7 +142,7 @@ export default function Navbar() {
     // Native hash navigation runs before React hydrates and lands on the outer
     // section wrapper. Re-run it after the intro is gone so deep links use the
     // visible content anchors too.
-    const initialNavigation = window.setTimeout(handleHashNavigation, 1250);
+    const initialNavigation = window.setTimeout(handleHashNavigation, 0);
     window.addEventListener("popstate", handleHashNavigation);
     window.addEventListener("hashchange", handleHashNavigation);
 
@@ -179,6 +178,10 @@ export default function Navbar() {
   const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const targetId = href.replace("#", "");
+    if (window.location.pathname !== "/" && window.location.pathname !== "/en/") {
+      router.push(`/${href}`);
+      return;
+    }
     setActiveSection(targetId);
 
     if (typeof window !== "undefined") {
@@ -194,7 +197,7 @@ export default function Navbar() {
     setTimeout(() => {
       scrollTarget(targetId);
     }, 100);
-  }, [scrollTarget]);
+  }, [scrollTarget, router]);
 
   return (
     <motion.header

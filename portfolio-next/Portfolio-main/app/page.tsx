@@ -1,10 +1,3 @@
-import PortfolioPage from "./[lang]/page";
-import LangLayout from "./[lang]/layout";
+import PortfolioHome from "@/components/portfolio-home";
 
-export default function RootPage() {
-  return (
-    <LangLayout params={Promise.resolve({ lang: "en" })}>
-      <PortfolioPage />
-    </LangLayout>
-  );
-}
+export default function RootPage() { return <PortfolioHome />; }

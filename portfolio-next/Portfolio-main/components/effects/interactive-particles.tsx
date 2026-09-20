@@ -80,6 +80,7 @@ export function InteractiveParticles() {
     const mouseRef = useRef({ x: -1000, y: -1000, radius: 150 });
 
     useEffect(() => {
+        if (window.matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse)").matches) return;
         const canvas = canvasRef.current;
         if (!canvas) return;
 
@@ -88,6 +89,7 @@ export function InteractiveParticles() {
 
         let animationFrameId = 0;
         let isVisible = false;
+        let pageVisible = !document.hidden;
         let particles: Particle[] = [];
         let cachedRect = canvas.getBoundingClientRect();
         let cachedDpr = window.devicePixelRatio || 1;
@@ -140,7 +142,7 @@ export function InteractiveParticles() {
         };
 
         const animate = () => {
-            if (!isVisible) {
+            if (!isVisible || !pageVisible) {
                 animationFrameId = 0;
                 return;
             }
@@ -170,6 +172,11 @@ export function InteractiveParticles() {
         );
         visibilityObserver.observe(canvas);
 
+        const handleVisibility = () => {
+            pageVisible = !document.hidden;
+            if (pageVisible && isVisible) startLoop(); else stopLoop();
+        };
+
         const handleMouseMove = (e: MouseEvent) => {
             mouseRef.current.x = (e.clientX - cachedRect.left) * cachedDpr;
             mouseRef.current.y = (e.clientY - cachedRect.top) * cachedDpr;
@@ -183,6 +190,7 @@ export function InteractiveParticles() {
         window.addEventListener("resize", resizeCanvas);
         window.addEventListener("mousemove", handleMouseMove);
         window.addEventListener("mouseleave", handleMouseLeave);
+        document.addEventListener("visibilitychange", handleVisibility);
 
         resizeCanvas();
 
@@ -190,6 +198,7 @@ export function InteractiveParticles() {
             window.removeEventListener("resize", resizeCanvas);
             window.removeEventListener("mousemove", handleMouseMove);
             window.removeEventListener("mouseleave", handleMouseLeave);
+            document.removeEventListener("visibilitychange", handleVisibility);
             stopLoop();
             visibilityObserver.disconnect();
             themeObserver.disconnect();
