@@ -20,7 +20,7 @@ export default function Research() {
                 <div className="grid gap-16 xl:grid-cols-[0.9fr_1.1fr] xl:items-center xl:gap-24">
                     <div>
                         <BlurReveal>
-                            <p className="font-mono text-xs tracking-[0.14em] text-muted-foreground">[004] {research.eyebrow}</p>
+                            <p className="font-mono text-xs tracking-[0.14em] text-muted-foreground">[002] {research.eyebrow}</p>
                         </BlurReveal>
                         <BlurReveal>
                             <h2 className="mt-7 max-w-3xl text-5xl font-black leading-[0.86] tracking-tighter sm:text-6xl lg:text-7xl xl:text-8xl">

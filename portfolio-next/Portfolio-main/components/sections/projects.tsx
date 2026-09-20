@@ -16,7 +16,7 @@ export default function Projects() {
             <div id="projects-content" className="container mx-auto scroll-mt-28 px-container">
                 <div className="mb-12 grid gap-6 lg:mb-16 lg:grid-cols-[.72fr_1.28fr] lg:items-end">
                     <div className="flex flex-col gap-4">
-                        <BlurReveal><span className="title-counter">[003]</span></BlurReveal>
+                        <BlurReveal><span className="title-counter">[001]</span></BlurReveal>
                         <BlurReveal><h2 className="title">{dict.title.projects}</h2></BlurReveal>
                     </div>
                     <BlurReveal>

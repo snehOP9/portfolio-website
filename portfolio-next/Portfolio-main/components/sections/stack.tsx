@@ -43,7 +43,7 @@ export default function Stack() {
             <div id="stack-content" className="h-full flex scroll-mt-28 flex-col px-container container mx-auto">
                 <div className="grid gap-6 mb-16 lg:grid-cols-[1fr_.8fr] lg:items-end">
                     <BlurReveal>
-                        <div><span className="title-counter">[002]</span>
+                        <div><span className="title-counter">[004]</span>
                         <h2 className="title mt-4">{dict.title.stack}</h2></div>
                     </BlurReveal>
                     <BlurReveal>

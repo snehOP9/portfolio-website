@@ -24,7 +24,7 @@ export default function About() {
 
                             <BlurReveal>
                                 <span className="title-counter">
-                                    [001]
+                                    [003]
                                 </span>
                             </BlurReveal>
 

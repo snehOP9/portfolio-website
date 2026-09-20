@@ -1,110 +1,50 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+
+const welcome = "Welcome to Sneh's universe";
 
 export function Preloader() {
-    const [isLoading, setIsLoading] = useState(true);
-    const reduceMotion = useReducedMotion();
+  const [isLoading, setIsLoading] = useState(true);
+  const reduceMotion = useReducedMotion();
+  const revealDelay = reduceMotion ? 0 : 980;
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-            document.body.style.overflow = "";
-        }, reduceMotion ? 0 : 620);
+  useEffect(() => {
+    const timer = window.setTimeout(() => setIsLoading(false), reduceMotion ? 0 : 3100);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.clearTimeout(timer);
+      document.body.style.overflow = "";
+    };
+  }, [reduceMotion]);
 
-        document.body.style.overflow = "hidden";
+  return <AnimatePresence>
+    {isLoading && <motion.div
+      key="preloader"
+      initial={{ opacity: 1 }}
+      exit={{ y: "-100%", transition: { duration: reduceMotion ? 0 : 0.6, ease: [0.76, 0, 0.24, 1] } }}
+      className="fixed inset-0 z-99999 isolate flex items-center justify-center overflow-hidden bg-[#070908] px-6 text-foreground"
+      role="status"
+      aria-label="Opening Sneh Raunak's portfolio"
+    >
+      <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(198,255,114,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(198,255,114,.08)_1px,transparent_1px)] [background-size:64px_64px]" />
+      <motion.div className="absolute h-[58vmin] w-[58vmin] rounded-full border border-signal/20" animate={reduceMotion ? undefined : { rotate: 360, scale: [0.92, 1.04, 0.92] }} transition={{ duration: 18, ease: "linear", repeat: Infinity }} />
+      <motion.div className="absolute h-[40vmin] w-[40vmin] rounded-full border border-dashed border-foreground/15" animate={reduceMotion ? undefined : { rotate: -360 }} transition={{ duration: 25, ease: "linear", repeat: Infinity }} />
+      <div className="absolute left-6 top-6 font-mono text-[10px] tracking-[.22em] text-muted-foreground sm:left-10 sm:top-10">SR / PORTFOLIO / 2026</div>
+      <div className="absolute bottom-6 right-6 font-mono text-[10px] tracking-[.22em] text-muted-foreground sm:bottom-10 sm:right-10">ML SYSTEMS / FULL-STACK</div>
 
-        return () => {
-            clearTimeout(timer);
-            document.body.style.overflow = "";
-        };
-    }, [reduceMotion]);
+      <div className="relative z-10 flex max-w-5xl flex-col items-center text-center">
+        <motion.div initial={{ opacity: 0, scale: 0.72, filter: "blur(12px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} transition={{ duration: reduceMotion ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] }} className="relative flex h-40 w-40 items-center justify-center sm:h-48 sm:w-48">
+          <motion.svg animate={reduceMotion ? undefined : { rotate: 360 }} transition={{ duration: 12, ease: "linear", repeat: Infinity }} viewBox="0 0 100 100" className="absolute inset-0 h-full w-full text-signal/70"><circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" strokeWidth=".5" strokeDasharray="2 5" /></motion.svg>
+          <motion.svg viewBox="0 0 100 100" className="absolute inset-2 h-[calc(100%-1rem)] w-[calc(100%-1rem)] -rotate-90 text-signal"><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" strokeWidth="1" strokeOpacity=".2" /><motion.circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" strokeWidth="1.4" strokeDasharray="289" initial={{ strokeDashoffset: 289 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: reduceMotion ? 0 : 0.9, ease: [0.65, 0, 0.35, 1] }} /></motion.svg>
+          <motion.svg viewBox="0 0 100 100" className="relative z-10 h-24 w-24 text-foreground sm:h-28 sm:w-28" initial={{ pathLength: 0, opacity: 0, rotate: -14 }} animate={{ pathLength: 1, opacity: 1, rotate: 0 }} transition={{ duration: reduceMotion ? 0 : 0.78, delay: reduceMotion ? 0 : 0.15, ease: [0.65, 0, 0.35, 1] }} aria-hidden="true"><motion.path d="M72 24C65 17 52 14 40 17C27 20 21 29 23 39C25 49 35 52 47 54C58 56 64 59 63 66C62 73 53 77 43 76C33 75 25 70 21 64" fill="none" stroke="currentColor" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" /></motion.svg>
+        </motion.div>
 
-    return (
-        <AnimatePresence>
-            {isLoading && (
-                <motion.div
-                    key="preloader"
-                    initial={{ y: 0 }}
-                    exit={{
-                        y: "-100%",
-                        transition: { duration: reduceMotion ? 0 : 0.42, ease: [0.76, 0, 0.24, 1] }
-                    }}
-                    className="fixed inset-0 z-99999 flex flex-col items-center justify-center bg-background pointer-events-auto"
-                >
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
-                        animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                        exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)", transition: { duration: 0.4 } }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
-                        className="relative z-10 flex flex-col items-center gap-8"
-                    >
-                        <div className="relative flex items-center justify-center w-36 h-36">
-                            <motion.svg
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: reduceMotion ? 0 : 12, ease: "linear", repeat: reduceMotion ? 0 : Infinity }}
-                                viewBox="0 0 100 100"
-                                className="absolute inset-0 w-full h-full opacity-40"
-                            >
-                                <circle
-                                    cx="50" cy="50" r="48"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="0.5"
-                                    strokeDasharray="2 6"
-                                    className="text-muted-foreground"
-                                />
-                            </motion.svg>
-
-                            <motion.svg
-                                viewBox="0 0 100 100"
-                                className="absolute inset-0 w-full h-full -rotate-90"
-                            >
-                                <circle
-                                    cx="50" cy="50" r="46"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="1"
-                                    className="text-border/30"
-                                />
-                                <motion.circle
-                                    cx="50" cy="50" r="46"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="1.5"
-                                    strokeDasharray="289"
-                                    initial={{ strokeDashoffset: 289 }}
-                                    animate={{ strokeDashoffset: 0 }}
-                                    transition={{ duration: reduceMotion ? 0 : 0.58, ease: [0.65, 0, 0.35, 1] }}
-                                    className="text-primary"
-                                />
-                            </motion.svg>
-
-                            <div className="absolute inset-3 rounded-full border border-border/50 bg-secondary/5 backdrop-blur-md" />
-
-                            <motion.svg
-                                viewBox="0 0 100 100"
-                                className="relative z-10 h-20 w-20 text-foreground"
-                                initial={{ pathLength: 0, opacity: 0, rotate: -10 }}
-                                animate={{ pathLength: 1, opacity: 1, rotate: 0 }}
-                                transition={{ duration: reduceMotion ? 0 : 0.48, delay: reduceMotion ? 0 : 0.08, ease: [0.65, 0, 0.35, 1] }}
-                                aria-label="Sneh Raunak"
-                            >
-                                <motion.path
-                                    d="M72 24C65 17 52 14 40 17C27 20 21 29 23 39C25 49 35 52 47 54C58 56 64 59 63 66C62 73 53 77 43 76C33 75 25 70 21 64"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="9"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </motion.svg>
-                        </div>
-
-                    </motion.div>
-                </motion.div>
-            )}
-        </AnimatePresence>
-    );
+        <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : 0.62 }} className="mt-7 font-mono text-[10px] tracking-[.24em] text-signal sm:text-xs">SIGNAL DETECTED</motion.p>
+        <h1 className="mt-6 max-w-4xl text-[clamp(2.1rem,6.5vw,5.7rem)] font-black leading-[.86] tracking-[-.055em] text-foreground"><span className="sr-only">{welcome}</span><span aria-hidden="true">{[...welcome].map((letter, index) => <motion.span key={`${letter}-${index}`} className="inline-block" initial={{ opacity: 0, y: "0.45em", filter: "blur(8px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ duration: reduceMotion ? 0 : 0.38, delay: reduceMotion ? 0 : revealDelay / 1000 + index * 0.043, ease: [0.16, 1, 0.3, 1] }}>{letter === " " ? "\u00a0" : letter}</motion.span>)}</span></h1>
+        <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: reduceMotion ? 0 : 1.15, delay: reduceMotion ? 0 : 1.1, ease: [0.65, 0, 0.35, 1] }} className="mt-8 h-px w-24 origin-left bg-signal" />
+      </div>
+    </motion.div>}
+  </AnimatePresence>;
 }
