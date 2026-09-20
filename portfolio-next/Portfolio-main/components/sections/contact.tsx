@@ -33,9 +33,18 @@ export function InstagramIcon({ className }: { className?: string }) {
     );
 }
 
+export function XIcon({ className }: { className?: string }) {
+    return (
+        <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.585-6.64 7.585H.472l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.29 19.493h2.04L6.486 3.24H4.298L17.61 20.646Z" />
+        </svg>
+    );
+}
+
 export const socialIconMap: Record<string, React.FC<{ className?: string }>> = {
     github: GithubIcon,
     linkedin: LinkedinIcon,
+    x: XIcon,
     instagram: InstagramIcon,
 };
 

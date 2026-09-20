@@ -3,7 +3,9 @@
   "social": [
     { "label": "GitHub", "href": "https://github.com/snehOP9" },
     { "label": "Linkedin", "href": "https://www.linkedin.com/in/sneh-raunak/" },
-    { "label": "LeetCode", "href": "https://leetcode.com/u/Snehhhh/" }
+    { "label": "LeetCode", "href": "https://leetcode.com/u/Snehhhh/" },
+    { "label": "X", "href": "https://x.com/Snehhhh_09" },
+    { "label": "Instagram", "href": "https://www.instagram.com/sneh_raunak/" }
   ],
   "stack": {
     "frontend": [
