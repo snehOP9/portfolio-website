@@ -8,10 +8,10 @@ const welcome = "Welcome to Sneh's universe";
 export function Preloader() {
   const [isLoading, setIsLoading] = useState(true);
   const reduceMotion = useReducedMotion();
-  const revealDelay = reduceMotion ? 0 : 980;
+  const revealDelay = reduceMotion ? 0 : 1450;
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setIsLoading(false), reduceMotion ? 0 : 3100);
+    const timer = window.setTimeout(() => setIsLoading(false), reduceMotion ? 0 : 4200);
     document.body.style.overflow = "hidden";
     return () => {
       window.clearTimeout(timer);
@@ -32,7 +32,7 @@ export function Preloader() {
       <motion.div className="absolute h-[58vmin] w-[58vmin] rounded-full border border-signal/20" animate={reduceMotion ? undefined : { rotate: 360, scale: [0.92, 1.04, 0.92] }} transition={{ duration: 18, ease: "linear", repeat: Infinity }} />
       <motion.div className="absolute h-[40vmin] w-[40vmin] rounded-full border border-dashed border-foreground/15" animate={reduceMotion ? undefined : { rotate: -360 }} transition={{ duration: 25, ease: "linear", repeat: Infinity }} />
       <div className="absolute left-6 top-6 font-mono text-[10px] tracking-[.22em] text-muted-foreground sm:left-10 sm:top-10">SR / PORTFOLIO / 2026</div>
-      <div className="absolute bottom-6 right-6 font-mono text-[10px] tracking-[.22em] text-muted-foreground sm:bottom-10 sm:right-10">ML SYSTEMS / FULL-STACK</div>
+      <div className="absolute bottom-6 left-6 right-6 hidden justify-end font-mono text-[10px] tracking-[.22em] text-muted-foreground sm:flex sm:bottom-10 sm:left-auto sm:right-10">ML SYSTEMS / FULL-STACK</div>
 
       <div className="relative z-10 flex max-w-5xl flex-col items-center text-center">
         <motion.div initial={{ opacity: 0, scale: 0.72, filter: "blur(12px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} transition={{ duration: reduceMotion ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] }} className="relative flex h-40 w-40 items-center justify-center sm:h-48 sm:w-48">
@@ -42,7 +42,7 @@ export function Preloader() {
         </motion.div>
 
         <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : 0.62 }} className="mt-7 font-mono text-[10px] tracking-[.24em] text-signal sm:text-xs">SIGNAL DETECTED</motion.p>
-        <h1 className="mt-6 max-w-4xl text-[clamp(2.1rem,6.5vw,5.7rem)] font-black leading-[.86] tracking-[-.055em] text-foreground"><span className="sr-only">{welcome}</span><span aria-hidden="true">{[...welcome].map((letter, index) => <motion.span key={`${letter}-${index}`} className="inline-block" initial={{ opacity: 0, y: "0.45em", filter: "blur(8px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ duration: reduceMotion ? 0 : 0.38, delay: reduceMotion ? 0 : revealDelay / 1000 + index * 0.043, ease: [0.16, 1, 0.3, 1] }}>{letter === " " ? "\u00a0" : letter}</motion.span>)}</span></h1>
+        <h1 className="mt-6 whitespace-nowrap text-[clamp(1.12rem,5.15vw,5.7rem)] font-black leading-[.86] tracking-[-.065em] text-foreground"><span className="sr-only">{welcome}</span><span aria-hidden="true">{[...welcome].map((letter, index) => <motion.span key={`${letter}-${index}`} className="inline-block" initial={{ opacity: 0, y: "0.45em", filter: "blur(8px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ duration: reduceMotion ? 0 : 0.38, delay: reduceMotion ? 0 : revealDelay / 1000 + index * 0.043, ease: [0.16, 1, 0.3, 1] }}>{letter === " " ? "\u00a0" : letter}</motion.span>)}</span></h1>
         <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: reduceMotion ? 0 : 1.15, delay: reduceMotion ? 0 : 1.1, ease: [0.65, 0, 0.35, 1] }} className="mt-8 h-px w-24 origin-left bg-signal" />
       </div>
     </motion.div>}

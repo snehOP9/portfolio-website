@@ -1,6 +1,6 @@
 export type StackItem = {
     name: string;
-    icon: string;
+    icon?: string;
     featured?: boolean;
 };
 

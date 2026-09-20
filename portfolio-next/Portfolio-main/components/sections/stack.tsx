@@ -16,23 +16,23 @@ export default function Stack() {
 
     const categories = [
         {
-            title: dict.frontendStack,
-            evidence: "Interfaces and operational surfaces",
+            title: "ML / AI",
+            evidence: "Modelling, evaluation, and explainability",
             items: content.stack?.frontend || [],
         },
         {
-            title: dict.backendStack,
+            title: "Backend",
             evidence: "APIs, model-serving, and application flows",
             items: content.stack?.backend || [],
         },
         {
-            title: dict.databaseStack,
-            evidence: "Auditable state and durable data boundaries",
+            title: "Data",
+            evidence: "State, persistence, and data boundaries",
             items: content.stack?.database || [],
         },
         {
-            title: dict.toolsStack,
-            evidence: "Delivery, collaboration, and motion systems",
+            title: "Engineering",
+            evidence: "Delivery and collaboration systems",
             items: content.stack?.tools || [],
         },
     ];
@@ -73,14 +73,14 @@ export default function Stack() {
                                                     <Magnetic intensity={0.15}>
                                                         <div className="group flex min-h-12 items-center gap-3 rounded-xl border border-border/40 bg-secondary/10 px-3 py-2 transition-colors duration-300 hover:border-foreground/30 hover:bg-secondary/30">
                                                             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-background/70 p-1 transition-transform duration-300 group-hover:scale-105">
-                                                                <Image
+                                                                {item.icon ? <Image
                                                                     src={item.icon}
                                                                     alt={item.name}
                                                                     width={36}
                                                                     height={36}
                                                                     className={`h-10 w-10 object-contain ${item.name === "Next.js" || item.name === "Vercel" ? "dark:invert dark:brightness-200" : ""}`}
                                                                     unoptimized={item.icon.endsWith('.svg')}
-                                                                />
+                                                                /> : <span className="font-mono text-[10px] text-signal">{item.name.slice(0, 2).toUpperCase()}</span>}
                                                             </div>
                                                             <span className="text-sm leading-none tracking-wide text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
                                                                 {item.name}
@@ -97,8 +97,8 @@ export default function Stack() {
                                                 <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-primary/50 to-transparent" />
                                                 <div className="absolute inset-0 bg-linear-to-tr from-foreground/5 to-transparent pointer-events-none" />
 
-                                                <div className="relative p-3 rounded-xl bg-secondary/50 ring-1 ring-border/50 shadow-inner group-hover:scale-110 transition-transform duration-500">
-                                                    <Image src={item.icon} alt={item.name} width={36} height={36} className="drop-shadow-lg" unoptimized={item.icon.endsWith('.svg')} />
+                                                <div className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-secondary/50 ring-1 ring-border/50 shadow-inner group-hover:scale-110 transition-transform duration-500">
+                                                    {item.icon ? <Image src={item.icon} alt={item.name} width={36} height={36} className="drop-shadow-lg" unoptimized={item.icon.endsWith('.svg')} /> : <span className="font-mono text-[10px] text-signal">{item.name.slice(0, 2).toUpperCase()}</span>}
                                                 </div>
                                                 <div className="flex flex-col items-center justify-center gap-1 z-10">
                                                     <span className="text-sm font-bold tracking-[0.15em] uppercase text-foreground">
