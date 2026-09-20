@@ -164,12 +164,26 @@ export default function Navbar() {
     const updateActiveSection = () => {
       frameId = 0;
       const headerHeight = headerRef.current?.getBoundingClientRect().height ?? 80;
+      // Home is intentionally a full viewport introduction. Its sticky layout
+      // makes the next section's offset unreliable at the top of the page, so
+      // keep Home selected until the reader has meaningfully left that view.
+      if (window.scrollY < Math.min(window.innerHeight * 0.68, 520)) {
+        setActiveSection((current) => current === "home" ? current : "home");
+        return;
+      }
+
       const readingLine = window.scrollY + headerHeight + window.innerHeight * 0.28;
       let nextActive = "home";
 
       for (const id of sectionIds) {
-        const section = document.getElementById(id);
-        if (section && section.offsetTop <= readingLine) nextActive = id;
+        // Use the same anchor that navigation scrolls to. The outer wrappers
+        // are affected by sticky content and could otherwise underline About
+        // while the reader is still looking at Work or Research.
+        const section = document.getElementById(contentTargetIds[id] ?? id);
+        const sectionTop = section
+          ? section.getBoundingClientRect().top + window.scrollY
+          : Number.POSITIVE_INFINITY;
+        if (sectionTop <= readingLine) nextActive = id;
       }
       setActiveSection((current) => current === nextActive ? current : nextActive);
     };

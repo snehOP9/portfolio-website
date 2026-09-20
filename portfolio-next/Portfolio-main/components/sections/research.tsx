@@ -33,9 +33,9 @@ export default function Research() {
                             </p>
                         </BlurReveal>
                         <BlurReveal>
-                            <p className="mt-8 inline-flex items-center gap-2 rounded-full border border-border/70 bg-secondary/25 px-4 py-2 font-mono text-xs tracking-[0.12em] text-foreground/80">
+                            <Link href="/research/short-form-video-xai/" className="mt-8 inline-flex items-center gap-2 rounded-full border border-border/70 bg-secondary/25 px-4 py-2 font-mono text-xs tracking-[0.12em] text-foreground/80 transition-colors hover:border-foreground/60 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal">
                                 {research.status}<ArrowUpRight className="h-3.5 w-3.5" />
-                            </p>
+                            </Link>
                         </BlurReveal>
                         <BlurReveal>
                             <Link href="/research/short-form-video-xai/" className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-foreground underline decoration-foreground/40 underline-offset-4 transition-colors hover:decoration-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal">

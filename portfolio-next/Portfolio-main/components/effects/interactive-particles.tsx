@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 class Particle {
     x: number;
@@ -78,9 +78,18 @@ class Particle {
 export function InteractiveParticles() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const mouseRef = useRef({ x: -1000, y: -1000, radius: 150 });
+    const [enabled, setEnabled] = useState(false);
 
     useEffect(() => {
-        if (window.matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse)").matches) return;
+        const media = window.matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse)");
+        const updateEnabled = () => setEnabled(!media.matches);
+        updateEnabled();
+        media.addEventListener("change", updateEnabled);
+        return () => media.removeEventListener("change", updateEnabled);
+    }, []);
+
+    useEffect(() => {
+        if (!enabled) return;
         const canvas = canvasRef.current;
         if (!canvas) return;
 
@@ -203,7 +212,9 @@ export function InteractiveParticles() {
             visibilityObserver.disconnect();
             themeObserver.disconnect();
         };
-    }, []);
+    }, [enabled]);
+
+    if (!enabled) return null;
 
     return (
         <canvas

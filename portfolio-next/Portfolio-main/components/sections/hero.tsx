@@ -35,7 +35,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={containerRef} id="home" className="hero-shell sticky top-0 min-h-[720px] overflow-hidden bg-background px-container pt-28 pb-12 sm:pt-32 lg:h-screen lg:pb-16">
+    <section ref={containerRef} id="home" className="hero-shell min-h-[720px] overflow-hidden bg-background px-container pt-28 pb-12 sm:pt-32 lg:sticky lg:top-0 lg:h-screen lg:pb-16">
       <motion.div style={reduceMotion ? undefined : { opacity, scale, y }} className="relative z-20 mx-auto grid h-full max-w-[1800px] gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(420px,.82fr)] lg:items-center">
         <div className="flex flex-col justify-center space-y-7 xl:space-y-10">
           <div className="flex items-center gap-3 font-mono text-xs tracking-[0.16em] text-signal"><span className="h-px w-10 bg-signal opacity-70" /> Data → models → systems</div>

@@ -48,30 +48,30 @@ const ProjectCard = React.memo(function ProjectCard({ project }: { project: Proj
                     aria-label={`Read ${project.title} case study`}
                     onClick={playClick}
                     onMouseEnter={playHover}
-                    className="group relative aspect-[4/5] w-full cursor-pointer text-left perspective-1000 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal lg:aspect-[16/10] xl:aspect-[4/5]"
+                    className="group relative aspect-[16/11] w-full cursor-pointer text-left perspective-1000 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal lg:aspect-[16/10] xl:aspect-[16/11]"
                 >
-                    <div className="absolute inset-0 overflow-hidden rounded-2xl border border-border/50 bg-muted shadow-2xl transition-all duration-700 ease-out group-hover:-translate-y-2 group-hover:border-foreground/35">
+                    <div className="absolute inset-0 overflow-hidden rounded-2xl border border-[#d1ff82]/25 bg-[#07100a] text-white shadow-2xl transition-all duration-700 ease-out group-hover:-translate-y-2 group-hover:border-[#d1ff82]/65">
                         <div className="absolute inset-0 z-0">
                             <ProjectSignalScene kind={kind} />
-                            <div className="absolute inset-0 bg-linear-to-t from-background via-background/35 to-background/5" />
-                            <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(0,0,0,0.54),transparent_58%)]" />
+                            <div className="absolute inset-0 bg-linear-to-t from-[#07100a] via-[#07100a]/45 to-[#07100a]/10" />
+                            <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(0,0,0,0.48),transparent_58%)]" />
                         </div>
 
                         <div className="absolute inset-0 z-10 flex flex-col justify-between p-6 xl:p-8">
                             <div className="flex items-start justify-between gap-3">
-                                <span className="rounded-full border border-foreground/15 bg-background/40 px-3 py-2 font-mono text-xs tracking-[0.08em] text-foreground/85 backdrop-blur-md">
+                                <span className="rounded-full border border-white/25 bg-black/35 px-3 py-2 font-mono text-xs tracking-[0.08em] text-white/95 backdrop-blur-md">
                                     {project.category}
                                 </span>
-                                <span className="rounded-full border border-foreground/15 bg-background/40 px-3 py-2 font-mono text-xs tracking-[0.08em] text-foreground/85 backdrop-blur-md">
+                                <span className="rounded-full border border-white/25 bg-black/35 px-3 py-2 font-mono text-xs tracking-[0.08em] text-white/95 backdrop-blur-md">
                                     {project.year}
                                 </span>
                             </div>
 
                             <div className="max-w-[92%]">
-                                <h3 className="text-4xl font-black tracking-tighter text-foreground sm:text-5xl">
+                                <h3 className="text-4xl font-black tracking-tighter text-white sm:text-5xl">
                                     {project.title}
                                 </h3>
-                                <span className="project-detail-cta mt-5 inline-flex items-center rounded-full border border-signal bg-background/35 px-5 py-3 text-base font-bold text-signal backdrop-blur-md transition-colors">
+                                <span className="project-detail-cta mt-5 inline-flex items-center rounded-full border border-signal bg-black/45 px-5 py-3 text-base font-bold text-signal backdrop-blur-md transition-colors">
                                     View project details →
                                 </span>
                             </div>
