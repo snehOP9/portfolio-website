@@ -215,6 +215,12 @@
   transform-style: preserve-3d;
 }
 
+@media (max-width: 639px) {
+  .hero-shell .whitespace-nowrap { white-space: normal; }
+  .hero-shell p { overflow-wrap: anywhere; }
+  .hero-shell .s-system { max-width: 100%; }
+}
+
 .project-signal-scene {
   position: absolute;
   inset: 0;

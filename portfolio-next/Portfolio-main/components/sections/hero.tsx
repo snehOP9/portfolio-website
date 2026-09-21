@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { useScroll, useTransform, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Mouse, FileText } from "lucide-react";
 import { useLanguage } from "@/providers/language-provider";
@@ -16,11 +16,20 @@ export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
   const [contactOpen, setContactOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [introReady, setIntroReady] = useState(false);
   const { scrollY } = useScroll();
   const reduceMotion = useReducedMotion();
   const opacity = useTransform(scrollY, [0, 800], [1, 0]);
   const scale = useTransform(scrollY, [0, 800], [1, 0.96]);
   const y = useTransform(scrollY, [0, 800], [0, -90]);
+
+  useEffect(() => {
+    const reveal = () => setIntroReady(true);
+    if (document.documentElement.dataset.portfolioIntroReady === "true") reveal();
+    window.addEventListener("portfolio:intro-complete", reveal);
+    const fallback = window.setTimeout(reveal, 3600);
+    return () => { window.removeEventListener("portfolio:intro-complete", reveal); window.clearTimeout(fallback); };
+  }, []);
 
   const scrollToProjects = useCallback(() => {
     window.history.replaceState({ section: "work" }, "", "#work");
@@ -36,7 +45,8 @@ export default function Hero() {
 
   return (
     <section ref={containerRef} id="home" className="hero-shell min-h-[720px] overflow-hidden bg-background px-container pt-28 pb-12 sm:pt-32 lg:sticky lg:top-0 lg:h-screen lg:pb-16">
-      <motion.div style={reduceMotion ? undefined : { opacity, scale, y }} className="relative z-20 mx-auto grid h-full max-w-[1800px] gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(420px,.82fr)] lg:items-center">
+      <motion.div style={reduceMotion ? undefined : { opacity, scale, y }} className="relative z-20 mx-auto h-full max-w-[1800px]">
+      <motion.div initial={{ opacity: 0, y: reduceMotion ? 0 : 18, filter: reduceMotion ? "none" : "blur(5px)" }} animate={{ opacity: introReady || reduceMotion ? 1 : 0, y: introReady || reduceMotion ? 0 : 18, filter: introReady || reduceMotion ? "none" : "blur(5px)" }} transition={{ duration: reduceMotion ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] }} className="grid h-full gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(420px,.82fr)] lg:items-center">
         <div className="flex flex-col justify-center space-y-7 xl:space-y-10">
           <div className="flex items-center gap-3 font-mono text-xs tracking-[0.16em] text-signal"><span className="h-px w-10 bg-signal opacity-70" /> Data → models → systems</div>
           <h1 className="max-w-4xl text-[clamp(3.5rem,8.5vw,9.5rem)] font-black leading-[.78] tracking-[-.075em] text-foreground">Sneh<br />Raunak<span className="text-signal">.</span></h1>
@@ -65,6 +75,7 @@ export default function Hero() {
           <SSystem />
           <div className="absolute bottom-0 left-1/2 flex -translate-x-1/2 items-center gap-3 whitespace-nowrap font-mono text-xs tracking-[.14em] text-muted-foreground"><span className="h-1.5 w-1.5 rounded-full bg-signal shadow-[0_0_16px_var(--signal)]" /> Interactive identity system</div>
         </div>
+      </motion.div>
       </motion.div>
       <ContactModal open={contactOpen} onOpenChange={setContactOpen} />
       <ResumeModal open={resumeOpen} onOpenChange={setResumeOpen} />
