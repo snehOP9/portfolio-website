@@ -41,6 +41,10 @@ export default function Navbar() {
 
   const dummyRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
+  const viewportHeightRef = useRef(800);
+  const headerHeightRef = useRef(80);
+  const lenisRef = useRef(lenis);
+  const hasAppliedInitialHashRef = useRef(false);
 
   const { scrollY } = useScroll();
 
@@ -60,19 +64,36 @@ export default function Navbar() {
   ], []);
 
   useEffect(() => {
+    lenisRef.current = lenis;
+  }, [lenis]);
+
+  useEffect(() => {
     if (typeof window === "undefined") return;
 
     const updateDimensions = () => {
+      // Keyboard and visual-viewport changes update visual measurements only.
+      // They must never recreate the section navigation callback.
+      viewportHeightRef.current = window.visualViewport?.height ?? window.innerHeight;
       setDimensions({
         screenWidth: window.innerWidth,
-        scrollHeight: window.innerHeight,
+        scrollHeight: viewportHeightRef.current,
         containerWidth: dummyRef.current ? dummyRef.current.getBoundingClientRect().width : 1280,
       });
     };
 
     updateDimensions();
     window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
+    window.visualViewport?.addEventListener("resize", updateDimensions);
+    const headerObserver = new ResizeObserver(() => {
+      headerHeightRef.current = headerRef.current?.getBoundingClientRect().height ?? 80;
+    });
+    if (headerRef.current) headerObserver.observe(headerRef.current);
+
+    return () => {
+      window.removeEventListener("resize", updateDimensions);
+      window.visualViewport?.removeEventListener("resize", updateDimensions);
+      headerObserver.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -98,26 +119,15 @@ export default function Navbar() {
     const elem = document.getElementById(contentTargetId);
 
     if (elem || targetId === "home") {
-      let navbarHeight = 80;
-      if (headerRef.current) {
-        const currentHeight = headerRef.current.offsetHeight;
-        const currentScroll = window.scrollY;
-        const currentPy = currentScroll >= dimensions.scrollHeight
-          ? 12
-          : 24 - (currentScroll / dimensions.scrollHeight) * 12;
-        const heightDifference = (currentPy - 12) * 2;
-        navbarHeight = Math.max(currentHeight - heightDifference, 0);
-      }
-
       // Resolve a numeric destination. Passing an element to Lenis also applies
       // its CSS scroll-margin/padding calculation, which left a large gap above
       // every section on desktop browsers.
       const destination = targetId === "home"
         ? 0
-        : elem!.getBoundingClientRect().top + window.scrollY - navbarHeight - 12;
+        : elem!.getBoundingClientRect().top + window.scrollY - headerHeightRef.current - 12;
 
-      if (lenis) {
-        lenis.scrollTo(destination, {
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(destination, {
           duration: 1.5,
         });
       } else {
@@ -131,7 +141,7 @@ export default function Navbar() {
         }
       }
     }
-  }, [lenis, dimensions.scrollHeight]);
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -141,15 +151,25 @@ export default function Navbar() {
       scrollTarget(hash);
     };
 
-    // Native hash navigation runs before React hydrates and lands on the outer
-    // section wrapper. Re-run it after the intro is gone so deep links use the
-    // visible content anchors too.
-    const initialNavigation = window.setTimeout(handleHashNavigation, 0);
+    const applyInitialHash = () => {
+      if (hasAppliedInitialHashRef.current) return;
+      hasAppliedInitialHashRef.current = true;
+      handleHashNavigation();
+    };
+
+    // The preloader owns the one initial deep-link correction. Resize events,
+    // virtual keyboards, and layout animation cannot reach this path.
+    if (document.documentElement.dataset.portfolioIntroReady === "true") {
+      applyInitialHash();
+    } else {
+      window.addEventListener("portfolio:intro-ready", applyInitialHash, { once: true });
+    }
+
     window.addEventListener("popstate", handleHashNavigation);
     window.addEventListener("hashchange", handleHashNavigation);
 
     return () => {
-      window.clearTimeout(initialNavigation);
+      window.removeEventListener("portfolio:intro-ready", applyInitialHash);
       window.removeEventListener("popstate", handleHashNavigation);
       window.removeEventListener("hashchange", handleHashNavigation);
     };
@@ -220,9 +240,9 @@ export default function Navbar() {
 
     setIsMobileMenuOpen(false);
 
-    setTimeout(() => {
+    window.requestAnimationFrame(() => {
       scrollTarget(targetId);
-    }, 100);
+    });
   }, [scrollTarget, router]);
 
   return (

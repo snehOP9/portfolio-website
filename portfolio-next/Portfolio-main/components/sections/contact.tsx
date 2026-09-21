@@ -173,7 +173,7 @@ function FloatingInput({
     isTextArea?: boolean;
 }) {
     const baseClasses =
-        "peer w-full rounded-xl border border-border/70 bg-secondary/20 px-5 pt-7 pb-3 text-sm text-foreground placeholder-transparent outline-none transition-all duration-300 hover:border-foreground/50 focus:border-foreground/60 focus:bg-background/70 focus:ring-2 focus:ring-foreground/20";
+        "peer w-full rounded-xl border border-border/70 bg-secondary/20 px-5 pt-7 pb-3 text-base sm:text-sm text-foreground placeholder-transparent outline-none transition-all duration-300 hover:border-foreground/50 focus:border-foreground/60 focus:bg-background/70 focus:ring-2 focus:ring-foreground/20";
     const errorClasses = error ? "border-red-500/50 focus:border-red-500/50 focus:ring-red-500/20" : "";
 
     return (
@@ -187,7 +187,9 @@ function FloatingInput({
                     onChange={(e) => onChange(e.target.value)}
                     rows={4}
                     className={`${baseClasses} ${errorClasses} resize-none`}
-                    aria-label={label}
+                    autoComplete="off"
+                    enterKeyHint="send"
+                    required
                     aria-invalid={!!error}
                     aria-describedby={error ? `${id}-error` : undefined}
                 />
@@ -200,7 +202,12 @@ function FloatingInput({
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                     className={`${baseClasses} ${errorClasses}`}
-                    aria-label={label}
+                    autoComplete={id === "name" ? "name" : id === "email" ? "email" : "off"}
+                    inputMode={type === "email" ? "email" : "text"}
+                    enterKeyHint="next"
+                    autoCapitalize={type === "email" ? "none" : undefined}
+                    spellCheck={type === "email" ? false : undefined}
+                    required
                     aria-invalid={!!error}
                     aria-describedby={error ? `${id}-error` : undefined}
                 />
