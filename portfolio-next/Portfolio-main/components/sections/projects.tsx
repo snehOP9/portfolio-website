@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import Link from "next/link";
-import { motion, useInView, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
+import { motion, useInView, useMotionTemplate, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useLanguage } from "@/providers/language-provider";
 import { BlurReveal } from "@/components/effects/blur-reveal";
 import type { ProjectItem } from "@/types/project";
@@ -17,14 +17,20 @@ const projectDetails = {
 
 export default function Projects() {
   const { content, dict } = useLanguage();
+  const sectionRef = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start 88%", "end 22%"] });
+  const signalScale = useSpring(useTransform(scrollYProgress, [0, .7], [0, 1]), { damping: 26, stiffness: 130, mass: .45 });
+  const signalX = useTransform(scrollYProgress, [0, 1], ["8%", "92%"]);
 
-  return <section data-slot="projects" className="relative py-16 md:py-24 lg:py-32">
+  return <section ref={sectionRef} data-slot="projects" className="relative overflow-hidden py-16 md:py-24 lg:py-32">
+    {!reduceMotion && <div className="pointer-events-none absolute inset-x-0 top-[8.6rem] hidden h-px lg:block" aria-hidden="true"><motion.span style={{ scaleX: signalScale }} className="absolute inset-0 origin-left bg-linear-to-r from-transparent via-signal/65 to-transparent" /><motion.span style={{ left: signalX }} className="absolute -top-1 h-2.5 w-2.5 rounded-full bg-signal shadow-[0_0_18px_rgba(198,255,114,.82)]" /></div>}
     <div id="projects-content" className="container mx-auto scroll-mt-28 px-container">
       <div className="mb-12 grid gap-6 lg:mb-16 lg:grid-cols-[.72fr_1.28fr] lg:items-end">
         <div className="flex flex-col gap-4"><BlurReveal><span className="title-counter">[001]</span></BlurReveal><BlurReveal><h2 className="title">{dict.title.projects}</h2></BlurReveal></div>
         <BlurReveal><p className="max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">{dict.projectsIntro}</p></BlurReveal>
       </div>
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3 xl:gap-6">
+      <div className="grid auto-rows-fr gap-5 md:grid-cols-2 xl:grid-cols-3 xl:gap-6">
         {content.projects.map((project: ProjectItem) => <ProjectCard key={project.id} project={project} />)}
       </div>
     </div>
@@ -38,13 +44,16 @@ const ProjectCard = React.memo(function ProjectCard({ project }: { project: Proj
   const reduceMotion = useReducedMotion();
   const rotateX = useSpring(useMotionValue(0), { damping: 24, stiffness: 210, mass: .35 });
   const rotateY = useSpring(useMotionValue(0), { damping: 24, stiffness: 210, mass: .35 });
+  const pointerX = useMotionValue("50%");
+  const pointerY = useMotionValue("50%");
+  const specularLight = useMotionTemplate`radial-gradient(34rem circle at ${pointerX} ${pointerY}, rgba(231,255,191,.13), transparent 38%)`;
   const key = project.title === "SentinelFlow" ? "SentinelFlow" : project.title.startsWith("Student") ? "Student" : "Anony";
   const detail = projectDetails[key];
   const kind = key === "SentinelFlow" ? "sentinel" : key === "Student" ? "student" : "anony";
   const entranceIndex = key === "SentinelFlow" ? 0 : key === "Student" ? 1 : 2;
 
-  return <motion.div ref={cardRef} initial={{ opacity: 0, y: reduceMotion ? 0 : 28, scale: reduceMotion ? 1 : .98 }} animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 28, scale: inView ? 1 : .98 }} transition={{ duration: .72, delay: entranceIndex * .1, ease: [0.16, 1, 0.3, 1] }} style={reduceMotion ? undefined : { rotateX, rotateY, transformPerspective: 1200 }} onPointerMove={(event) => { if (reduceMotion || event.pointerType !== "mouse") return; const rect = event.currentTarget.getBoundingClientRect(); rotateX.set(((event.clientY - rect.top) / rect.height - .5) * -4); rotateY.set(((event.clientX - rect.left) / rect.width - .5) * 6); }} onPointerLeave={() => { rotateX.set(0); rotateY.set(0); }} className="will-change-transform">
-    <Link href={`/projects/${detail.slug}/`} aria-label={`Read ${project.title} case study`} onClick={playClick} onMouseEnter={playHover} className="group relative block min-h-[31rem] overflow-hidden rounded-3xl border border-border/80 bg-card text-left shadow-[0_18px_60px_rgba(0,0,0,.14)] transition-[transform,border-color,box-shadow] duration-500 hover:-translate-y-1 hover:border-signal/70 hover:shadow-[0_26px_80px_rgba(0,0,0,.22)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal">
+  return <motion.div ref={cardRef} initial={{ opacity: 0, y: reduceMotion ? 0 : 28, scale: reduceMotion ? 1 : .98 }} animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 28, scale: inView ? 1 : .98 }} transition={{ duration: .72, delay: entranceIndex * .1, ease: [0.16, 1, 0.3, 1] }} style={reduceMotion ? undefined : { rotateX, rotateY, transformPerspective: 1200 }} onPointerMove={(event) => { if (reduceMotion || event.pointerType !== "mouse") return; const rect = event.currentTarget.getBoundingClientRect(); const x = (event.clientX - rect.left) / rect.width; const y = (event.clientY - rect.top) / rect.height; rotateX.set((y - .5) * -4); rotateY.set((x - .5) * 6); pointerX.set(`${x * 100}%`); pointerY.set(`${y * 100}%`); }} onPointerLeave={() => { rotateX.set(0); rotateY.set(0); pointerX.set("50%"); pointerY.set("50%"); }} className="h-full will-change-transform">
+    <Link href={`/projects/${detail.slug}/`} aria-label={`Read ${project.title} case study`} onClick={playClick} onMouseEnter={playHover} className="group relative block h-full min-h-[31rem] overflow-hidden rounded-3xl border border-border/80 bg-card text-left shadow-[0_18px_60px_rgba(0,0,0,.14)] transition-[transform,border-color,box-shadow] duration-500 hover:-translate-y-1 hover:border-signal/70 hover:shadow-[0_26px_80px_rgba(0,0,0,.22)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal">
       <div className="absolute inset-x-0 top-0 h-[47%] overflow-hidden bg-[#07100a] text-white">
         <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105"><ProjectSignalScene kind={kind} /><div className="absolute inset-0 bg-linear-to-t from-[#07100a] via-[#07100a]/30 to-transparent" /></div>
         <div className="relative z-10 flex items-start justify-between gap-3 p-5">
@@ -52,7 +61,8 @@ const ProjectCard = React.memo(function ProjectCard({ project }: { project: Proj
           <span className="rounded-full border border-white/25 bg-black/35 px-3 py-2 font-mono text-[10px] tracking-[0.1em] text-white/95 backdrop-blur-md">{project.year}</span>
         </div>
       </div>
-      <div className="relative flex min-h-[31rem] flex-col justify-end p-6 pt-[15.5rem] sm:p-7 sm:pt-[16rem]">
+      <motion.div style={reduceMotion ? undefined : { background: specularLight }} className="pointer-events-none absolute inset-0 z-[1] opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden="true" />
+      <div className="relative z-[2] flex h-full min-h-[31rem] flex-col justify-end p-6 pt-[15.5rem] sm:p-7 sm:pt-[16rem]">
         <p className="font-mono text-[10px] tracking-[.16em] text-signal">SELECTED BUILD / 0{project.id}</p>
         <h3 className="mt-3 max-w-[15ch] text-[clamp(2.2rem,3.2vw,3.5rem)] font-black leading-[.88] tracking-[-.055em] text-foreground">{project.title}</h3>
         <p className="mt-4 max-w-[40ch] text-sm leading-relaxed text-muted-foreground sm:text-[0.95rem]">{project.description}</p>
