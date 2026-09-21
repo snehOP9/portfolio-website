@@ -1,5 +1,5 @@
 {
-  "contact": { "location": "India", "email": "sneh.raunakk@gmail.com" },
+  "contact": { "location": "India", "email": "snehraunaksjs2005@gmail.com" },
   "social": [
     { "label": "GitHub", "href": "https://github.com/snehOP9" },
     { "label": "Linkedin", "href": "https://www.linkedin.com/in/sneh-raunak/" },
@@ -9,16 +9,26 @@
   ],
   "stack": {
     "frontend": [
-      { "name": "Python", "icon": "/stack/python.svg", "featured": true }, { "name": "scikit-learn" }, { "name": "SHAP" }, { "name": "LIME" }, { "name": "MLflow" }
+      { "name": "Python", "icon": "/stack/python.svg", "featured": true }, { "name": "Machine Learning" }, { "name": "Generative AI" }, { "name": "Model Integration" }, { "name": "Predictive Modeling" }, { "name": "Explainable AI" }
     ],
     "backend": [
       { "name": "FastAPI" }, { "name": "Node.js", "icon": "/stack/nodejs.svg" }, { "name": "Express" }, { "name": "REST APIs" }
     ],
     "database": [
-      { "name": "PostgreSQL", "icon": "/stack/postgresql.svg", "featured": true }, { "name": "Redis" }, { "name": "MongoDB", "icon": "/stack/mongodb.svg" }, { "name": "SQLite" }
+      { "name": "MySQL", "featured": true }, { "name": "MongoDB", "icon": "/stack/mongodb.svg" }, { "name": "SQLite" }, { "name": "Firebase" }, { "name": "SQL" }
     ],
     "tools": [
-      { "name": "Docker" }, { "name": "Git", "icon": "/stack/git.svg" }, { "name": "GitHub Actions" }, { "name": "Vercel", "icon": "/stack/vercel.svg" }, { "name": "React", "icon": "/stack/react.svg" }, { "name": "Next.js", "icon": "/stack/nextjs.svg" }, { "name": "TypeScript", "icon": "/stack/typescript.svg" }, { "name": "Tailwind CSS", "icon": "/stack/tailwindcss.svg" }
+      { "name": "C/C++" }, { "name": "JavaScript" }, { "name": "TypeScript", "icon": "/stack/typescript.svg" }, { "name": "HTML" }, { "name": "CSS" }, { "name": "Git", "icon": "/stack/git.svg" }, { "name": "GitHub" }, { "name": "Google Cloud" }, { "name": "Data Structures & Algorithms" }, { "name": "OOP" }, { "name": "DBMS" }
     ]
-  }
+  },
+  "experience": {
+    "role": "Web Development Intern - In-house Training",
+    "organization": "Chandigarh University, Punjab",
+    "period": "May 2025 - July 2025"
+  },
+  "highlights": [
+    "Machine Learning A-Z (2026): ML, DL, AI with AWS, Python - Udemy, 49.5 hours.",
+    "Led Smart India Hackathon teams in the 2023 and 2024 editions.",
+    "Solved 190+ DSA problems on LeetCode."
+  ]
 }
