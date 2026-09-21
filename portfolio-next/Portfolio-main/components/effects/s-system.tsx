@@ -14,7 +14,7 @@ function OrbitLabel({ x, y, children }: { x: number; y: number; children: string
   );
 }
 
-export function SSystem() {
+export function SSystem({ interactive = true }: { interactive?: boolean }) {
   const reduceMotion = useReducedMotion();
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
@@ -22,10 +22,11 @@ export function SSystem() {
     <div
       className="s-system"
       onPointerMove={(event) => {
+        if (!interactive || reduceMotion) return;
         const rect = event.currentTarget.getBoundingClientRect();
         setTilt({ x: (event.clientX - rect.left) / rect.width - 0.5, y: (event.clientY - rect.top) / rect.height - 0.5 });
       }}
-      onPointerLeave={() => setTilt({ x: 0, y: 0 })}
+      onPointerLeave={() => interactive && setTilt({ x: 0, y: 0 })}
       aria-label="A custom S form surrounded by data, model, and system signals"
       role="img"
     >

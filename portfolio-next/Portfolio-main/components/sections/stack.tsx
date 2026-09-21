@@ -10,9 +10,11 @@ import {
     HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import type { StackItem } from "@/types/stack";
+import { motion, useReducedMotion } from "framer-motion";
 
 export default function Stack() {
     const { content, dict } = useLanguage();
+    const reduceMotion = useReducedMotion();
 
     const categories = [
         {
@@ -54,7 +56,7 @@ export default function Stack() {
                 <div className="mb-6 flex flex-col gap-10">
                     {categories.map((category, catIndex) => (
                         <BlurReveal key={category.title}>
-                            <div>
+                            <motion.div initial={{ opacity: 0, x: reduceMotion ? 0 : -18 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: .2 }} transition={{ duration: .6, delay: catIndex * .08, ease: [0.16, 1, 0.3, 1] }}>
                                 <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
                                     <span className="text-xs font-mono tracking-widest text-muted-foreground/60">
                                         0{catIndex + 1}
@@ -112,7 +114,7 @@ export default function Stack() {
                                         </HoverCard>
                                     ))}
                                 </div>
-                            </div>
+                            </motion.div>
                         </BlurReveal>
                     ))}
                 </div>

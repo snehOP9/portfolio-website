@@ -1,11 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
+import { motion, useInView, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { useLanguage } from "@/providers/language-provider";
 import { BlurReveal } from "@/components/effects/blur-reveal";
 import type { ProjectItem } from "@/types/project";
-import Magnetic from "@/components/effects/magnetic";
 import { useSound } from "@/providers/sound-provider";
 import { ProjectSignalScene } from "@/components/effects/project-signal-scene";
 
@@ -33,11 +33,17 @@ export default function Projects() {
 
 const ProjectCard = React.memo(function ProjectCard({ project }: { project: ProjectItem }) {
   const { playHover, playClick } = useSound();
+  const cardRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(cardRef, { once: true, amount: .22 });
+  const reduceMotion = useReducedMotion();
+  const rotateX = useSpring(useMotionValue(0), { damping: 24, stiffness: 210, mass: .35 });
+  const rotateY = useSpring(useMotionValue(0), { damping: 24, stiffness: 210, mass: .35 });
   const key = project.title === "SentinelFlow" ? "SentinelFlow" : project.title.startsWith("Student") ? "Student" : "Anony";
   const detail = projectDetails[key];
   const kind = key === "SentinelFlow" ? "sentinel" : key === "Student" ? "student" : "anony";
+  const entranceIndex = key === "SentinelFlow" ? 0 : key === "Student" ? 1 : 2;
 
-  return <Magnetic disabled>
+  return <motion.div ref={cardRef} initial={{ opacity: 0, y: reduceMotion ? 0 : 28, scale: reduceMotion ? 1 : .98 }} animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 28, scale: inView ? 1 : .98 }} transition={{ duration: .72, delay: entranceIndex * .1, ease: [0.16, 1, 0.3, 1] }} style={reduceMotion ? undefined : { rotateX, rotateY, transformPerspective: 1200 }} onPointerMove={(event) => { if (reduceMotion || event.pointerType !== "mouse") return; const rect = event.currentTarget.getBoundingClientRect(); rotateX.set(((event.clientY - rect.top) / rect.height - .5) * -4); rotateY.set(((event.clientX - rect.left) / rect.width - .5) * 6); }} onPointerLeave={() => { rotateX.set(0); rotateY.set(0); }} className="will-change-transform">
     <Link href={`/projects/${detail.slug}/`} aria-label={`Read ${project.title} case study`} onClick={playClick} onMouseEnter={playHover} className="group relative block min-h-[31rem] overflow-hidden rounded-3xl border border-border/80 bg-card text-left shadow-[0_18px_60px_rgba(0,0,0,.14)] transition-[transform,border-color,box-shadow] duration-500 hover:-translate-y-1 hover:border-signal/70 hover:shadow-[0_26px_80px_rgba(0,0,0,.22)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal">
       <div className="absolute inset-x-0 top-0 h-[47%] overflow-hidden bg-[#07100a] text-white">
         <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105"><ProjectSignalScene kind={kind} /><div className="absolute inset-0 bg-linear-to-t from-[#07100a] via-[#07100a]/30 to-transparent" /></div>
@@ -54,5 +60,5 @@ const ProjectCard = React.memo(function ProjectCard({ project }: { project: Proj
         <span className="mt-5 inline-flex w-fit items-center gap-2 text-sm font-semibold text-foreground transition-colors group-hover:text-signal">Read case study <span aria-hidden="true">→</span></span>
       </div>
     </Link>
-  </Magnetic>;
+  </motion.div>;
 });
