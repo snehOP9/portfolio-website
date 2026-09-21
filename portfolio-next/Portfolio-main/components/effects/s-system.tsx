@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { useState } from "react";
+import { motion } from "framer-motion";
+import { useState, useSyncExternalStore } from "react";
 
 const S_PATH = "M518 142C472 104 414 84 342 84c-99 0-177 45-177 124 0 83 72 108 177 128 80 16 112 34 112 75 0 42-39 67-104 67-76 0-134-29-177-76l-63 70c54 62 136 96 237 96 109 0 194-48 194-135 0-92-76-115-181-136-77-15-109-31-109-68 0-37 37-60 92-60 58 0 108 23 144 59l72-76Z";
 
@@ -15,14 +15,24 @@ function OrbitLabel({ x, y, children }: { x: number; y: number; children: string
 }
 
 export function SSystem({ interactive = true }: { interactive?: boolean }) {
-  const reduceMotion = useReducedMotion();
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  // Keep the server and first client render structurally identical. Motion is
+  // enabled only after hydration, avoiding reduced-motion SVG mismatch errors.
+  const motionEnabled = useSyncExternalStore(
+    (notify) => {
+      const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+      media.addEventListener("change", notify);
+      return () => media.removeEventListener("change", notify);
+    },
+    () => !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => false,
+  );
 
   return (
     <div
       className="s-system"
       onPointerMove={(event) => {
-        if (!interactive || reduceMotion) return;
+        if (!interactive || !motionEnabled) return;
         const rect = event.currentTarget.getBoundingClientRect();
         setTilt({ x: (event.clientX - rect.left) / rect.width - 0.5, y: (event.clientY - rect.top) / rect.height - 0.5 });
       }}
@@ -52,10 +62,10 @@ export function SSystem({ interactive = true }: { interactive?: boolean }) {
         </defs>
 
         <circle cx="380" cy="380" r="290" fill="url(#s-glow)" />
-        <motion.g animate={reduceMotion ? undefined : { rotate: 360 }} transition={{ duration: 30, ease: "linear", repeat: Infinity }} style={{ transformOrigin: "380px 380px" }}>
+        <motion.g animate={motionEnabled ? { rotate: 360 } : undefined} transition={{ duration: 30, ease: "linear", repeat: Infinity }} style={{ transformOrigin: "380px 380px" }}>
           <ellipse cx="380" cy="382" rx="270" ry="139" fill="none" stroke="rgba(206,255,128,.24)" strokeWidth="1.5" />
           <ellipse cx="380" cy="382" rx="225" ry="280" fill="none" stroke="rgba(190,255,105,.13)" strokeWidth="1" transform="rotate(52 380 382)" />
-          {!reduceMotion && <><circle r="7" fill="#d7ff8f" filter="url(#s-bloom)"><animateMotion dur="8s" repeatCount="indefinite" rotate="auto"><mpath href="#orbit-a" /></animateMotion></circle><circle r="4" fill="#f1ffe0"><animateMotion dur="12s" repeatCount="indefinite" rotate="auto"><mpath href="#orbit-b" /></animateMotion></circle></>}
+          <><circle cx="0" cy="0" r="7" fill="#d7ff8f" filter="url(#s-bloom)"><animateMotion dur="8s" begin={motionEnabled ? "0s" : "indefinite"} repeatCount="indefinite" rotate="auto"><mpath href="#orbit-a" /></animateMotion></circle><circle cx="0" cy="0" r="4" fill="#f1ffe0"><animateMotion dur="12s" begin={motionEnabled ? "0s" : "indefinite"} repeatCount="indefinite" rotate="auto"><mpath href="#orbit-b" /></animateMotion></circle></>
         </motion.g>
 
         <g opacity=".7"><path d="M120 382C120 208 650 172 650 382" fill="none" stroke="rgba(231,255,193,.58)" strokeWidth="1.25" strokeDasharray="3 8" /></g>
@@ -63,9 +73,9 @@ export function SSystem({ interactive = true }: { interactive?: boolean }) {
           <path d={S_PATH} fill="url(#s-metal)" stroke="url(#s-edge)" strokeWidth="4" strokeLinejoin="round" />
           <path d={S_PATH} fill="none" stroke="rgba(255,255,255,.18)" strokeWidth="1" strokeLinejoin="round" transform="translate(-5 -7)" />
         </g>
-        <motion.g animate={reduceMotion ? undefined : { rotate: -360 }} transition={{ duration: 38, ease: "linear", repeat: Infinity }} style={{ transformOrigin: "380px 380px" }}>
+        <motion.g animate={motionEnabled ? { rotate: -360 } : undefined} transition={{ duration: 38, ease: "linear", repeat: Infinity }} style={{ transformOrigin: "380px 380px" }}>
           <path d="M196 233C358 126 604 263 499 486" fill="none" stroke="rgba(196,255,109,.66)" strokeWidth="1.4" />
-          {!reduceMotion && <circle r="6" fill="#c6ff72" filter="url(#s-bloom)"><animateMotion dur="10s" repeatCount="indefinite" rotate="auto"><mpath href="#orbit-b" /></animateMotion></circle>}
+          <circle cx="0" cy="0" r="6" fill="#c6ff72" filter="url(#s-bloom)"><animateMotion dur="10s" begin={motionEnabled ? "0s" : "indefinite"} repeatCount="indefinite" rotate="auto"><mpath href="#orbit-b" /></animateMotion></circle>
         </motion.g>
         <OrbitLabel x={156} y={326}>DATA</OrbitLabel>
         <OrbitLabel x={585} y={315}>MODELS</OrbitLabel>
