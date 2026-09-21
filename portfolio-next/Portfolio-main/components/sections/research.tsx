@@ -56,6 +56,10 @@ export default function Research() {
 
                     <BlurReveal>
                         <div className="relative min-h-[480px] overflow-hidden rounded-2xl border border-border/70 bg-card/40 p-5 shadow-2xl sm:p-8">
+                            <motion.svg viewBox="0 0 720 420" className="pointer-events-none absolute inset-x-0 bottom-0 h-[72%] w-full opacity-50" aria-hidden="true">
+                                <motion.path d="M42 354C158 312 178 130 300 212S457 346 676 76" fill="none" stroke="rgba(198,255,114,.5)" strokeWidth="1.5" strokeDasharray="5 10" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 1 }} viewport={{ once: true, amount: .3 }} transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }} />
+                                {[{ x: 160, y: 240 }, { x: 300, y: 212 }, { x: 492, y: 292 }, { x: 620, y: 142 }].map((point, index) => <motion.circle key={`${point.x}-${point.y}`} cx={point.x} cy={point.y} r="5" fill="#c6ff72" initial={{ opacity: 0, scale: .4 }} whileInView={{ opacity: [.2, 1, .45], scale: [1, 1.5, 1] }} viewport={{ once: true }} transition={{ duration: 1.8, delay: .24 + index * .12, ease: "easeInOut" }} />)}
+                            </motion.svg>
                             <motion.div
                                 animate={reduceMotion ? undefined : { rotate: 360 }}
                                 transition={{ duration: 42, ease: "linear", repeat: Infinity }}

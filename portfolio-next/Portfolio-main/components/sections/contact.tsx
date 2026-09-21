@@ -351,6 +351,9 @@ export default function Contact() {
             </div>
 
             <div id="contact-content" className="container relative z-10 mx-auto scroll-mt-28 px-container">
+                <motion.div initial={{ scaleX: 0, opacity: 0 }} whileInView={{ scaleX: 1, opacity: 1 }} viewport={{ once: true, amount: .25 }} transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1] }} className="relative mx-auto mb-10 h-px max-w-5xl origin-left bg-linear-to-r from-transparent via-signal/70 to-transparent">
+                    <motion.span initial={{ x: "-10vw", opacity: 0 }} whileInView={{ x: "50vw", opacity: [0, 1, 1, 0] }} viewport={{ once: true }} transition={{ duration: 1.2, delay: .15, ease: "easeInOut" }} className="absolute -top-1 left-0 h-2.5 w-2.5 rounded-full bg-signal shadow-[0_0_18px_rgba(198,255,114,.88)]" aria-hidden="true" />
+                </motion.div>
 
                 {/* ─── Section Header ─── */}
                 <div className="flex flex-col items-center text-center max-w-5xl mx-auto mb-16 lg:mb-24">

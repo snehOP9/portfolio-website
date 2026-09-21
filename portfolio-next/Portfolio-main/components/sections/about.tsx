@@ -8,6 +8,7 @@ import { AboutModal } from "@/components/modals/about-modal";
 import { HangingProfile } from "@/components/widgets/hanging-profile";
 import Magnetic from "@/components/effects/magnetic";
 import { useSound } from "@/providers/sound-provider";
+import { motion } from "framer-motion";
 
 export default function About() {
     const { content, dict } = useLanguage();
@@ -16,6 +17,7 @@ export default function About() {
 
     return (
         <section className="w-full container-void bg-background text-foreground overflow-hidden relative">
+            <motion.div initial={{ scaleX: 0, opacity: 0 }} whileInView={{ scaleX: 1, opacity: 1 }} viewport={{ once: true, amount: .3 }} transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }} className="absolute right-[8%] top-10 h-px w-[min(38vw,420px)] origin-right bg-linear-to-r from-transparent via-signal/60 to-transparent" aria-hidden="true" />
             <div id="about-content" className="container mx-auto scroll-mt-28 px-container">
                 <div className="flex flex-col gap-12 xl:flex-row xl:gap-20">
 

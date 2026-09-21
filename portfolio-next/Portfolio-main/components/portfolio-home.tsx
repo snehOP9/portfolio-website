@@ -7,7 +7,8 @@ import Research from "@/components/sections/research";
 import Roadmap from "@/components/sections/roadmap";
 import Contact from "@/components/sections/contact";
 import { InteractiveParticles } from "@/components/effects/interactive-particles";
+import { ScrollSignal } from "@/components/effects/scroll-signal";
 
 export default function PortfolioHome() {
-  return <><ScrollProgress /><InteractiveParticles /><main id="main-content" className="bg-background relative"><Hero /><div className="relative z-10 divide-y divide-border bg-background"><section id="work"><Projects /></section><section id="research"><Research /></section><section id="about"><About /></section><section id="stack"><Stack /></section><section id="roadmap"><Roadmap /></section><section id="contact"><Contact /></section></div></main></>;
+  return <><ScrollProgress /><ScrollSignal /><InteractiveParticles /><main id="main-content" className="bg-background relative"><Hero /><div className="relative z-10 divide-y divide-border bg-background"><section id="work"><Projects /></section><section id="research"><Research /></section><section id="about"><About /></section><section id="stack"><Stack /></section><section id="roadmap"><Roadmap /></section><section id="contact"><Contact /></section></div></main></>;
 }
