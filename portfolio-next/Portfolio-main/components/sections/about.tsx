@@ -62,7 +62,7 @@ export default function About() {
                             </BlurReveal>
 
                             <BlurReveal>
-                                <div className="grid max-w-3xl gap-px overflow-hidden rounded-2xl border border-border/70 bg-border/70 sm:grid-cols-3">
+                                <div className="grid max-w-4xl gap-px overflow-hidden rounded-2xl border border-border/70 bg-border/70 sm:grid-cols-2 xl:grid-cols-4">
                                     <div className="bg-background p-5">
                                         <p className="font-mono text-xs tracking-[0.12em] text-muted-foreground">Education</p>
                                         <p className="mt-3 font-medium leading-tight">{content.education.institution}</p>
@@ -75,6 +75,20 @@ export default function About() {
                                         <p className="font-mono text-xs tracking-[0.12em] text-muted-foreground">Current record</p>
                                         <p className="mt-3 font-medium leading-tight">{content.education.period}<br />{content.education.cgpa}</p>
                                     </div>
+                                    <div className="bg-background p-5">
+                                        <p className="font-mono text-xs tracking-[0.12em] text-muted-foreground">Experience</p>
+                                        <p className="mt-3 font-medium leading-tight">{content.experience.role}</p>
+                                        <p className="mt-2 text-sm leading-tight text-muted-foreground">{content.experience.period}</p>
+                                    </div>
+                                </div>
+                            </BlurReveal>
+
+                            <BlurReveal>
+                                <div className="max-w-4xl border-l border-signal/60 pl-5">
+                                    <p className="font-mono text-xs tracking-[0.12em] text-muted-foreground">Resume highlights</p>
+                                    <ul className="mt-3 grid gap-2 text-sm leading-relaxed text-muted-foreground md:grid-cols-3">
+                                        {content.highlights.map((highlight: string) => <li key={highlight}>{highlight}</li>)}
+                                    </ul>
                                 </div>
                             </BlurReveal>
 
