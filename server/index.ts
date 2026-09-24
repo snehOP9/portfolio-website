@@ -4,14 +4,11 @@ import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
 
-// Safety check
 if (!process.env.DATABASE_URL) {
   throw new Error(
     "DATABASE_URL must be set. Did you forget to provision a database?",
   );
 }
-
-console.log("DATABASE_URL:", process.env.DATABASE_URL);
 
 const app = express();
 const httpServer = createServer(app);
@@ -73,7 +70,7 @@ app.use((req, res, next) => {
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
+    const message = status >= 500 ? "Internal Server Error" : (err.message || "Request failed");
 
     console.error("Internal Server Error:", err);
 
@@ -81,8 +78,6 @@ app.use((req, res, next) => {
     return res.status(status).json({ message });
   });
 
-  // In production, serve built static assets.
-  // In dev, setup Vite middleware.
   if (process.env.NODE_ENV === "production") {
     serveStatic(app);
   } else {
@@ -91,10 +86,6 @@ app.use((req, res, next) => {
   }
 
   const port = parseInt(process.env.PORT || "5000", 10);
-
-  // Windows-friendly listen:
-  // - DO NOT use reusePort (can be ENOTSUP)
-  // - Bind to localhost for local dev
   const host = process.env.HOST || "127.0.0.1";
 
   httpServer.listen(port, host, () => {
