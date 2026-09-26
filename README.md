@@ -20,3 +20,18 @@ npm run build
 ```
 
 The root `client/`, `server/`, and `shared/` application is legacy. Its public profile data is retained only for compatibility and is aligned with the current public portfolio facts.
+
+
+## Development workflow
+
+Before pushing changes, run the active application's checks locally:
+
+```bash
+cd portfolio-next/Portfolio-main
+npm ci
+npm run typecheck
+npm run lint
+npm run build
+```
+
+Keep generated build output and local environment files out of commits.
