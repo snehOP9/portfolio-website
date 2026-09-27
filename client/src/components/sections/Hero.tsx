@@ -1,17 +1,19 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Download, Github, Linkedin, Mail } from 'lucide-react';
 import heroImg from "@assets/WhatsApp_Image_2026-02-22_at_13.01.09_1771745536934.jpeg";
 
 export function Hero() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
         
         {/* Text Content */}
         <motion.div 
-          initial={{ opacity: 0, x: -50 }}
+          initial={shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, ease: "easeOut" }}
           className="flex flex-col space-y-6 text-center lg:text-left z-10"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 w-fit mx-auto lg:mx-0">
@@ -64,9 +66,13 @@ export function Hero() {
 
         {/* Image / Visual */}
         <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={shouldReduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          transition={
+            shouldReduceMotion
+              ? { duration: 0, delay: 0 }
+              : { duration: 0.8, delay: 0.2, ease: "easeOut" }
+          }
           className="relative lg:h-[600px] flex items-center justify-center lg:justify-end"
         >
           <div className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[450px] md:h-[450px]">

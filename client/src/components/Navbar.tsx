@@ -1,6 +1,6 @@
 import { profile } from "@/data/profile";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Menu, X, Github, Linkedin } from "lucide-react";
 import { LeetcodeIcon } from "./LeetcodeIcon";
 
@@ -17,6 +17,7 @@ const NAV_LINKS = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,9 +29,13 @@ export function Navbar() {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
+      initial={shouldReduceMotion ? { y: 0 } : { y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      transition={
+        shouldReduceMotion
+          ? { duration: 0 }
+          : { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+      }
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? "glass py-4" : "bg-transparent py-6"
       }`}
@@ -116,9 +121,10 @@ export function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
+            initial={shouldReduceMotion ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
+            exit={shouldReduceMotion ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
+            transition={shouldReduceMotion ? { duration: 0 } : undefined}
             className="md:hidden glass border-t border-white/5 overflow-hidden"
           >
             <div className="flex flex-col px-6 py-4 space-y-4">
