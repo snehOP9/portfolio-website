@@ -20,3 +20,7 @@ npm run build
 ```
 
 The root `client/`, `server/`, and `shared/` application is legacy. Its public profile data is retained only for compatibility and is aligned with the current public portfolio facts.
+
+## Maintenance and deployment
+
+Before publishing portfolio changes, use the [deployment checklist](docs/DEPLOYMENT_CHECKLIST.md). Routine upkeep notes are tracked in [daily maintenance](docs/DAILY-MAINTENANCE.md).
