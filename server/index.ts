@@ -22,7 +22,8 @@ declare module "http" {
 }
 
 app.use(
-  express.json({
+  // Keep public request bodies bounded to reduce accidental resource exhaustion.
+app.use(express.json({
     limit: "100kb",
     verify: (req, _res, buf) => {
       req.rawBody = buf;
