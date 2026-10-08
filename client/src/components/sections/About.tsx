@@ -1,9 +1,11 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Code, Lightbulb, MapPin, Zap } from 'lucide-react';
 import { SectionHeading } from '../SectionHeading';
 import aboutImg from "@assets/WhatsApp_Image_2026-02-22_at_12.59.37_1771745530773.jpeg";
 
 export function About() {
+  const shouldReduceMotion = useReducedMotion();
+
   const highlights = [
     { icon: <Code className="w-5 h-5 text-primary" />, title: "Clean Code", desc: "Writing readable & maintainable code" },
     { icon: <Zap className="w-5 h-5 text-accent" />, title: "Problem Solving", desc: "Strong foundation in DSA" },
@@ -21,10 +23,10 @@ export function About() {
 
         <div className="grid lg:grid-cols-2 gap-16 items-center mt-16">
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
+            initial={shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
+            transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6 }}
             className="relative order-2 lg:order-1"
           >
             <div className="relative rounded-2xl overflow-hidden glass aspect-[4/5] max-w-md mx-auto">
@@ -46,10 +48,10 @@ export function About() {
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, x: 50 }}
+            initial={shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
+            transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6 }}
             className="space-y-8 order-1 lg:order-2"
           >
             <div className="prose prose-invert lg:prose-lg max-w-none text-muted-foreground">
@@ -73,10 +75,10 @@ export function About() {
               {highlights.map((item, idx) => (
                 <motion.div 
                   key={idx}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.2 + (idx * 0.1) }}
+                  transition={shouldReduceMotion ? { duration: 0, delay: 0 } : { delay: 0.2 + (idx * 0.1) }}
                   className="glass-card p-4 rounded-xl flex items-start gap-4"
                 >
                   <div className="p-2 rounded-lg bg-white/5">
