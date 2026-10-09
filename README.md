@@ -20,3 +20,7 @@ npm run build
 ```
 
 The root `client/`, `server/`, and `shared/` application is legacy. Its public profile data is retained only for compatibility and is aligned with the current public portfolio facts.
+
+## Legacy Express security headers
+
+The legacy Express server disables the `X-Powered-By` banner and sets `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, a strict-origin referrer policy, and a restrictive Permissions Policy. A Content Security Policy is intentionally not enforced by this server middleware because the legacy Vite development flow and deployed static Next.js application have different asset requirements; review each deployment target before introducing a CSP. HSTS should be configured at the TLS-terminating production edge, not unconditionally for local HTTP development.
