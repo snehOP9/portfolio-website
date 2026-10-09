@@ -45,3 +45,7 @@ jobs:
       - name: Production build
         working-directory: portfolio-next/Portfolio-main
         run: npm run build
+
+      - name: Smoke-check exported HTML
+        working-directory: portfolio-next/Portfolio-main
+        run: npm run check:static-output
