@@ -30,7 +30,9 @@ export function About() {
             <div className="relative rounded-2xl overflow-hidden glass aspect-[4/5] max-w-md mx-auto">
               <img 
                 src={aboutImg} 
-                alt="Sneh Raunak Working" 
+                alt="Sneh Raunak Working"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background via-background/80 to-transparent">
