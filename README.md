@@ -20,3 +20,7 @@ npm run build
 ```
 
 The root `client/`, `server/`, and `shared/` application is legacy. Its public profile data is retained only for compatibility and is aligned with the current public portfolio facts.
+
+## Keyboard focus regression check
+
+After UI changes, use only the keyboard to tab through the home page and mobile navigation. Confirm the active link, button, and form control has a visible high-contrast outline; open and close the mobile menu using Enter/Space; and confirm the skip-to-content link becomes visible when focused. Repeat in both light and dark themes.
