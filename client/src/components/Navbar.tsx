@@ -135,13 +135,28 @@ export function Navbar() {
 
               {/* Mobile Social Icons */}
               <div className="flex gap-6 pt-4 border-t border-white/10">
-                <a href={profile.links.github} target="_blank">
+                <a
+                  href={profile.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                >
                   <Github size={20} />
                 </a>
-                <a href={profile.links.linkedin} target="_blank">
+                <a
+                  href={profile.links.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                >
                   <Linkedin size={20} />
                 </a>
-                <a href={profile.links.leetcode} target="_blank">
+                <a
+                  href={profile.links.leetcode}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LeetCode"
+                >
                   <LeetcodeIcon className="w-5 h-5 text-[#FFA116]" />
                 </a>
               </div>
