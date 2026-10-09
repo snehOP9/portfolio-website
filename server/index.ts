@@ -1,4 +1,5 @@
 import "dotenv/config";
+import { randomUUID } from "node:crypto";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
@@ -14,6 +15,16 @@ if (!process.env.DATABASE_URL) {
 
 const app = express();
 const httpServer = createServer(app);
+
+const requestIdPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+app.use((req, res, next) => {
+  const suppliedId = req.header("x-request-id");
+  const requestId = suppliedId && requestIdPattern.test(suppliedId) ? suppliedId : randomUUID();
+  res.locals.requestId = requestId;
+  res.setHeader("X-Request-Id", requestId);
+  next();
+});
 
 declare module "http" {
   interface IncomingMessage {
@@ -78,7 +89,7 @@ app.use((req, res, next) => {
     console.error("Internal Server Error:", err);
 
     if (res.headersSent) return next(err);
-    return res.status(status).json({ message });
+    return res.status(status).json({ message, requestId: res.locals.requestId });
   });
 
   // In production, serve built static assets.
