@@ -11,6 +11,10 @@ npm run dev
 
 The production build is configured as a static export for the `https://snehraunak.in` GitHub Pages custom domain.
 
+## Content editing
+
+See [the content editing guide](docs/CONTENT-EDITING.md) for the authoritative content files, safe editing practices, and validation checklist.
+
 ## Contact
 
 - GitHub: [snehOP9](https://github.com/snehOP9)
