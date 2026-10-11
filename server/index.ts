@@ -23,13 +23,14 @@ declare module "http" {
 
 app.use(
   express.json({
+    limit: "32kb",
     verify: (req, _res, buf) => {
       req.rawBody = buf;
     },
   }),
 );
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false, limit: "16kb" }));
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
@@ -71,11 +72,20 @@ app.use((req, res, next) => {
   await registerRoutes(httpServer, app);
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message =
-      status >= 500 ? "Internal Server Error" : err.message || "Request failed";
+    const isMalformedJson = err?.type === "entity.parse.failed";
+    const isRequestTooLarge = err?.type === "entity.too.large";
+    const status = isMalformedJson ? 400 : isRequestTooLarge ? 413 : err.status || err.statusCode || 500;
+    const message = isMalformedJson
+      ? "Malformed JSON request"
+      : isRequestTooLarge
+        ? "Request body too large"
+        : status >= 500
+          ? "Internal Server Error"
+          : err.message || "Request failed";
 
-    console.error("Internal Server Error:", err);
+    if (status >= 500) {
+      console.error("Internal Server Error:", err);
+    }
 
     if (res.headersSent) return next(err);
     return res.status(status).json({ message });
