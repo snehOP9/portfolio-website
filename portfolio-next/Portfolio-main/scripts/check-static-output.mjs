@@ -27,7 +27,7 @@ if (!html || !entryFile) {
 }
 
 const checks = [
-  ["document title", /<title>[^<]+<\\/title>/i],
+  ["document title", /<title>[^<]+<\/title>/i],
   ["meta description", /<meta[^>]+name=["']description["'][^>]+content=["'][^"']+["']/i],
   ["Work navigation anchor", /href=["']#work["']/i],
   ["Research navigation anchor", /href=["']#research["']/i],
