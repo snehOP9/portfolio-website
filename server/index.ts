@@ -1,4 +1,5 @@
 import "dotenv/config";
+import { randomUUID } from "node:crypto";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
@@ -13,13 +14,31 @@ if (!process.env.DATABASE_URL) {
 
 
 const app = express();
+app.disable("x-powered-by");
 const httpServer = createServer(app);
 
 declare module "http" {
   interface IncomingMessage {
     rawBody: unknown;
+    requestId: string;
   }
 }
+
+app.use((req, res, next) => {
+  const supplied = req.get("X-Request-Id");
+  const isUuid = typeof supplied === "string"
+    && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(supplied);
+  req.requestId = isUuid ? supplied : randomUUID();
+  res.setHeader("X-Request-Id", req.requestId);
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  if (process.env.NODE_ENV === "production") {
+    res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+  }
+  next();
+});
 
 app.use(
   express.json({
@@ -46,22 +65,11 @@ export function log(message: string, source = "express") {
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
-  let capturedJsonResponse: Record<string, any> | undefined = undefined;
-
-  const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
-    capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
-  };
 
   res.on("finish", () => {
     const duration = Date.now() - start;
     if (path.startsWith("/api")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
-      }
-      log(logLine);
+      log(`${req.method} ${path} ${res.statusCode} in ${duration}ms requestId=${req.requestId}`);
     }
   });
 
@@ -84,7 +92,8 @@ app.use((req, res, next) => {
           : err.message || "Request failed";
 
     if (status >= 500) {
-      console.error("Internal Server Error:", err);
+      const errorName = err instanceof Error ? err.name : "UnknownError";
+      console.error("Unhandled API error", { requestId: _req.requestId, errorName });
     }
 
     if (res.headersSent) return next(err);

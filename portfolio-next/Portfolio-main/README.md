@@ -25,4 +25,4 @@ MongoDB is installed locally for development, but a browser on GitHub Pages cann
 
 ## Current implementation
 
-The active deployable application is `portfolio-next/Portfolio-main`; the root `client/`, `server/`, and `shared/` application is legacy and is not part of the Pages build. Use `npm ci`, `npm run typecheck`, `npm run lint`, and `npm run build` to validate changes. See `docs/CURRENT_ARCHITECTURE.md` for route, deployment, and contact-delivery boundaries.
+The active deployable application is `portfolio-next/Portfolio-main`; the root `client/`, `server/`, and `shared/` application is legacy and is not part of the Pages build. Use `npm ci`, `npm run typecheck`, `npm run lint`, and `npm run build` to validate changes. See `docs/CURRENT_ARCHITECTURE.md` for route, deployment, and contact-delivery boundaries, and `docs/CONTENT-EDITING.md` for safe content changes and validation.
