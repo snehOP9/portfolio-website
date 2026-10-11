@@ -58,6 +58,21 @@ try {
   failures.push("public og.png asset");
 }
 
+try {
+  const cname = (await readFile(join(outputDirectory, "CNAME"), "utf8")).trim();
+  if (cname !== "snehraunak.in") {
+    failures.push("CNAME with snehraunak.in");
+  }
+} catch {
+  failures.push("CNAME");
+}
+
+try {
+  await access(join(outputDirectory, "404.html"));
+} catch {
+  failures.push("404.html");
+}
+
 if (failures.length) {
   console.error(`Static output check failed for ${entryFile}. Missing: ${failures.join(", ")}.`);
   process.exit(1);
