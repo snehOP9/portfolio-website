@@ -49,3 +49,7 @@ jobs:
       - name: Smoke-check exported HTML
         working-directory: portfolio-next/Portfolio-main
         run: npm run check:static-output
+
+      - name: Smoke-check exported HTML
+        working-directory: portfolio-next/Portfolio-main
+        run: npm run check:static-output
