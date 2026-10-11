@@ -1,4 +1,4 @@
-import { access, readFile } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 
 const outputDirectory = join(process.cwd(), "out");
@@ -37,9 +37,30 @@ const checks = [
 
 const failures = checks.filter(([, pattern]) => !pattern.test(html)).map(([name]) => name);
 
+const staticDirectory = join(outputDirectory, "_next", "static");
+let staticFiles = [];
+try {
+  staticFiles = await readdir(staticDirectory, { recursive: true });
+} catch {
+  failures.push("_next/static directory");
+}
+
+if (!staticFiles.some((file) => file.endsWith(".js"))) {
+  failures.push("generated JavaScript asset");
+}
+if (!staticFiles.some((file) => file.endsWith(".css"))) {
+  failures.push("generated CSS asset");
+}
+
+try {
+  await access(join(outputDirectory, "og.png"));
+} catch {
+  failures.push("public og.png asset");
+}
+
 if (failures.length) {
   console.error(`Static output check failed for ${entryFile}. Missing: ${failures.join(", ")}.`);
   process.exit(1);
 }
 
-console.log(`Static output smoke check passed: ${entryFile} contains a title, description, and all key navigation anchors.`);
+console.log(`Static output smoke check passed: ${entryFile} and representative JS, CSS, and public assets are present.`);
