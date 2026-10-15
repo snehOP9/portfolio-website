@@ -24,4 +24,6 @@ npm run check:static-output
 
 See [`CONTENT-EDITING.md`](portfolio-next/Portfolio-main/docs/CONTENT-EDITING.md) for the active content paths and validation workflow.
 
-The root `client/`, `server/`, and `shared/` application is legacy. Its public profile data is retained only for compatibility and is aligned with the current public portfolio facts.
+The root `client/`, `server/`, and `shared/` application is legacy. Its public profile data is retained only for compatibility and is aligned with the current public portfolio facts. It is not part of the published static site.
+
+If you intentionally run the legacy server locally, copy `.env.example` to `.env` and replace the database placeholders with a local PostgreSQL connection string. `DATABASE_URL` is required by the legacy server and Drizzle configuration; the example file contains placeholders only. Never commit a real connection string.
