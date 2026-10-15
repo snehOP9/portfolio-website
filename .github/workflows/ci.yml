@@ -46,6 +46,14 @@ jobs:
         working-directory: portfolio-next/Portfolio-main
         run: npm run build
 
+      - name: Audit production dependencies
+        working-directory: portfolio-next/Portfolio-main
+        run: npm audit --omit=dev --audit-level=high
+
       - name: Smoke-check exported HTML
         working-directory: portfolio-next/Portfolio-main
         run: npm run check:static-output
+
+      - name: Check static accessibility and links
+        working-directory: portfolio-next/Portfolio-main
+        run: npm run check:static-quality
