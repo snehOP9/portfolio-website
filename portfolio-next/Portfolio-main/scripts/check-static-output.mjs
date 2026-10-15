@@ -37,6 +37,20 @@ const checks = [
 
 const failures = checks.filter(([, pattern]) => !pattern.test(html)).map(([name]) => name);
 
+// Ensure each generated Next.js asset referenced by the entry document exists in the export.
+const assetReferences = [
+  ...html.matchAll(/(?:src|href)=["']([^"']*\/_next\/static\/[^"']+)["']/g),
+].map((match) => match[1].split(/[?#]/, 1)[0]);
+
+for (const reference of new Set(assetReferences)) {
+  const relativePath = reference.replace(/^\//, "");
+  try {
+    await access(join(outputDirectory, relativePath));
+  } catch {
+    failures.push(`referenced static asset: ${reference}`);
+  }
+}
+
 const staticDirectory = join(outputDirectory, "_next", "static");
 let staticFiles = [];
 try {
