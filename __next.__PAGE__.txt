@@ -1,0 +1,36 @@
+2:"$Sreact.fragment"
+3:"/_next/static/chunks/42onvq6nokjl2.js"
+4:"/_next/static/chunks/1fmtjn2e1cbh6.js"
+5:"/_next/static/chunks/2mbxziof0jc9m.js"
+6:"/_next/static/chunks/0do1xnw4e40q7.js"
+7:"/_next/static/chunks/0efw38gd-v0uk.js"
+8:"/_next/static/chunks/334n6cc-c66ys.js"
+9:"/_next/static/chunks/0gigx40itrvzk.js"
+a:I[51896,["$3","$4","$5","$6","$7","$8","$9"],"default"]
+b:I[73678,["$3","$4","$5","$6","$7","$8","$9"],"ScrollSignal"]
+c:"InteractiveParticles"
+d:I[46083,["$3","$4","$5","$6","$7","$8","$9"],"$c"]
+e:I[31287,["$3","$4","$5","$6","$7","$8","$9"],"default"]
+f:I[66844,["$3","$4","$5","$6","$7","$8","$9"],"default"]
+10:I[66354,["$3","$4","$5","$6","$7","$8","$9"],"default"]
+11:I[48032,["$3","$4","$5","$6","$7","$8","$9"],"default"]
+12:I[76553,["$3","$4","$5","$6","$7","$8","$9"],"default"]
+13:I[61517,["$3","$4","$5","$6","$7","$8","$9"],"default"]
+14:I[57841,["$3","$4","$5","$6","$7","$8","$9"],"default"]
+15:I[97367,["$3","$4","$5","$6","$7"],"OutletBoundary"]
+16:"$Sreact.suspense"
+1a:"ViewportBoundary"
+1b:I[97367,["$3","$4","$5","$6","$7"],"$1a"]
+1c:"MetadataBoundary"
+1d:I[97367,["$3","$4","$5","$6","$7"],"$1c"]
+1e:I[27201,["$3","$4","$5","$6","$7"],"IconMark"]
+19:X
+1:[["children",{"s":"__PAGE__","h":128,"d":{"r":["$","$2","c",{"children":[[["$","$La",null,{}],["$","$Lb",null,{}],["$","$Ld",null,{}],["$","main",null,{"id":"main-content","className":"bg-background relative","children":[["$","$Le",null,{}],["$","div",null,{"className":"relative z-10 divide-y divide-border bg-background","children":[["$","section",null,{"id":"work","children":["$","$Lf",null,{}]}],["$","section",null,{"id":"research","children":["$","$L10",null,{}]}],["$","section",null,{"id":"about","children":["$","$L11",null,{}]}],["$","section",null,{"id":"stack","children":["$","$L12",null,{}]}],["$","section",null,{"id":"roadmap","children":["$","$L13",null,{}]}],["$","section",null,{"id":"contact","children":["$","$L14",null,{}]}]]}]]}]],[["$","script","script-0",{"src":"/_next/static/chunks/334n6cc-c66ys.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/0gigx40itrvzk.js","async":true}]],["$","$L15",null,{"children":["$","$16",null,{"name":"Next.MetadataOutlet","children":"$@17"}]}]]}],"p":"$@18","v":null,"s":"$19"}}]]
+0:{"t":{"t":{"s":"","h":16,"c":"$Q1"},"h":{"r":["$","$2","h",{"children":[null,["$","$L1b",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L1d",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$16",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Sneh Raunak | ML systems and full-stack products"}],["$","meta","1",{"name":"description","content":"Selected machine-learning systems, full-stack products, and explainable-AI research by Sneh Raunak."}],["$","link","2",{"rel":"author","href":"https://snehraunak.in"}],["$","meta","3",{"name":"author","content":"Sneh Raunak"}],["$","meta","4",{"name":"keywords","content":"Sneh Raunak,machine learning,full-stack developer,FastAPI,Next.js,explainable AI,portfolio"}],["$","meta","5",{"name":"creator","content":"Sneh Raunak"}],["$","meta","6",{"name":"robots","content":"index, follow"}],["$","link","7",{"rel":"canonical","href":"https://snehraunak.in/"}],["$","meta","8",{"property":"og:title","content":"Sneh Raunak | ML systems and full-stack products"}],["$","meta","9",{"property":"og:description","content":"Selected machine-learning systems, full-stack products, and explainable-AI research by Sneh Raunak."}],["$","meta","10",{"property":"og:url","content":"https://snehraunak.in/"}],["$","meta","11",{"property":"og:site_name","content":"Sneh Raunak"}],["$","meta","12",{"property":"og:locale","content":"en_IN"}],["$","meta","13",{"property":"og:image","content":"https://snehraunak.in/og.png"}],["$","meta","14",{"property":"og:image:width","content":"1200"}],["$","meta","15",{"property":"og:image:height","content":"630"}],["$","meta","16",{"property":"og:image:alt","content":"Sneh Raunak - ML systems and full-stack products"}],["$","meta","17",{"property":"og:type","content":"website"}],["$","meta","18",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","19",{"name":"twitter:creator","content":"@Snehhhh_09"}],["$","meta","20",{"name":"twitter:title","content":"Sneh Raunak | ML systems and full-stack products"}],["$","meta","21",{"name":"twitter:description","content":"Selected machine-learning systems, full-stack products, and explainable-AI research by Sneh Raunak."}],["$","meta","22",{"name":"twitter:image","content":"https://snehraunak.in/og.png"}],["$","link","23",{"rel":"icon","href":"/favicon.ico?favicon.4393_pw9qcotq.ico","sizes":"192x192","type":"image/x-icon"}],["$","link","24",{"rel":"icon","href":"/icon.svg?icon.0dokwzdx3867_.svg","sizes":"any","type":"image/svg+xml"}],["$","$L1e","25",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@1f","v":null,"s":"$19"}},"a":"$@20","u":"$@21","b":"QRgW5ccwGJ4uO-emjahgQ"}
+17:null
+21:true
+19:300
+19:C
+20:0
+1f:"$undefined"
+18:"$undefined"

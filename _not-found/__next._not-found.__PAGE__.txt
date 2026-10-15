@@ -1,0 +1,37 @@
+2:"$Sreact.fragment"
+3:"/_next/static/chunks/42onvq6nokjl2.js"
+4:"/_next/static/chunks/1fmtjn2e1cbh6.js"
+5:"/_next/static/chunks/2mbxziof0jc9m.js"
+6:"/_next/static/chunks/0do1xnw4e40q7.js"
+7:"/_next/static/chunks/0efw38gd-v0uk.js"
+8:I[39756,["$3","$4","$5","$6","$7"],"default"]
+9:I[37457,["$3","$4","$5","$6","$7"],"default"]
+e:"/_next/static/chunks/0v0sdo6muwaro.js"
+f:I[72111,["$3","$4","$5","$6","$7","$e"],"ThemeProvider"]
+10:I[84523,["$3","$4","$5","$6","$7","$e"],"CustomCursor"]
+11:"InteractiveParticles"
+12:I[46083,["$3","$4","$5","$6","$7","$e"],"$11"]
+13:I[22016,["$3","$4","$5","$6","$7","$e"],""]
+14:I[5014,["$3","$4","$5","$6","$7","$e"],"default"]
+15:I[97367,["$3","$4","$5","$6","$7"],"OutletBoundary"]
+16:"$Sreact.suspense"
+19:"ViewportBoundary"
+1a:I[97367,["$3","$4","$5","$6","$7"],"$19"]
+1b:"MetadataBoundary"
+1c:I[97367,["$3","$4","$5","$6","$7"],"$1b"]
+1d:I[27201,["$3","$4","$5","$6","$7"],"IconMark"]
+:HL["/_next/static/chunks/3j27jqjbmo-vt.css","style"]
+b:X
+b:C
+c:X
+d:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$2","c",{"children":[["$","html",null,{"lang":"en","suppressHydrationWarning":true,"children":[["$","head",null,{"children":["$","title",null,{"children":"404 - Page Not Found"}]}],["$","body",null,{"className":"_9RM67q_variable CHdLIa_variable font-sans bg-background text-foreground antialiased","children":["$","$Lf",null,{"attribute":"class","defaultTheme":"dark","enableSystem":false,"children":[["$","$L10",null,{}],["$","div",null,{"className":"relative w-full h-screen flex flex-col justify-center items-center text-center px-container overflow-hidden bg-background","children":[["$","$L12",null,{}],["$","div",null,{"className":"relative z-20 flex flex-col items-center justify-center max-w-2xl px-4","children":[["$","div",null,{"className":"relative select-none flex items-center justify-center","children":[["$","h1",null,{"className":"text-[9rem] sm:text-[12rem] md:text-[15rem] font-black tracking-tighter leading-none text-foreground/5 dark:text-foreground/5 font-sans","children":"404"}],["$","span",null,{"className":"absolute text-2xl sm:text-3xl md:text-4xl font-black tracking-[0.25em] text-foreground uppercase drop-shadow-sm font-sans animate-pulse","children":"Page Not Found"}]]}],["$","p",null,{"className":"text-muted-foreground text-sm sm:text-base font-light leading-relaxed max-w-md mb-8 select-none","children":"The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."}],["$","div",null,{"children":["$","$L13",null,{"href":"/","className":"w-fit group relative flex h-12 sm:h-14 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-border/50 bg-foreground px-6 sm:px-8 text-background transition-all duration-500 ease-out hover:bg-background hover:border-foreground/30 hover:text-foreground shadow-2xl hover:-translate-y-0.5","children":[["$","div",null,{"className":"absolute inset-0 flex h-full w-full justify-center -translate-x-full -skew-x-12 group-hover:duration-1000 group-hover:translate-x-full","children":["$","div",null,{"className":"relative h-full w-8 bg-background/20 dark:bg-foreground/10"}]}],["$","span",null,{"className":"relative z-10 flex items-center gap-2 text-xs font-bold tracking-[0.15em] uppercase","children":["Back to Home",["$","$L14",null,{"iconNode":[["path",{"d":"M5 12h14","key":"1ays0h"}],["path",{"d":"m12 5 7 7-7 7","key":"xquz4c"}]],"className":"lucide-arrow-right w-3.5 h-3.5 transition-transform duration-500 group-hover:translate-x-1"}]]}]]}]}]]}]]}]]}]}]]}],[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/3j27jqjbmo-vt.css","precedence":"next"}],["$","script","script-0",{"src":"/_next/static/chunks/0v0sdo6muwaro.js","async":true}]],["$","$L15",null,{"children":["$","$16",null,{"name":"Next.MetadataOutlet","children":"$@17"}]}]]}],"p":"$@18","v":null,"s":"$c"}}]]
+1:[["children",{"s":"/_not-found","h":64,"d":{"r":["$","$2","c",{"children":[null,["$","$L8",null,{"parallelRouterKey":"children","template":["$","$L9",null,{}]}]]}],"p":"$@a","v":"$b","s":"$c"},"c":"$Qd"}]]
+0:{"t":{"t":{"s":"","h":16,"c":"$Q1"},"h":{"r":["$","$2","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L1a",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L1c",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$16",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"404 - Page Not Found | Sneh Raunak"}],["$","meta","1",{"name":"description","content":"Page not found."}],["$","link","2",{"rel":"author","href":"https://snehraunak.in"}],["$","meta","3",{"name":"author","content":"Sneh Raunak"}],["$","meta","4",{"name":"keywords","content":"Sneh Raunak,machine learning,full-stack developer,FastAPI,Next.js,explainable AI,portfolio"}],["$","meta","5",{"name":"creator","content":"Sneh Raunak"}],["$","meta","6",{"name":"robots","content":"index, follow"}],["$","link","7",{"rel":"canonical","href":"https://snehraunak.in/"}],["$","meta","8",{"property":"og:title","content":"404 - Page Not Found | Sneh Raunak"}],["$","meta","9",{"property":"og:description","content":"Page not found."}],["$","meta","10",{"property":"og:url","content":"https://snehraunak.in/"}],["$","meta","11",{"property":"og:site_name","content":"Sneh Raunak"}],["$","meta","12",{"property":"og:locale","content":"en_IN"}],["$","meta","13",{"property":"og:image","content":"https://snehraunak.in/og.png"}],["$","meta","14",{"property":"og:image:width","content":"1200"}],["$","meta","15",{"property":"og:image:height","content":"630"}],["$","meta","16",{"property":"og:image:alt","content":"Sneh Raunak - ML systems and full-stack products"}],["$","meta","17",{"property":"og:type","content":"website"}],["$","meta","18",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","19",{"name":"twitter:creator","content":"@Snehhhh_09"}],["$","meta","20",{"name":"twitter:title","content":"404 - Page Not Found | Sneh Raunak"}],["$","meta","21",{"name":"twitter:description","content":"Page not found."}],["$","meta","22",{"name":"twitter:image","content":"https://snehraunak.in/og.png"}],["$","link","23",{"rel":"icon","href":"/favicon.ico?favicon.4393_pw9qcotq.ico","sizes":"192x192","type":"image/x-icon"}],["$","link","24",{"rel":"icon","href":"/icon.svg?icon.0dokwzdx3867_.svg","sizes":"any","type":"image/svg+xml"}],["$","$L1d","25",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@1e","v":null,"s":"$c"}},"a":"$@1f","u":"$@20","b":"QRgW5ccwGJ4uO-emjahgQ"}
+17:null
+20:true
+c:300
+c:C
+1f:0
+a:"$undefined"
+1e:"$undefined"
+18:"$undefined"
