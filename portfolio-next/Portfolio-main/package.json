@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "check:static-output": "node scripts/check-static-output.mjs"
+    "check:static-output": "node scripts/check-static-output.mjs",
+    "check:static-quality": "node scripts/check-static-quality.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
