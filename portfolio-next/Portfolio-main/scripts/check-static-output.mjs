@@ -87,6 +87,21 @@ try {
   failures.push("404.html");
 }
 
+
+for (const [name, expected] of [
+  ["robots.txt", "Sitemap: https://snehraunak.in/sitemap.xml"],
+  ["sitemap.xml", "<loc>https://snehraunak.in/</loc>"],
+]) {
+  try {
+    const content = await readFile(join(outputDirectory, name), "utf8");
+    if (!content.includes(expected)) {
+      failures.push(`${name} canonical entry`);
+    }
+  } catch {
+    failures.push(name);
+  }
+}
+
 if (failures.length) {
   console.error(`Static output check failed for ${entryFile}. Missing: ${failures.join(", ")}.`);
   process.exit(1);
